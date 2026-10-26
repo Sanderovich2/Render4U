@@ -2,12 +2,9 @@ package dev.render4u.render.vulkan;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.renderpearl.api.device.GpuDevice;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class VulkanHelper {
     public static final String VULKAN_BACKEND = "Vulkan";
-    private static final Logger LOGGER = LoggerFactory.getLogger("Render4UVulkan");
 
     private static volatile Boolean vulkanActive;
     private static volatile String cachedBackendName;
@@ -22,10 +19,9 @@ public final class VulkanHelper {
             return active;
         }
         try {
-            GpuDevice device = RenderSystem.getDevice();
-            boolean res = isVulkan(device);
-            vulkanActive = res;
-            return res;
+            boolean result = isVulkan(RenderSystem.getDevice());
+            vulkanActive = result;
+            return result;
         } catch (Throwable t) {
             return false;
         }
@@ -71,11 +67,4 @@ public final class VulkanHelper {
         }
         return "Unknown Device";
     }
-
-    public static void submitIfVulkan(GpuDevice device) {
-        if (isVulkan(device)) {
-            device.createCommandEncoder().submit();
-        }
-    }
 }
-

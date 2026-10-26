@@ -3,6 +3,7 @@ package dev.render4u.render.display.batch;
 import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.navigation.ScreenRectangle;
 import net.minecraft.client.gui.render.TextureSetup;
@@ -18,6 +19,12 @@ public final class DisplayBatcher {
 
     private static Matrix3x2f snapshot = new Matrix3x2f();
     private static @Nullable GuiGraphicsExtractor session;
+    private static int viewportWidth;
+    private static int viewportHeight;
+    private static int frameBatches;
+    private static int frameElements;
+    private static int lastFrameBatches;
+    private static int lastFrameElements;
 
     private DisplayBatcher() {
     }
@@ -26,10 +33,17 @@ public final class DisplayBatcher {
         flush();
         recycle();
         session = graphics;
+        Minecraft minecraft = Minecraft.getInstance();
+        viewportWidth = minecraft.getWindow().getWidth();
+        viewportHeight = minecraft.getWindow().getHeight();
     }
 
     public static void end() {
         flush();
+        lastFrameBatches = frameBatches;
+        lastFrameElements = frameElements;
+        frameBatches = 0;
+        frameElements = 0;
         session = null;
     }
 
@@ -37,14 +51,24 @@ public final class DisplayBatcher {
         return session != null;
     }
 
+    public static int lastFrameBatches() {
+        return lastFrameBatches;
+    }
+
+    public static int lastFrameElements() {
+        return lastFrameElements;
+    }
+
     public static void flush() {
         GuiGraphicsExtractor active = session;
         if (active == null || PENDING.isEmpty()) {
             return;
         }
+        frameBatches += PENDING.size();
         for (int i = 0, size = PENDING.size(); i < size; i++) {
             BatchRenderState batch = PENDING.get(i);
             batch.seal();
+            frameElements += batch.memberCount();
             active.guiRenderState.addGuiElement(batch);
         }
         PENDING.clear();
@@ -67,6 +91,9 @@ public final class DisplayBatcher {
         int x1 = x0 + bounds.width();
         int y1 = y0 + bounds.height();
         if (x1 <= x0 || y1 <= y0) {
+            return;
+        }
+        if (x1 <= 0 || y1 <= 0 || x0 >= viewportWidth || y0 >= viewportHeight) {
             return;
         }
         RenderPipeline pipeline = element.pipeline();
@@ -113,4 +140,3 @@ public final class DisplayBatcher {
         LEASED.clear();
     }
 }
-

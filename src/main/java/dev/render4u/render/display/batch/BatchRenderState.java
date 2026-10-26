@@ -12,8 +12,6 @@ import net.minecraft.client.renderer.state.gui.GuiElementRenderState;
 import org.jspecify.annotations.Nullable;
 
 public final class BatchRenderState implements GuiElementRenderState {
-    private static final int MAX_MEMBERS = 4096;
-
     private final List<GuiElementRenderState> members = new ArrayList<>(32);
     private int[] rects = new int[128];
     private RenderPipeline pipeline;
@@ -69,6 +67,10 @@ public final class BatchRenderState implements GuiElementRenderState {
             }
         }
         return false;
+    }
+
+    int memberCount() {
+        return count;
     }
 
     void seal() {

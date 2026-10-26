@@ -3,35 +3,31 @@ package dev.render4u.render.display.blur;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.renderpearl.api.GpuFormat;
 import com.mojang.renderpearl.api.commands.CommandEncoder;
 import com.mojang.renderpearl.api.commands.RenderPass;
-import com.mojang.renderpearl.api.pipeline.ColorTargetState;
-import com.mojang.renderpearl.api.pipeline.PrimitiveTopology;
 import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import com.mojang.renderpearl.api.textures.FilterMode;
 import com.mojang.renderpearl.api.textures.GpuSampler;
 import com.mojang.renderpearl.api.textures.GpuTextureView;
+import dev.render4u.render.display.DisplayUtil;
+import dev.render4u.render.display.Pipelines;
 import dev.render4u.render.display.batch.DisplayBatcher;
+import dev.render4u.render.display.shape.RectBuilder;
+import dev.render4u.render.display.shape.RectRenderState;
 import dev.render4u.util.color.Color;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.navigation.ScreenRectangle;
 import net.minecraft.client.gui.render.TextureSetup;
-import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.renderer.state.gui.GuiElementRenderState;
-import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.Nullable;
 import org.joml.Matrix3x2f;
 
-public final class Blur {
+public final class Blur extends RectBuilder<Blur> {
 
     public enum Type {
         GAUSSIAN,
@@ -52,50 +48,6 @@ public final class Blur {
     public record Key(Type type, int strength) {
         public Key {
             strength = Math.clamp(strength, 1, Type.MAX_STRENGTH);
-        }
-    }
-
-    public static final class Pipelines {
-        public static final float PADDING = 1.0F;
-
-        public static final RenderPipeline DOWNSAMPLE = fullscreen("downsample", "blur_down", false, false);
-        public static final RenderPipeline UPSAMPLE = fullscreen("upsample", "blur_up", false, false);
-        public static final RenderPipeline GAUSSIAN_HORIZONTAL = fullscreen("gaussian_h", "blur_separable", false, false);
-        public static final RenderPipeline GAUSSIAN_VERTICAL = fullscreen("gaussian_v", "blur_separable", true, false);
-        public static final RenderPipeline BOX_HORIZONTAL = fullscreen("box_h", "blur_separable", false, true);
-        public static final RenderPipeline BOX_VERTICAL = fullscreen("box_v", "blur_separable", true, true);
-
-        public static final RenderPipeline PANEL = RenderPipelines.register(
-                RenderPipeline.builder(RenderPipelines.GUI_TEXTURED_SNIPPET)
-                        .withLocation(id("pipeline/blur_panel"))
-                        .withVertexShader(id("core/blur_panel"))
-                        .withFragmentShader(id("core/blur_panel"))
-                        .withVertexBinding(0, DefaultVertexFormat.POSITION_TEX_LIGHTMAP_COLOR)
-                        .build()
-        );
-
-        private Pipelines() {
-        }
-
-        private static RenderPipeline fullscreen(String name, String fragment, boolean vertical, boolean box) {
-            RenderPipeline.Builder builder = RenderPipeline.builder()
-                    .withLocation(id("pipeline/blur_" + name))
-                    .withVertexShader(Identifier.withDefaultNamespace("core/screenquad"))
-                    .withFragmentShader(id("core/" + fragment))
-                    .withPrimitiveTopology(PrimitiveTopology.TRIANGLES)
-                    .withColorTargetState(ColorTargetState.DEFAULT);
-            RenderPipelines.TRACY_BLIT.getBindGroupLayouts().forEach(builder::withBindGroupLayout);
-            if (vertical) {
-                builder.withShaderDefine("BLUR_VERTICAL");
-            }
-            if (box) {
-                builder.withShaderDefine("KERNEL_BOX");
-            }
-            return RenderPipelines.register(builder.build());
-        }
-
-        private static Identifier id(String path) {
-            return Identifier.fromNamespaceAndPath("render4u", path);
         }
     }
 
@@ -171,98 +123,83 @@ public final class Blur {
         }
     }
 
-    public static final class RenderState implements GuiElementRenderState {
+    public static final class RenderState extends RectRenderState {
         private final Key key;
-        private final Matrix3x2f pose;
-        private final float x;
-        private final float y;
-        private final float width;
-        private final float height;
-        private final int packedTop;
-        private final int packedBottom;
-        private final int topLeft;
-        private final int topRight;
-        private final int bottomRight;
-        private final int bottomLeft;
-        private final @Nullable ScreenRectangle scissor;
-        private final ScreenRectangle bounds;
         private @Nullable TextureSetup textureSetup;
 
-        RenderState(Key key, Matrix3x2f pose, float x, float y, float width, float height, int packedTop, int packedBottom,
-                    int topLeft, int topRight, int bottomRight, int bottomLeft, @Nullable ScreenRectangle scissor) {
+        RenderState(Key key, Matrix3x2f pose, float x, float y, float width, float height, int paramsTop, int paramsBottom,
+                    int tintTopLeft, int tintTopRight, int tintBottomRight, int tintBottomLeft, @Nullable ScreenRectangle scissor) {
+            super(pose, x, y, width, height, RectBuilder.PADDING, paramsTop, paramsBottom,
+                    tintTopLeft, tintTopRight, tintBottomRight, tintBottomLeft, scissor);
             this.key = key;
-            this.pose = pose;
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
-            this.packedTop = packedTop;
-            this.packedBottom = packedBottom;
-            this.topLeft = topLeft;
-            this.topRight = topRight;
-            this.bottomRight = bottomRight;
-            this.bottomLeft = bottomLeft;
-            this.scissor = scissor;
-            float pad = Pipelines.PADDING;
-            ScreenRectangle raw = new ScreenRectangle((int) Math.floor(x - pad), (int) Math.floor(y - pad),
-                    (int) Math.ceil(width + pad * 2.0F) + 1, (int) Math.ceil(height + pad * 2.0F) + 1).transformAxisAligned(pose);
-            ScreenRectangle clipped = scissor != null ? raw.intersection(scissor) : raw;
-            this.bounds = clipped != null ? clipped : ScreenRectangle.empty();
-        }
-
-        @Override
-        public void buildVertices(VertexConsumer consumer) {
-            float pad = Pipelines.PADDING;
-            float hw = width * 0.5F + pad;
-            float hh = height * 0.5F + pad;
-            float x0 = x - pad;
-            float y0 = y - pad;
-            float x1 = x + width + pad;
-            float y1 = y + height + pad;
-            vertex(consumer, x0, y0, -hw, -hh, topLeft);
-            vertex(consumer, x0, y1, -hw, hh, bottomLeft);
-            vertex(consumer, x1, y1, hw, hh, bottomRight);
-            vertex(consumer, x1, y0, hw, -hh, topRight);
-        }
-
-        private void vertex(VertexConsumer consumer, float px, float py, float u, float v, int color) {
-            consumer.addVertexWith2DPose(pose, px, py).setUv(u, v).setUv2(packedTop, packedBottom).setColor(color);
+            ScreenRectangle region = new ScreenRectangle(
+                    (int) Math.floor(x - RectBuilder.PADDING), (int) Math.floor(y - RectBuilder.PADDING),
+                    (int) Math.ceil(width + RectBuilder.PADDING * 2.0F) + 1, (int) Math.ceil(height + RectBuilder.PADDING * 2.0F) + 1
+            ).transformAxisAligned(pose);
+            Blur.request(key, region);
         }
 
         @Override
         public RenderPipeline pipeline() {
-            return Pipelines.PANEL;
+            return Pipelines.BLUR_PANEL;
         }
 
         @Override
         public TextureSetup textureSetup() {
             if (textureSetup == null) {
-                Blur.request(key);
                 textureSetup = TextureSetup.singleTexture(Blur.outputView(key), RenderSystem.getSamplerCache().getClampToEdge(FilterMode.LINEAR));
             }
             return textureSetup;
         }
+    }
 
-        @Override
-        public @Nullable ScreenRectangle scissorArea() {
-            return scissor;
+    static final class Region {
+        int minX = Integer.MAX_VALUE;
+        int minY = Integer.MAX_VALUE;
+        int maxX = Integer.MIN_VALUE;
+        int maxY = Integer.MIN_VALUE;
+
+        void merge(ScreenRectangle rect) {
+            merge(rect.left(), rect.top(), rect.right(), rect.bottom());
         }
 
-        @Override
-        public @Nullable ScreenRectangle bounds() {
-            return bounds;
+        void merge(int left, int top, int right, int bottom) {
+            minX = Math.min(minX, left);
+            minY = Math.min(minY, top);
+            maxX = Math.max(maxX, right);
+            maxY = Math.max(maxY, bottom);
+        }
+
+        void merge(Region other) {
+            minX = Math.min(minX, other.minX);
+            minY = Math.min(minY, other.minY);
+            maxX = Math.max(maxX, other.maxX);
+            maxY = Math.max(maxY, other.maxY);
+        }
+
+        boolean isEmpty() {
+            return minX > maxX || minY > maxY;
         }
     }
 
     private static final Targets TARGETS = new Targets();
-    private static final Set<Key> REQUESTED = new LinkedHashSet<>();
+    private static final Map<Key, Region> REQUESTED = new LinkedHashMap<>();
 
-    public static void init() {
-        var _ = Pipelines.PANEL;
+    private static final int KERNEL_MARGIN_TEXELS = 12;
+    static final int[] SCISSOR = new int[4];
+
+    private static final float MAX_RADIUS = 31.5F;
+    private static final float OPACITY_STEPS = 31.0F;
+
+    private Type type = Type.GAUSSIAN;
+    private int strength = 3;
+
+    private Blur() {
+        corners(0, 0, 0, 0);
     }
 
-    public static void request(Key key) {
-        REQUESTED.add(key);
+    public static void request(Key key, ScreenRectangle region) {
+        REQUESTED.computeIfAbsent(key, k -> new Region()).merge(region);
     }
 
     public static GpuTextureView outputView(Key key) {
@@ -278,11 +215,16 @@ public final class Blur {
         TARGETS.ensure(main);
 
         int depth = 0;
-        for (Key key : REQUESTED) {
+        for (Key key : REQUESTED.keySet()) {
             int d = key.type().downDepth(key.strength());
             if (d > depth) {
                 depth = d;
             }
+        }
+
+        Region chain = new Region();
+        for (Region region : REQUESTED.values()) {
+            chain.merge(region);
         }
 
         CommandEncoder encoder = RenderSystem.getDevice().createCommandEncoder();
@@ -290,13 +232,17 @@ public final class Blur {
         GpuTextureView source = main.getColorTextureView();
         for (int level = 1; level <= depth; level++) {
             TextureTarget target = TARGETS.down(level);
-            pass(encoder, Pipelines.DOWNSAMPLE, source, target);
+            pass(encoder, Pipelines.BLUR_DOWNSAMPLE, source, target, level, chain);
             source = target.getColorTextureView();
         }
 
-        for (Key key : REQUESTED) {
-            processKey(encoder, key);
+        for (Map.Entry<Key, Region> entry : REQUESTED.entrySet()) {
+            processKey(encoder, entry.getKey(), entry.getValue());
         }
+        REQUESTED.clear();
+    }
+
+    public static void endFrame() {
         REQUESTED.clear();
     }
 
@@ -305,70 +251,84 @@ public final class Blur {
         TARGETS.close();
     }
 
-    private static void processKey(CommandEncoder encoder, Key key) {
+    private static void processKey(CommandEncoder encoder, Key key, Region region) {
         switch (key.type()) {
-            case GAUSSIAN -> separable(encoder, key, Pipelines.GAUSSIAN_HORIZONTAL, Pipelines.GAUSSIAN_VERTICAL);
-            case KAWASE -> kawase(encoder, key);
-            case BOX -> separable(encoder, key, Pipelines.BOX_HORIZONTAL, Pipelines.BOX_VERTICAL);
+            case GAUSSIAN -> separable(encoder, key, region, Pipelines.BLUR_GAUSSIAN_HORIZONTAL, Pipelines.BLUR_GAUSSIAN_VERTICAL);
+            case KAWASE -> kawase(encoder, key, region);
+            case BOX -> separable(encoder, key, region, Pipelines.BLUR_BOX_HORIZONTAL, Pipelines.BLUR_BOX_VERTICAL);
         }
     }
 
-    private static void kawase(CommandEncoder encoder, Key key) {
+    private static void kawase(CommandEncoder encoder, Key key, Region region) {
         GpuTextureView source = TARGETS.down(key.strength()).getColorTextureView();
         for (int level = key.strength() - 1; level >= 1; level--) {
             TextureTarget target = level == 1 ? TARGETS.output(key) : TARGETS.temp(level);
-            pass(encoder, Pipelines.UPSAMPLE, source, target);
+            pass(encoder, Pipelines.BLUR_UPSAMPLE, source, target, level, region);
             source = target.getColorTextureView();
         }
     }
 
-    private static void separable(CommandEncoder encoder, Key key, RenderPipeline horizontal, RenderPipeline vertical) {
+    private static void separable(CommandEncoder encoder, Key key, Region region, RenderPipeline horizontal, RenderPipeline vertical) {
         int level = key.type().outputLevel(key.strength());
         int repeats = key.strength() > 3 ? 2 : 1;
         TextureTarget temp = TARGETS.temp(level);
         TextureTarget output = TARGETS.output(key);
         GpuTextureView source = TARGETS.down(level).getColorTextureView();
         for (int i = 0; i < repeats; i++) {
-            pass(encoder, horizontal, source, temp);
-            pass(encoder, vertical, temp.getColorTextureView(), output);
+            pass(encoder, horizontal, source, temp, level, region);
+            pass(encoder, vertical, temp.getColorTextureView(), output, level, region);
             source = output.getColorTextureView();
         }
     }
 
-    private static void pass(CommandEncoder encoder, RenderPipeline pipeline, GpuTextureView source, TextureTarget target) {
+    private static void pass(CommandEncoder encoder, RenderPipeline pipeline, GpuTextureView source, TextureTarget target, int level, Region region) {
+        if (!crop(region, level, target.width, target.height)) {
+            return;
+        }
         GpuSampler sampler = RenderSystem.getSamplerCache().getClampToEdge(FilterMode.LINEAR);
         try (RenderPass renderPass = encoder.createRenderPass(() -> "Blur " + pipeline.getLocation().getPath(), target.getColorTextureView(), Optional.empty())) {
             renderPass.setPipeline(RenderSystem.getCompiledPipeline(pipeline));
             RenderSystem.bindDefaultUniforms(renderPass);
+            renderPass.enableScissor(SCISSOR[0], SCISSOR[1], SCISSOR[2], SCISSOR[3]);
             renderPass.setUniform("InSampler", source, sampler);
             renderPass.draw(3, 1, 0, 0);
+            renderPass.disableScissor();
         }
+    }
+
+    static boolean crop(Region region, int level, int targetWidth, int targetHeight) {
+        if (region.isEmpty()) {
+            return false;
+        }
+        int margin = KERNEL_MARGIN_TEXELS << level;
+        int x0 = Math.max(0, toScreen(region.minX) - margin);
+        int y0 = Math.max(0, toScreen(region.minY) - margin);
+        int x1 = toScreen(region.maxX) + margin;
+        int y1 = toScreen(region.maxY) + margin;
+        int tx0 = x0 >> level;
+        int ty0 = y0 >> level;
+        int tx1 = (x1 + (1 << level) - 1) >> level;
+        int ty1 = (y1 + (1 << level) - 1) >> level;
+        int scX = Math.max(0, tx0);
+        int scY = Math.max(0, targetHeight - ty1);
+        int scW = Math.max(0, Math.min(targetWidth, tx1) - scX);
+        int scH = Math.max(0, (targetHeight - Math.max(0, ty0)) - scY);
+        if (scW == 0 || scH == 0) {
+            return false;
+        }
+        SCISSOR[0] = scX;
+        SCISSOR[1] = scY;
+        SCISSOR[2] = scW;
+        SCISSOR[3] = scH;
+        return true;
+    }
+
+    private static int toScreen(int gui) {
+        return Math.round(gui * DisplayUtil.SCALE);
     }
 
     private static RenderTarget mainTarget() {
         return Minecraft.getInstance().gameRenderer.mainRenderTarget();
-    }
-
-    private static final float MAX_RADIUS = 31.5F;
-    private static final float OPACITY_STEPS = 31.0F;
-
-    private float x;
-    private float y;
-    private float width;
-    private float height;
-    private float radiusTopLeft;
-    private float radiusTopRight;
-    private float radiusBottomRight;
-    private float radiusBottomLeft;
-    private Type type = Type.GAUSSIAN;
-    private int strength = 3;
-    private int tintTopLeft;
-    private int tintTopRight;
-    private int tintBottomRight;
-    private int tintBottomLeft;
-    private float alpha = 1.0F;
-
-    private Blur() {
     }
 
     public static Blur create() {
@@ -376,113 +336,64 @@ public final class Blur {
     }
 
     public static Blur of(float x, float y, float width, float height) {
-        return new Blur().bounds(x, y, width, height);
-    }
-
-    public Blur position(float x, float y) {
-        this.x = x;
-        this.y = y;
-        return this;
-    }
-
-    public Blur size(float width, float height) {
-        this.width = width;
-        this.height = height;
-        return this;
-    }
-
-    public Blur bounds(float x, float y, float width, float height) {
-        return position(x, y).size(width, height);
-    }
-
-    public Blur radius(float radius) {
-        return radius(radius, radius, radius, radius);
-    }
-
-    public Blur radius(float topLeft, float topRight, float bottomRight, float bottomLeft) {
-        this.radiusTopLeft = topLeft;
-        this.radiusTopRight = topRight;
-        this.radiusBottomRight = bottomRight;
-        this.radiusBottomLeft = bottomLeft;
-        return this;
+        return new Blur().position(x, y).size(width, height);
     }
 
     public Blur radiusTop(float radius) {
         this.radiusTopLeft = radius;
         this.radiusTopRight = radius;
-        return this;
+        return self();
     }
 
     public Blur radiusBottom(float radius) {
         this.radiusBottomLeft = radius;
         this.radiusBottomRight = radius;
-        return this;
+        return self();
     }
 
     public Blur radiusLeft(float radius) {
         this.radiusTopLeft = radius;
         this.radiusBottomLeft = radius;
-        return this;
+        return self();
     }
 
     public Blur radiusRight(float radius) {
         this.radiusTopRight = radius;
         this.radiusBottomRight = radius;
-        return this;
+        return self();
     }
 
     public Blur type(Type type) {
         this.type = type;
-        return this;
+        return self();
     }
 
     public Blur strength(int strength) {
         this.strength = Math.clamp(strength, 1, Type.MAX_STRENGTH);
-        return this;
+        return self();
     }
 
     public Blur tint(int argb) {
-        return corners(argb, argb, argb, argb);
+        return color(argb);
     }
 
     public Blur tint(Color color) {
         return tint(color.argb());
     }
 
-    public Blur verticalGradient(Color top, Color bottom) {
-        return corners(top.argb(), top.argb(), bottom.argb(), bottom.argb());
-    }
-
-    public Blur horizontalGradient(Color left, Color right) {
-        return corners(left.argb(), right.argb(), right.argb(), left.argb());
-    }
-
-    public Blur corners(int topLeft, int topRight, int bottomRight, int bottomLeft) {
-        this.tintTopLeft = topLeft;
-        this.tintTopRight = topRight;
-        this.tintBottomRight = bottomRight;
-        this.tintBottomLeft = bottomLeft;
-        return this;
-    }
-
-    public Blur alpha(float alpha) {
-        this.alpha = Math.clamp(alpha, 0.0F, 1.0F);
-        return this;
-    }
-
     public RenderState build(GuiGraphicsExtractor graphics) {
         float maxRadius = Math.min(Math.min(width, height) * 0.5F, MAX_RADIUS);
-        int topLeft = packRadius(radiusTopLeft, maxRadius);
-        int topRight = packRadius(radiusTopRight, maxRadius);
-        int bottomRight = packRadius(radiusBottomRight, maxRadius);
-        int bottomLeft = packRadius(radiusBottomLeft, maxRadius);
+        int topLeft = packRadius(radiusTopLeft, maxRadius, 2.0F, 6);
+        int topRight = packRadius(radiusTopRight, maxRadius, 2.0F, 6);
+        int bottomRight = packRadius(radiusBottomRight, maxRadius, 2.0F, 6);
+        int bottomLeft = packRadius(radiusBottomLeft, maxRadius, 2.0F, 6);
         int opacity = Math.round(alpha * OPACITY_STEPS);
         Key key = new Key(type, strength);
         return new RenderState(
                 key, DisplayBatcher.pose(graphics), x, y, width, height,
                 topLeft | topRight << 6 | type.outputLevel(strength) << 12 | (opacity & 1) << 15,
                 bottomLeft | bottomRight << 6 | (opacity >> 1) << 12,
-                tintTopLeft, tintTopRight, tintBottomRight, tintBottomLeft,
+                colorTopLeft, colorTopRight, colorBottomRight, colorBottomLeft,
                 graphics.scissorStack.peek()
         );
     }
@@ -493,9 +404,4 @@ public final class Blur {
         }
         DisplayBatcher.submit(graphics, build(graphics));
     }
-
-    private static int packRadius(float radius, float max) {
-        return Math.clamp(Math.round(Math.clamp(radius, 0.0F, max) * 2.0F), 0, 63);
-    }
 }
-

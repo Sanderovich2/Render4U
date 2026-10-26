@@ -17,17 +17,13 @@ layout(location = 1) in vec2 UV0;
 layout(location = 2) in ivec2 UV2;
 layout(location = 3) in vec4 Color;
 
-layout(location = 0) out vec2 localPos;
+layout(location = 0) out vec2 texCoord;
 layout(location = 1) out vec4 vertexColor;
-layout(location = 2) flat out vec2 halfSize;
-layout(location = 3) flat out ivec2 radii;
-
-const float PADDING = 1.0;
+layout(location = 2) flat out ivec2 params;
 
 void main() {
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
-    localPos = UV0;
-    halfSize = abs(UV0) - PADDING;
-    radii = UV2 & 0xFFFF;
+    texCoord = UV0;
     vertexColor = Color * ColorModulator;
-}
+    params = UV2 & 0xFFFF;
+}

@@ -1,6 +1,5 @@
 package dev.render4u.render.font;
 
-import java.awt.Font;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -9,9 +8,9 @@ import org.slf4j.LoggerFactory;
 
 public final class FontManager {
     private static final Logger LOGGER = LoggerFactory.getLogger("Render4UFontManager");
-    private static final Map<String, TTFFont> FONTS = new ConcurrentHashMap<>();
+    private static final Map<String, Font> FONTS = new ConcurrentHashMap<>();
 
-    public static TTFFont ROBOTO;
+    public static Font ROBOTO;
 
     private FontManager() {
     }
@@ -23,31 +22,31 @@ public final class FontManager {
         ROBOTO = register("roboto", "/assets/render4u/fonts/roboto.ttf");
     }
 
-    public static TTFFont register(String name, String resourcePath) {
+    public static Font register(String name, String resourcePath) {
         try (InputStream stream = FontManager.class.getResourceAsStream(resourcePath)) {
             if (stream != null) {
-                Font font = Font.createFont(Font.TRUETYPE_FONT, stream);
-                TTFFont ttfFont = new TTFFont(name, font);
-                FONTS.put(name.toLowerCase(), ttfFont);
+                java.awt.Font font = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, stream);
+                Font f = new Font(name, font);
+                FONTS.put(name.toLowerCase(), f);
                 LOGGER.info("Registered font '{}' from classpath resource '{}'", name, resourcePath);
-                return ttfFont;
+                return f;
             } else {
                 LOGGER.warn("Could not find font resource '{}', falling back to SansSerif", resourcePath);
-                return register(name, new Font("SansSerif", Font.PLAIN, 18));
+                return register(name, new java.awt.Font("SansSerif", java.awt.Font.PLAIN, 18));
             }
         } catch (Exception e) {
             LOGGER.error("Failed to load font '{}' from '{}', falling back to SansSerif", name, resourcePath, e);
-            return register(name, new Font("SansSerif", Font.PLAIN, 18));
+            return register(name, new java.awt.Font("SansSerif", java.awt.Font.PLAIN, 18));
         }
     }
 
-    public static TTFFont register(String name, Font font) {
-        TTFFont ttfFont = new TTFFont(name, font);
-        FONTS.put(name.toLowerCase(), ttfFont);
-        return ttfFont;
+    public static Font register(String name, java.awt.Font font) {
+        Font f = new Font(name, font);
+        FONTS.put(name.toLowerCase(), f);
+        return f;
     }
 
-    public static TTFFont get(String name) {
+    public static Font get(String name) {
         return FONTS.get(name.toLowerCase());
     }
 }

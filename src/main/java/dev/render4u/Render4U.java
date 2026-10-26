@@ -2,12 +2,8 @@ package dev.render4u;
 
 import dev.render4u.core.event.EventBus;
 import dev.render4u.feature.module.ModuleManager;
-import dev.render4u.render.display.blur.Blur;
-import dev.render4u.render.display.outline.OutlinePipeline;
-import dev.render4u.render.display.rounded.RoundedRectPipeline;
-import dev.render4u.render.display.shadow.ShadowPipeline;
+import dev.render4u.render.display.Pipelines;
 import dev.render4u.render.font.FontManager;
-import dev.render4u.render.font.TTFTextPipeline;
 import net.fabricmc.api.ClientModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,12 +23,7 @@ public final class Render4U implements ClientModInitializer {
         instance = this;
         LOGGER.info("Initializing {} v{} - Modern Rendering Utility", CLIENT_NAME, CLIENT_VERSION);
 
-        RoundedRectPipeline.init();
-        ShadowPipeline.init();
-        OutlinePipeline.init();
-        Blur.init();
-        TTFTextPipeline.init();
-
+        Pipelines.init();
         FontManager.init();
 
         moduleManager = new ModuleManager();
@@ -53,4 +44,3 @@ public final class Render4U implements ClientModInitializer {
         return instance.moduleManager;
     }
 }
-

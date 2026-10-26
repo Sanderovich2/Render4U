@@ -15,8 +15,7 @@ public abstract class GuiRendererMixin {
     }
 
     @Inject(method = "close", at = @At("HEAD"))
-    private void render4u$closeBlur(CallbackInfo ci) {
-        Blur.close();
+    private void render4u$endBlurFrame(CallbackInfo ci) {
+        Blur.endFrame();
     }
 }
-

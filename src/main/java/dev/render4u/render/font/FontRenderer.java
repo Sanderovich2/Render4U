@@ -1,23 +1,31 @@
 package dev.render4u.render.font;
 
 import com.mojang.blaze3d.platform.NativeImage;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.renderpearl.api.pipeline.RenderPipeline;
+import com.mojang.renderpearl.api.textures.FilterMode;
 import com.mojang.renderpearl.api.textures.GpuTextureView;
+import dev.render4u.render.display.Pipelines;
 import dev.render4u.render.display.batch.DisplayBatcher;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.navigation.ScreenRectangle;
+import net.minecraft.client.gui.render.TextureSetup;
+import net.minecraft.client.renderer.state.gui.GuiElementRenderState;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.resources.Identifier;
+import org.jspecify.annotations.Nullable;
+import org.joml.Matrix3x2f;
 
-public final class TTFFontRenderer {
+public final class FontRenderer {
     private static final int ATLAS_SIZE = 1024;
     private static final float OVERSAMPLE = 2.0F;
 
@@ -42,28 +50,19 @@ public final class TTFFontRenderer {
     private final float size;
     private final Map<Character, Glyph> glyphMap = new HashMap<>();
     private final Identifier textureId;
-    private final BufferedImage atlasImage;
+    private volatile BufferedImage atlasImage;
     private float fontHeight;
     private volatile DynamicTexture dynamicTexture;
 
     public record Glyph(float x, float y, float width, float height, float u0, float v0, float u1, float v1, float advance) {
     }
 
-    public static TTFFontRenderer create(String name, InputStream stream, float size) {
-        try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, stream);
-            return new TTFFontRenderer(name, font, size);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to load TTF font: " + name, e);
-        }
-    }
-
-    public TTFFontRenderer(String name, Font awtFont, float size) {
+    public FontRenderer(String name, java.awt.Font awtFont, float size) {
         this.name = name;
         this.size = size;
-        this.textureId = Identifier.fromNamespaceAndPath("render4u", "ttf_" + name.toLowerCase().replaceAll("[^a-z0-9_]", "_") + "_" + (int) size);
+        this.textureId = Identifier.fromNamespaceAndPath("render4u", "font_" + name.toLowerCase().replaceAll("[^a-z0-9_]", "_") + "_" + (int) size);
 
-        Font font = awtFont.deriveFont(Font.PLAIN, size * OVERSAMPLE);
+        java.awt.Font font = awtFont.deriveFont(java.awt.Font.PLAIN, size * OVERSAMPLE);
         this.atlasImage = new BufferedImage(ATLAS_SIZE, ATLAS_SIZE, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = atlasImage.createGraphics();
 
@@ -127,20 +126,18 @@ public final class TTFFontRenderer {
         synchronized (this) {
             if (dynamicTexture != null) return;
 
+            BufferedImage atlas = atlasImage;
+            if (atlas == null) return;
+
+            int[] pixels = atlas.getRGB(0, 0, ATLAS_SIZE, ATLAS_SIZE, null, 0, ATLAS_SIZE);
             NativeImage nativeImage = new NativeImage(NativeImage.Format.RGBA, ATLAS_SIZE, ATLAS_SIZE, false);
-            for (int y = 0; y < ATLAS_SIZE; y++) {
-                for (int x = 0; x < ATLAS_SIZE; x++) {
-                    int argb = atlasImage.getRGB(x, y);
-                    int a = (argb >> 24) & 0xFF;
-                    int r = (argb >> 16) & 0xFF;
-                    int g = (argb >> 8) & 0xFF;
-                    int b = argb & 0xFF;
-                    int abgr = (a << 24) | (b << 16) | (g << 8) | r;
-                    nativeImage.setPixel(x, y, abgr);
-                }
+            for (int i = 0; i < pixels.length; i++) {
+                nativeImage.setPixel(i % ATLAS_SIZE, i / ATLAS_SIZE, pixels[i]);
             }
 
-            DynamicTexture tex = new DynamicTexture(() -> "TTF_" + name, nativeImage);
+            atlasImage = null;
+
+            DynamicTexture tex = new DynamicTexture(() -> "Font_" + name, nativeImage);
             Minecraft.getInstance().getTextureManager().register(textureId, tex);
             this.dynamicTexture = tex;
         }
@@ -259,7 +256,7 @@ public final class TTFFontRenderer {
         }
 
         if (quadCount > 0) {
-            TTFTextRenderState state = new TTFTextRenderState(
+            RenderState state = new RenderState(
                     DisplayBatcher.pose(graphics),
                     textureView(),
                     quads, colors, quadCount,
@@ -269,5 +266,93 @@ public final class TTFFontRenderer {
             DisplayBatcher.submit(graphics, state);
         }
     }
-}
 
+    public static final class RenderState implements GuiElementRenderState {
+        private final Matrix3x2f pose;
+        private final GpuTextureView textureView;
+        private final float[] quads;
+        private final int[] colors;
+        private final int quadCount;
+        private final @Nullable ScreenRectangle scissor;
+        private final ScreenRectangle bounds;
+        private @Nullable TextureSetup textureSetup;
+
+        RenderState(Matrix3x2f pose, GpuTextureView textureView, float[] quads, int[] colors, int quadCount,
+                    float minX, float minY, float maxX, float maxY, @Nullable ScreenRectangle scissor) {
+            this.pose = pose;
+            this.textureView = textureView;
+            this.quads = quads;
+            this.colors = colors;
+            this.quadCount = quadCount;
+            this.scissor = scissor;
+            this.bounds = calculateBounds(pose, minX, minY, maxX - minX, maxY - minY, scissor);
+        }
+
+        @Override
+        public void buildVertices(VertexConsumer consumer) {
+            for (int i = 0; i < quadCount; i++) {
+                int q = i * 8;
+                float x0 = quads[q];
+                float y0 = quads[q + 1];
+                float x1 = quads[q + 2];
+                float y1 = quads[q + 3];
+                float u0 = quads[q + 4];
+                float v0 = quads[q + 5];
+                float u1 = quads[q + 6];
+                float v1 = quads[q + 7];
+                int color = colors[i];
+
+                consumer.addVertexWith2DPose(pose, x0, y0).setUv(u0, v0).setUv2(0, 0).setColor(color);
+                consumer.addVertexWith2DPose(pose, x0, y1).setUv(u0, v1).setUv2(0, 0).setColor(color);
+                consumer.addVertexWith2DPose(pose, x1, y1).setUv(u1, v1).setUv2(0, 0).setColor(color);
+                consumer.addVertexWith2DPose(pose, x1, y0).setUv(u1, v0).setUv2(0, 0).setColor(color);
+            }
+        }
+
+        private static ScreenRectangle calculateBounds(Matrix3x2f pose, float x, float y, float width, float height, @Nullable ScreenRectangle scissor) {
+            float minX = Float.MAX_VALUE;
+            float minY = Float.MAX_VALUE;
+            float maxX = -Float.MAX_VALUE;
+            float maxY = -Float.MAX_VALUE;
+
+            for (int i = 0; i < 4; i++) {
+                float px = x + (i & 1) * width;
+                float py = y + (i >> 1) * height;
+                float tx = pose.m00 * px + pose.m10 * py + pose.m20;
+                float ty = pose.m01 * px + pose.m11 * py + pose.m21;
+                minX = Math.min(minX, tx);
+                minY = Math.min(minY, ty);
+                maxX = Math.max(maxX, tx);
+                maxY = Math.max(maxY, ty);
+            }
+
+            ScreenRectangle raw = new ScreenRectangle((int) Math.floor(minX), (int) Math.floor(minY),
+                    (int) Math.ceil(maxX - minX) + 1, (int) Math.ceil(maxY - minY) + 1);
+            ScreenRectangle clipped = scissor != null ? raw.intersection(scissor) : raw;
+            return clipped != null ? clipped : ScreenRectangle.empty();
+        }
+
+        @Override
+        public RenderPipeline pipeline() {
+            return Pipelines.FONT;
+        }
+
+        @Override
+        public TextureSetup textureSetup() {
+            if (textureSetup == null) {
+                textureSetup = TextureSetup.singleTexture(textureView, RenderSystem.getSamplerCache().getClampToEdge(FilterMode.LINEAR));
+            }
+            return textureSetup;
+        }
+
+        @Override
+        public @Nullable ScreenRectangle scissorArea() {
+            return scissor;
+        }
+
+        @Override
+        public @Nullable ScreenRectangle bounds() {
+            return bounds;
+        }
+    }
+}

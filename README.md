@@ -11,9 +11,15 @@
   - `RoundedRect` — скруглённые прямоугольники и градиенты.
   - `Shadow` — мягкие тени со спредом и блюром.
   - `Outline` — сглаженные обводки с регулировкой толщины.
-- **Батчинг (`DisplayBatcher`)** — собирает отрисовку и эффективно переиспользует командные буферы под Vulkan и OpenGL.
-- **3D Рендер (`Render3D` & `EventRender3D`)** — проекция координат из мира на экран (World-to-Screen), 3D боксы, 2D Box ESP, Corner ESP, трейсеры, динамические неймтеги блоков и сущностей без багов инверсии за спиной камеры.
-- **Шрифты (TTF)** — быстрый рендерер TrueType-шрифтов на основе динамического атласа с полной поддержкой кириллицы (в комплекте Roboto).
+  - `Line` — SDF-линии с толщиной и градиентом вдоль линии.
+  - `Circle` — диски, кольца и дуги (прогресс-индикаторы).
+  - `Image` — текстуры и иконки по Identifier, кастомные картинки (файлы, `BufferedImage`) с тонировкой.
+- **Батчинг (`DisplayBatcher`)** — собирает отрисовку, отсекает элементы за экраном и эффективно переиспользует командные буферы под Vulkan и OpenGL.
+- **Оптимизированный блюр** — down/up-проходы рендерятся только в области запрошенных панелей (scissor-кроп с запасом на ядро фильтра), а не по всему экрану.
+- **Пайплайны (`Pipelines`)** — все шейдерные пайплайны модуля в одном классе.
+- **Self-test (`RenderSelfTestModule`)** — демо-оверлей, каждый кадр прогоняющий весь рендер-стек и пишущий результат в лог (см. ниже).
+- **3D Рендер (`Render3D` & `EventRender3D`)** — проекция координат из мира на экран (World-to-Screen) с кэшем матрицы на кадр, 3D боксы, 2D Box ESP, Corner ESP, трейсеры, неймтеги, хелперы сущностей с интерполяцией по partialTick (`drawEntityBox2D`, `drawEntityNametag` и др.).
+- **Шрифты (Font)** — быстрый рендерер TrueType-шрифтов на основе динамического атласа с полной поддержкой кириллицы (в комплекте Roboto).
 - **Утилита цвета (`ColorUtil`)** — удобный парсер HEX (`#RGB`, `#RRGGBB`, `#AARRGGBB`, `0x...`), RGB/RGBA и генератор плавных градиентов / радуги.
 
 ---
@@ -64,11 +70,7 @@
      - `ShaderManagerMixin` (сброс пайплайнов для совместимости с Vulkan)
 4. В точке входа клиента инициализируйте пайплайны:
    ```java
-   RoundedRectPipeline.init();
-   ShadowPipeline.init();
-   OutlinePipeline.init();
-   Blur.init();
-   TTFTextPipeline.init();
+   Pipelines.init();
    FontManager.init();
    ```
 
@@ -84,7 +86,7 @@ import dev.render4u.Render4U;
 import dev.render4u.core.event.EventTarget;
 import dev.render4u.core.event.impl.EventDisplay;
 import dev.render4u.render.display.blur.Blur;
-import dev.render4u.render.display.rounded.RoundedRect;
+import dev.render4u.render.display.shape.RoundedRect;
 import dev.render4u.render.font.FontManager;
 import dev.render4u.util.color.ColorUtil;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -161,6 +163,11 @@ public class EspModule {
 
         // 5. Неймтеги и дистанция
         Render3D.drawDistanceTag(graphics, "Target", targetX, targetY + 2.0, ColorUtil.hex("#9010141C"));
+
+        // 6. Хелперы сущностей (интерполяция по partialTick из события)
+        Render3D.drawEntityCornerBox2D(graphics, player, event.partialTick(), espColor, 1.5F, 8.0F);
+        Render3D.drawEntityNametag(graphics, player, event.partialTick(), 0xFFFFFFFF, 0x9010141C);
+        Render3D.drawEntityTracer(graphics, player, event.partialTick(), espColor, 1.5F);
     }
 }
 ```
@@ -183,9 +190,31 @@ Outline.of(x, y, w, h).radius(8).thickness(1.0F)
     .render(graphics);
 ```
 
-### Текст (TTF)
+### Текст (Font)
 ```java
 FontManager.ROBOTO.drawString(graphics, "Привет, мир!", x, y, 16.0F, 0xFFFFFFFF);
+```
+
+### Круги, линии и картинки
+```java
+Circle.of(centerX, centerY, 8.0F).color(0xFF5B86E5).render(graphics);
+Circle.of(centerX, centerY, 8.0F).innerRadius(4.0F).color(0xFF36D1DC).render(graphics);
+Circle.of(centerX, centerY, 10.0F).innerRadius(6.0F).angle(0.0F, 270.0F).color(0xFFFFB74D).render(graphics);
+
+Line.of(x1, y1, x2, y2).thickness(2.0F).gradient(0xFF5B86E5, 0xFF36D1DC).render(graphics);
+
+Image.of("textures/block/stone.png").bounds(x, y, 16.0F, 16.0F).render(graphics);
+Image.of(Identifier).bounds(x, y, w, h).uv(0.0F, 0.0F, 0.5F, 0.5F).color(0x80FFFFFF).render(graphics);
+Image.of(bufferedImage, "name").bounds(x, y, w, h).radius(6.0F).render(graphics);
+```
+
+### Кастомные картинки
+Кастомная текстура регистрируется по имени, кэшируется и повторные вызовы `of` с тем же именем не перезагружают её. Обновить содержимое уже зарегистрированной картинки — `Image.update`. Все вызовы должны быть на render-потоке (например, из модулей).
+```java
+Image.of(Path.of("config/logo.png")).bounds(x, y, 64.0F, 64.0F).render(graphics);
+Image.of(Path.of("config/logo.png"), "mylogo").bounds(x, y, 64.0F, 64.0F).render(graphics);
+Image.of(bufferedImage, "preview").bounds(x, y, 32.0F, 32.0F).render(graphics);
+Image.update("preview", newBufferedImage);
 ```
 
 ### Работа с цветом
@@ -194,6 +223,35 @@ int hexColor = ColorUtil.parseHex("#5B86E5");
 Color color = ColorUtil.hex("#AF10141C");
 int rgb = ColorUtil.rgba(255, 128, 0, 200);
 int rainbow = ColorUtil.rainbow(4.0F, 0.8F, 1.0F, 0);
+```
+
+---
+
+## Проверка, что всё рендерится
+
+### 1. Встроенный self-test (в игре)
+Вместе с утилитой регистрируются модули **Render Self Test** (включён по умолчанию) и **Debug HUD** (выключен). Self-test каждый кадр прогоняет весь рендер-стек и рисует демо-панель: тень, блюр, скруглённую панель, градиентную обводку, текст с кириллицей, круг/кольцо/дугу, градиентную линию, текстуру, градиентную полоску, а в мире — угловой бокс, трейсер, неймтег и хелперы сущностей.
+
+Если всё отрисовалось без ошибок, в логе появятся строки:
+
+```
+[Render4U/SelfTest] Self-test: 2D OK (shadow, blur, rounded rect, outline, circle, line, image, gradient, text, cyrillic)
+[Render4U/SelfTest] Self-test: 3D OK (corner box, tracer, distance tag, entity helpers)
+```
+
+**Debug HUD** показывает бэкенд (`VulkanHelper`), FPS, время кадра и статистику батчера. Включить:
+
+```java
+import dev.render4u.feature.module.impl.DebugHudModule;
+
+Render4U.getModuleManager().getModule(DebugHudModule.class).setEnabled(true);
+```
+
+### 2. Unit-тесты
+Логика без GPU (шина событий, цвета, градиенты, упаковка параметров примитивов) покрыта JUnit-тестами:
+
+```bash
+./gradlew test
 ```
 
 ---

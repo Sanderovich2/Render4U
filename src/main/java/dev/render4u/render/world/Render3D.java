@@ -1,12 +1,13 @@
 package dev.render4u.render.world;
 
 import dev.render4u.render.display.DisplayUtil;
-import dev.render4u.render.display.rounded.RoundedRect;
+import dev.render4u.render.display.shape.RoundedRect;
 import dev.render4u.render.font.FontManager;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
@@ -26,47 +27,40 @@ public final class Render3D {
         }
     }
 
+    private static final Matrix4f VIEW_PROJECTION = new Matrix4f();
+    private static final Vector4f CLIP = new Vector4f();
+    private static final Vector2f SCRATCH_A = new Vector2f();
+    private static final Vector2f SCRATCH_B = new Vector2f();
+
+    private static Vec3 cameraPos = Vec3.ZERO;
+    private static boolean frameCacheValid;
+
     private Render3D() {
     }
 
+    public static void beginFrame(Minecraft minecraft) {
+        if (prepare(minecraft)) {
+            frameCacheValid = true;
+        }
+    }
+
+    public static void endFrame() {
+        frameCacheValid = false;
+    }
+
+    public static Vec3 getCameraPos() {
+        if (!frameCacheValid) {
+            prepare(Minecraft.getInstance());
+        }
+        return cameraPos;
+    }
+
     public static @Nullable Vector2f project(double x, double y, double z) {
-        Minecraft mc = Minecraft.getInstance();
-        if (mc.gameRenderer == null) {
+        if (!prepare(Minecraft.getInstance())) {
             return null;
         }
-
-        Camera camera = mc.gameRenderer.mainCamera();
-        if (camera == null) {
-            return null;
-        }
-
-        Vec3 camPos = camera.position();
-        Matrix4f mat = camera.getViewRotationProjectionMatrix(new Matrix4f());
-
-        Vector4f v = new Vector4f(
-                (float) (x - camPos.x),
-                (float) (y - camPos.y),
-                (float) (z - camPos.z),
-                1.0F
-        );
-        mat.transform(v);
-
-        if (v.w <= 0.0F) {
-            return null;
-        }
-
-        float ndcX = v.x / v.w;
-        float ndcY = v.y / v.w;
-        float ndcZ = v.z / v.w;
-
-        if (ndcZ < -1.0F || ndcZ > 1.0F) {
-            return null;
-        }
-
-        float screenX = (ndcX * 0.5F + 0.5F) * DisplayUtil.width();
-        float screenY = (1.0F - (ndcY * 0.5F + 0.5F)) * DisplayUtil.height();
-
-        return new Vector2f(screenX, screenY);
+        Vector2f dest = new Vector2f();
+        return projectInto(x, y, z, dest) ? dest : null;
     }
 
     public static @Nullable Vector2f project(Vec3 pos) {
@@ -74,39 +68,24 @@ public final class Render3D {
     }
 
     public static @Nullable ScreenBox projectBox(AABB box) {
-        double[][] corners = {
-                {box.minX, box.minY, box.minZ},
-                {box.maxX, box.minY, box.minZ},
-                {box.maxX, box.minY, box.maxZ},
-                {box.minX, box.minY, box.maxZ},
-                {box.minX, box.maxY, box.minZ},
-                {box.maxX, box.maxY, box.minZ},
-                {box.maxX, box.maxY, box.maxZ},
-                {box.minX, box.maxY, box.maxZ}
-        };
-
         float minX = Float.MAX_VALUE;
         float minY = Float.MAX_VALUE;
         float maxX = -Float.MAX_VALUE;
         float maxY = -Float.MAX_VALUE;
         boolean anyVisible = false;
 
-        for (double[] corner : corners) {
-            Vector2f proj = project(corner[0], corner[1], corner[2]);
-            if (proj != null) {
-                anyVisible = true;
-                if (proj.x < minX) minX = proj.x;
-                if (proj.y < minY) minY = proj.y;
-                if (proj.x > maxX) maxX = proj.x;
-                if (proj.y > maxY) maxY = proj.y;
+        for (int i = 0; i < 8; i++) {
+            if (!projectInto(cornerX(box, i), cornerY(box, i), cornerZ(box, i), SCRATCH_A)) {
+                continue;
             }
+            anyVisible = true;
+            minX = Math.min(minX, SCRATCH_A.x);
+            minY = Math.min(minY, SCRATCH_A.y);
+            maxX = Math.max(maxX, SCRATCH_A.x);
+            maxY = Math.max(maxY, SCRATCH_A.y);
         }
 
-        if (!anyVisible) {
-            return null;
-        }
-
-        return new ScreenBox(minX, minY, maxX, maxY);
+        return anyVisible ? new ScreenBox(minX, minY, maxX, maxY) : null;
     }
 
     public static void drawLine(GuiGraphicsExtractor graphics, float x1, float y1, float x2, float y2, int color, float thickness) {
@@ -165,9 +144,7 @@ public final class Render3D {
         float y1 = screen.minY;
         float x2 = screen.maxX;
         float y2 = screen.maxY;
-        float w = screen.width();
-        float h = screen.height();
-        float len = Math.min(cornerLength, Math.min(w * 0.5F, h * 0.5F));
+        float len = Math.min(cornerLength, Math.min(screen.width() * 0.5F, screen.height() * 0.5F));
 
         drawLine(graphics, x1, y1, x1 + len, y1, color, thickness);
         drawLine(graphics, x1, y1, x1, y1 + len, color, thickness);
@@ -183,29 +160,12 @@ public final class Render3D {
     }
 
     public static void drawBox3D(GuiGraphicsExtractor graphics, AABB box, int color, float thickness) {
-        Vector2f c0 = project(box.minX, box.minY, box.minZ);
-        Vector2f c1 = project(box.maxX, box.minY, box.minZ);
-        Vector2f c2 = project(box.maxX, box.minY, box.maxZ);
-        Vector2f c3 = project(box.minX, box.minY, box.maxZ);
-        Vector2f c4 = project(box.minX, box.maxY, box.minZ);
-        Vector2f c5 = project(box.maxX, box.maxY, box.minZ);
-        Vector2f c6 = project(box.maxX, box.maxY, box.maxZ);
-        Vector2f c7 = project(box.minX, box.maxY, box.maxZ);
-
-        if (c0 != null && c1 != null) drawLine(graphics, c0.x, c0.y, c1.x, c1.y, color, thickness);
-        if (c1 != null && c2 != null) drawLine(graphics, c1.x, c1.y, c2.x, c2.y, color, thickness);
-        if (c2 != null && c3 != null) drawLine(graphics, c2.x, c2.y, c3.x, c3.y, color, thickness);
-        if (c3 != null && c0 != null) drawLine(graphics, c3.x, c3.y, c0.x, c0.y, color, thickness);
-
-        if (c4 != null && c5 != null) drawLine(graphics, c4.x, c4.y, c5.x, c5.y, color, thickness);
-        if (c5 != null && c6 != null) drawLine(graphics, c5.x, c5.y, c6.x, c6.y, color, thickness);
-        if (c6 != null && c7 != null) drawLine(graphics, c6.x, c6.y, c7.x, c7.y, color, thickness);
-        if (c7 != null && c4 != null) drawLine(graphics, c7.x, c7.y, c4.x, c4.y, color, thickness);
-
-        if (c0 != null && c4 != null) drawLine(graphics, c0.x, c0.y, c4.x, c4.y, color, thickness);
-        if (c1 != null && c5 != null) drawLine(graphics, c1.x, c1.y, c5.x, c5.y, color, thickness);
-        if (c2 != null && c6 != null) drawLine(graphics, c2.x, c2.y, c6.x, c6.y, color, thickness);
-        if (c3 != null && c7 != null) drawLine(graphics, c3.x, c3.y, c7.x, c7.y, color, thickness);
+        for (int i = 0; i < 4; i++) {
+            int next = (i + 1) & 3;
+            edge(graphics, box, i, next, color, thickness);
+            edge(graphics, box, i + 4, next + 4, color, thickness);
+            edge(graphics, box, i, i + 4, color, thickness);
+        }
     }
 
     public static void drawBlockBox3D(GuiGraphicsExtractor graphics, BlockPos pos, int color, float thickness) {
@@ -237,20 +197,89 @@ public final class Render3D {
     }
 
     public static void drawDistanceTag(GuiGraphicsExtractor graphics, String label, double x, double y, double z, int color) {
-        Vec3 cam = getCameraPos();
-        double dist = cam.distanceTo(new Vec3(x, y, z));
+        double dist = getCameraPos().distanceTo(new Vec3(x, y, z));
         String formatted = String.format("%s [%.1fm]", label, dist);
         drawNametag(graphics, formatted, x, y, z, 0xFFFFFFFF, color);
     }
 
-    public static Vec3 getCameraPos() {
-        Minecraft mc = Minecraft.getInstance();
-        if (mc.gameRenderer != null) {
-            Camera cam = mc.gameRenderer.mainCamera();
-            if (cam != null) {
-                return cam.position();
-            }
+    public static AABB entityBox(Entity entity, float partialTick) {
+        Vec3 lerped = entity.getPosition(partialTick);
+        return entity.getBoundingBox().move(lerped.x - entity.getX(), lerped.y - entity.getY(), lerped.z - entity.getZ());
+    }
+
+    public static void drawEntityBox2D(GuiGraphicsExtractor graphics, Entity entity, float partialTick, int color, float thickness) {
+        drawBox2D(graphics, entityBox(entity, partialTick), color, thickness);
+    }
+
+    public static void drawEntityCornerBox2D(GuiGraphicsExtractor graphics, Entity entity, float partialTick, int color, float thickness, float cornerLength) {
+        drawCornerBox2D(graphics, entityBox(entity, partialTick), color, thickness, cornerLength);
+    }
+
+    public static void drawEntityTracer(GuiGraphicsExtractor graphics, Entity entity, float partialTick, int color, float thickness) {
+        Vec3 center = entityBox(entity, partialTick).getCenter();
+        drawTracer(graphics, center.x, center.y, center.z, color, thickness);
+    }
+
+    public static void drawEntityNametag(GuiGraphicsExtractor graphics, Entity entity, float partialTick, int textColor, int bgColor) {
+        AABB box = entityBox(entity, partialTick);
+        Vec3 center = box.getCenter();
+        drawNametag(graphics, entity.getName().getString(), center.x, box.maxY + 0.3, center.z, textColor, bgColor);
+    }
+
+    private static boolean prepare(Minecraft minecraft) {
+        if (frameCacheValid) {
+            return true;
         }
-        return Vec3.ZERO;
+        if (minecraft.gameRenderer == null) {
+            return false;
+        }
+        Camera camera = minecraft.gameRenderer.mainCamera();
+        if (camera == null) {
+            return false;
+        }
+        Matrix4f result = camera.getViewRotationProjectionMatrix(VIEW_PROJECTION);
+        if (result != VIEW_PROJECTION) {
+            VIEW_PROJECTION.set(result);
+        }
+        cameraPos = camera.position();
+        return true;
+    }
+
+    private static boolean projectInto(double x, double y, double z, Vector2f dest) {
+        CLIP.set((float) (x - cameraPos.x), (float) (y - cameraPos.y), (float) (z - cameraPos.z), 1.0F);
+        VIEW_PROJECTION.transform(CLIP);
+
+        float w = CLIP.w;
+        if (w <= 0.0F) {
+            return false;
+        }
+        float invW = 1.0F / w;
+        float ndcZ = CLIP.z * invW;
+        if (ndcZ < -1.0F || ndcZ > 1.0F) {
+            return false;
+        }
+
+        dest.set((CLIP.x * invW * 0.5F + 0.5F) * DisplayUtil.width(),
+                (1.0F - (CLIP.y * invW * 0.5F + 0.5F)) * DisplayUtil.height());
+        return true;
+    }
+
+    private static void edge(GuiGraphicsExtractor graphics, AABB box, int from, int to, int color, float thickness) {
+        if (projectInto(cornerX(box, from), cornerY(box, from), cornerZ(box, from), SCRATCH_A)
+                && projectInto(cornerX(box, to), cornerY(box, to), cornerZ(box, to), SCRATCH_B)) {
+            drawLine(graphics, SCRATCH_A.x, SCRATCH_A.y, SCRATCH_B.x, SCRATCH_B.y, color, thickness);
+        }
+    }
+
+    private static double cornerX(AABB box, int corner) {
+        return (corner & 1) == 0 ? box.minX : box.maxX;
+    }
+
+    private static double cornerY(AABB box, int corner) {
+        return (corner & 4) == 0 ? box.minY : box.maxY;
+    }
+
+    private static double cornerZ(AABB box, int corner) {
+        return (corner & 2) == 0 ? box.minZ : box.maxZ;
     }
 }

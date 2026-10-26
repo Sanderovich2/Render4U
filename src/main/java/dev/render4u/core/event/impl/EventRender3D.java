@@ -9,13 +9,15 @@ public final class EventRender3D extends Event {
 
     private GuiGraphicsExtractor graphics;
     private Vec3 cameraPos;
+    private float partialTick;
 
     private EventRender3D() {
     }
 
-    public static EventRender3D get(GuiGraphicsExtractor graphics, Vec3 cameraPos) {
+    public static EventRender3D get(GuiGraphicsExtractor graphics, Vec3 cameraPos, float partialTick) {
         INSTANCE.graphics = graphics;
         INSTANCE.cameraPos = cameraPos;
+        INSTANCE.partialTick = partialTick;
         INSTANCE.setCancelled(false);
         return INSTANCE;
     }
@@ -24,7 +26,15 @@ public final class EventRender3D extends Event {
         return graphics;
     }
 
+    public GuiGraphicsExtractor getGraphics() {
+        return graphics;
+    }
+
     public Vec3 cameraPos() {
         return cameraPos;
+    }
+
+    public float partialTick() {
+        return partialTick;
     }
 }

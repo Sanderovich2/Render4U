@@ -84,7 +84,7 @@ public final class Gradient {
             i++;
         }
         float span = stops[i] - stops[i - 1];
-        return ColorMath.lerp(colors[i - 1], colors[i], span <= 0.0F ? 1.0F : (p - stops[i - 1]) / span);
+        return ColorUtil.lerp(colors[i - 1], colors[i], span <= 0.0F ? 1.0F : (p - stops[i - 1]) / span);
     }
 
     public int sample(float x, float y) {

@@ -46,7 +46,7 @@ public record Color(int argb) {
     }
 
     public Color alpha(float alpha) {
-        return of(ColorMath.multiplyAlpha(argb, alpha));
+        return of(ColorUtil.multiplyAlpha(argb, alpha));
     }
 
     public String toHex() {
