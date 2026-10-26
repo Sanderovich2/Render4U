@@ -12,6 +12,7 @@
   - `Shadow` — мягкие тени со спредом и блюром.
   - `Outline` — сглаженные обводки с регулировкой толщины.
 - **Батчинг (`DisplayBatcher`)** — собирает отрисовку и эффективно переиспользует командные буферы под Vulkan и OpenGL.
+- **3D Рендер (`Render3D` & `EventRender3D`)** — проекция координат из мира на экран (World-to-Screen), 3D боксы, 2D Box ESP, Corner ESP, трейсеры, динамические неймтеги блоков и сущностей без багов инверсии за спиной камеры.
 - **Шрифты (TTF)** — быстрый рендерер TrueType-шрифтов на основе динамического атласа с полной поддержкой кириллицы (в комплекте Roboto).
 - **Утилита цвета (`ColorUtil`)** — удобный парсер HEX (`#RGB`, `#RRGGBB`, `#AARRGGBB`, `0x...`), RGB/RGBA и генератор плавных градиентов / радуги.
 
@@ -117,6 +118,51 @@ public class MyHud {
 ```java
 Blur.of(x, y, w, h).radius(8).render(graphics);
 RoundedRect.of(x, y, w, h).radius(8).color(ColorUtil.colorRgba(20, 20, 20, 180)).render(graphics);
+```
+
+---
+
+## 3D Рендер в мире (ESP, боксы, трейсеры)
+
+Подпишитесь на `EventRender3D` (или используйте внутри `EventDisplay`):
+
+```java
+import dev.render4u.Render4U;
+import dev.render4u.core.event.EventTarget;
+import dev.render4u.core.event.impl.EventRender3D;
+import dev.render4u.render.world.Render3D;
+import dev.render4u.util.color.ColorUtil;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.BlockPos;
+
+public class EspModule {
+    public EspModule() {
+        Render4U.getEventBus().register(this);
+    }
+
+    @EventTarget
+    public void onRender3D(EventRender3D event) {
+        GuiGraphicsExtractor graphics = event.getGraphics();
+        int espColor = ColorUtil.hex("#5B86E5");
+
+        // 1. Трейсер от центра экрана к координатам
+        Render3D.drawTracer(graphics, targetX, targetY, targetZ, espColor, 1.5F);
+
+        // 2. 2D Box ESP вокруг хитбокса
+        Render3D.drawBox2D(graphics, player.getBoundingBox(), espColor, 1.5F);
+
+        // 3. Угловой (Corner) ESP
+        Render3D.drawCornerBox2D(graphics, player.getBoundingBox(), espColor, 1.5F, 8.0F);
+
+        // 4. Полноценный 3D Wireframe куб сущности или блока
+        Render3D.drawBox3D(graphics, player.getBoundingBox(), espColor, 1.5F);
+        Render3D.drawBlockBox3D(graphics, new BlockPos(100, 64, 100), ColorUtil.hex("#FF5555"), 1.5F);
+
+        // 5. Неймтеги и дистанция
+        Render3D.drawDistanceTag(graphics, "Target", targetX, targetY + 2.0, ColorUtil.hex("#9010141C"));
+    }
+}
 ```
 
 ---

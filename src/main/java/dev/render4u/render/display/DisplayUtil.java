@@ -29,6 +29,7 @@ public final class DisplayUtil {
         DisplayBatcher.begin(graphics);
         try {
             Render4U.getEventBus().post(EventDisplay.get(graphics));
+            Render4U.getEventBus().post(dev.render4u.core.event.impl.EventRender3D.get(graphics, dev.render4u.render.world.Render3D.getCameraPos()));
         } finally {
             DisplayBatcher.end();
             graphics.pose().popMatrix();
