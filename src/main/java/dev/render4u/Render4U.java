@@ -1,7 +1,6 @@
 package dev.render4u;
 
 import dev.render4u.core.event.EventBus;
-import dev.render4u.feature.module.ModuleManager;
 import dev.render4u.render.display.Pipelines;
 import dev.render4u.render.font.FontManager;
 import net.fabricmc.api.ClientModInitializer;
@@ -16,7 +15,6 @@ public final class Render4U implements ClientModInitializer {
 
     private static Render4U instance;
     private final EventBus eventBus = new EventBus();
-    private ModuleManager moduleManager;
 
     @Override
     public void onInitializeClient() {
@@ -25,9 +23,6 @@ public final class Render4U implements ClientModInitializer {
 
         Pipelines.init();
         FontManager.init();
-
-        moduleManager = new ModuleManager();
-        moduleManager.init();
 
         LOGGER.info("{} rendering utility initialized successfully!", CLIENT_NAME);
     }
@@ -38,9 +33,5 @@ public final class Render4U implements ClientModInitializer {
 
     public static EventBus getEventBus() {
         return instance.eventBus;
-    }
-
-    public static ModuleManager getModuleManager() {
-        return instance.moduleManager;
     }
 }
