@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "render4u",
+  "version": "${version}",
+  "name": "Render4U",
+  "description": "High-performance modern rendering utility for Minecraft Fabric with Vulkan and OpenGL support.",
+  "authors": [
+    "Render4U Team"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.render4u.Render4U"
+    ]
+  },
+  "mixins": [
+    "render4u.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

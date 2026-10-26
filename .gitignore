@@ -1,0 +1,23 @@
+# Gradle files
+.gradle/
+build/
+
+# IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+.vscode/
+
+# Minecraft run directory & logs
+run/
+logs/
+crash-reports/
+
+# Fabric Loom caches
+.fabric/
+
+# OS specific files
+.DS_Store
+Thumbs.db
