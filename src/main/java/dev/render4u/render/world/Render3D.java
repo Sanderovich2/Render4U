@@ -218,8 +218,8 @@ public final class Render3D {
             return;
         }
 
-        float textWidth = FontManager.ROBOTO_12.getStringWidth(text);
-        float textHeight = FontManager.ROBOTO_12.getFontHeight();
+        float textWidth = FontManager.ROBOTO.getStringWidth(text, 12.0F);
+        float textHeight = FontManager.ROBOTO.getFontHeight(12.0F);
         float padX = 6.0F;
         float padY = 3.0F;
         float boxW = textWidth + padX * 2.0F;
@@ -233,7 +233,7 @@ public final class Render3D {
                 .color(bgColor)
                 .render(graphics);
 
-        FontManager.ROBOTO_12.drawString(graphics, text, boxX + padX, boxY + padY, textColor);
+        FontManager.ROBOTO.drawString(graphics, text, boxX + padX, boxY + padY, 12.0F, textColor);
     }
 
     public static void drawDistanceTag(GuiGraphicsExtractor graphics, String label, double x, double y, double z, int color) {

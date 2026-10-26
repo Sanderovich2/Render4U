@@ -107,7 +107,7 @@ public class MyHud {
         RoundedRect.of(x, y, w, h).radius(6).color(ColorUtil.hex("#9010141C")).render(graphics);
 
         // Текст
-        FontManager.ROBOTO_14.drawString(graphics, "Render4U Active", x + 10, y + 14, 0xFFFFFFFF);
+        FontManager.ROBOTO.drawString(graphics, "Render4U Active", x + 10, y + 14, 14.0F, 0xFFFFFFFF);
     }
 }
 ```
@@ -185,7 +185,7 @@ Outline.of(x, y, w, h).radius(8).thickness(1.0F)
 
 ### Текст (TTF)
 ```java
-FontManager.ROBOTO_16.drawString(graphics, "Привет, мир!", x, y, 0xFFFFFFFF);
+FontManager.ROBOTO.drawString(graphics, "Привет, мир!", x, y, 16.0F, 0xFFFFFFFF);
 ```
 
 ### Работа с цветом

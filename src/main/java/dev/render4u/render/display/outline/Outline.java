@@ -95,6 +95,10 @@ public final class Outline {
         return this;
     }
 
+    public Outline corners(Color topLeft, Color topRight, Color bottomRight, Color bottomLeft) {
+        return corners(topLeft.argb(), topRight.argb(), bottomRight.argb(), bottomLeft.argb());
+    }
+
     public Outline gradient(Gradient gradient) {
         return corners(gradient.sample(0.0F, 0.0F), gradient.sample(1.0F, 0.0F), gradient.sample(1.0F, 1.0F), gradient.sample(0.0F, 1.0F));
     }

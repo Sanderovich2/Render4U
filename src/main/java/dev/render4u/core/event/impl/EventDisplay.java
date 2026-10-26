@@ -20,5 +20,9 @@ public final class EventDisplay extends Event {
     public GuiGraphicsExtractor graphics() {
         return graphics;
     }
+
+    public GuiGraphicsExtractor getGraphics() {
+        return graphics;
+    }
 }
 
