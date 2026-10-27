@@ -1,6 +1,13 @@
 <h1 align="center"> Render4U </h1>
 <p align="center">
-  <img alt="fabric" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/fabric_vector.svg">
+  <img alt="Fabric" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/fabric_vector.svg">
+  <img alt="Fabric API" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/requires/fabric-api_vector.svg">
+  <img alt="Java 25" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/built-with/java25_vector.svg">
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Minecraft-26.3-5B8DEF?style=for-the-badge&logo=minecraft&logoColor=white" alt="Minecraft 26.3">
+  <img src="https://img.shields.io/badge/Release-v1.2.0-38BDF8?style=for-the-badge" alt="Release 1.2.0">
+  <img src="https://img.shields.io/badge/License-MIT-818CF8?style=for-the-badge" alt="License MIT">
 </p>
 
 **Render4U** — быстрая и плавная база рендера для Fabric (Minecraft 26.3), созданная для кастомных GUI, интерфейсов и клиентских визуалов без просадок FPS.
