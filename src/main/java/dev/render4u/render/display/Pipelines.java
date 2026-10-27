@@ -16,6 +16,8 @@ public final class Pipelines {
     public static final RenderPipeline LINE = gui("line");
     public static final RenderPipeline CIRCLE = gui("circle");
     public static final RenderPipeline IMAGE = guiTextured("image");
+    public static final RenderPipeline HEAD = guiTextured("head");
+    public static final RenderPipeline TEXT = guiTextured("text");
     public static final RenderPipeline FONT = guiTextured("font");
     public static final RenderPipeline BLUR_PANEL = guiTextured("blur_panel");
     public static final RenderPipeline BLUR_DOWNSAMPLE = fullscreen("blur_downsample", "blur_down", false, false);

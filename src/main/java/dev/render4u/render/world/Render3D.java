@@ -2,7 +2,8 @@ package dev.render4u.render.world;
 
 import dev.render4u.render.display.DisplayUtil;
 import dev.render4u.render.display.shape.RoundedRect;
-import dev.render4u.render.font.FontManager;
+import dev.render4u.render.font.ttf.TTFFont;
+import dev.render4u.render.font.ttf.TTFFontManager;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -172,14 +173,15 @@ public final class Render3D {
         drawBox3D(graphics, new AABB(pos), color, thickness);
     }
 
-    public static void drawNametag(GuiGraphicsExtractor graphics, String text, double x, double y, double z, int textColor, int bgColor) {
+    public static void drawNametag(GuiGraphicsExtractor graphics, TTFFont font, String text, double x, double y, double z, float size, int textColor, int bgColor) {
         Vector2f pos = project(x, y, z);
         if (pos == null) {
             return;
         }
 
-        float textWidth = FontManager.ROBOTO.getStringWidth(text, 12.0F);
-        float textHeight = FontManager.ROBOTO.getFontHeight(12.0F);
+        TTFFont f = font != null ? font : TTFFontManager.ROBOTO;
+        float textWidth = f.getStringWidth(text, size);
+        float textHeight = f.getFontHeight(size);
         float padX = 6.0F;
         float padY = 3.0F;
         float boxW = textWidth + padX * 2.0F;
@@ -193,7 +195,11 @@ public final class Render3D {
                 .color(bgColor)
                 .render(graphics);
 
-        FontManager.ROBOTO.drawString(graphics, text, boxX + padX, boxY + padY, 12.0F, textColor);
+        f.drawString(graphics, text, boxX + padX, boxY + padY, size, textColor);
+    }
+
+    public static void drawNametag(GuiGraphicsExtractor graphics, String text, double x, double y, double z, int textColor, int bgColor) {
+        drawNametag(graphics, null, text, x, y, z, 12.0F, textColor, bgColor);
     }
 
     public static void drawDistanceTag(GuiGraphicsExtractor graphics, String label, double x, double y, double z, int color) {

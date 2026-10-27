@@ -1,31 +1,41 @@
-package dev.render4u.render.font;
+package dev.render4u.render.font.ttf;
 
 import java.io.InputStream;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
-public final class Font {
+public final class TTFFont {
     private final String name;
     private final java.awt.Font baseFont;
-    private final Map<Float, FontRenderer> renderers = new ConcurrentHashMap<>();
+    private final Map<Float, TTFFontRenderer> renderers = new ConcurrentHashMap<>();
+    private final TTFFontRenderer[] fastRenderers = new TTFFontRenderer[73];
 
-    public Font(String name, java.awt.Font baseFont) {
+    public TTFFont(String name, java.awt.Font baseFont) {
         this.name = name;
         this.baseFont = baseFont;
     }
 
-    public static Font fromStream(String name, InputStream stream) {
+    public static TTFFont fromStream(String name, InputStream stream) {
         try {
             java.awt.Font font = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, stream);
-            return new Font(name, font);
+            return new TTFFont(name, font);
         } catch (Exception e) {
             throw new RuntimeException("Failed to load font: " + name, e);
         }
     }
 
-    public FontRenderer getRenderer(float size) {
-        return renderers.computeIfAbsent(size, s -> new FontRenderer(name, baseFont, s));
+    public TTFFontRenderer getRenderer(float size) {
+        if (size >= 1.0F && size <= 72.0F && (int) size == size) {
+            int idx = (int) size;
+            TTFFontRenderer r = fastRenderers[idx];
+            if (r == null) {
+                r = renderers.computeIfAbsent(size, s -> new TTFFontRenderer(name, baseFont, s));
+                fastRenderers[idx] = r;
+            }
+            return r;
+        }
+        return renderers.computeIfAbsent(size, s -> new TTFFontRenderer(name, baseFont, s));
     }
 
     public void drawString(GuiGraphicsExtractor graphics, String text, float x, float y, float size, int color) {

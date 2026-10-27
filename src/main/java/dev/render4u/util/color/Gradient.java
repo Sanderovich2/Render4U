@@ -1,6 +1,7 @@
 package dev.render4u.util.color;
 
 import java.util.Arrays;
+import java.util.List;
 
 public final class Gradient {
     public enum Mode {
@@ -8,6 +9,30 @@ public final class Gradient {
         REPEAT,
         MIRROR
     }
+
+    public static final Gradient RAINBOW = Gradient.of(
+            0xFFFF0000, 0xFFFF7F00, 0xFFFFFF00, 0xFF00FF00, 0xFF00FFFF, 0xFF0000FF, 0xFF8B00FF
+    );
+
+    public static final Gradient SUNSET = Gradient.of(
+            0xFF2E0854, 0xFF8B008B, 0xFFFF1493, 0xFFFF7F50, 0xFFFFD700
+    );
+
+    public static final Gradient NEON = Gradient.of(
+            0xFFFF007F, 0xFF7F00FF, 0xFF00E5FF
+    );
+
+    public static final Gradient ASTOLFO = Gradient.of(
+            0xFFFF6B8B, 0xFFFF8E53, 0xFFFFD572, 0xFF65D5B8, 0xFF5D9CEC
+    );
+
+    public static final Gradient CYBERPUNK = Gradient.of(
+            0xFF00F0FF, 0xFFFFE600, 0xFFFF003C
+    );
+
+    public static final Gradient AURORA = Gradient.of(
+            0xFF011627, 0xFF00F5D4, 0xFF7B2CBF, 0xFF4361EE
+    );
 
     private final int[] colors;
     private final float[] stops;
@@ -58,6 +83,25 @@ public final class Gradient {
         return new Gradient(colors.clone(), stops.clone(), 0.0F, 0.0F, Mode.CLAMP);
     }
 
+    public static Gradient stops(GradientStop... stops) {
+        if (stops.length == 0) {
+            throw new IllegalArgumentException("Gradient requires at least one stop");
+        }
+        GradientStop[] sorted = stops.clone();
+        Arrays.sort(sorted);
+        float[] positions = new float[sorted.length];
+        int[] colors = new int[sorted.length];
+        for (int i = 0; i < sorted.length; i++) {
+            positions[i] = sorted[i].position();
+            colors[i] = sorted[i].color();
+        }
+        return new Gradient(colors, positions, 0.0F, 0.0F, Mode.CLAMP);
+    }
+
+    public static Gradient stops(List<GradientStop> stops) {
+        return stops(stops.toArray(new GradientStop[0]));
+    }
+
     public Gradient angle(float degrees) {
         return new Gradient(colors, stops, degrees, offset, mode);
     }
@@ -68,6 +112,26 @@ public final class Gradient {
 
     public Gradient mode(Mode mode) {
         return new Gradient(colors, stops, angle, offset, mode);
+    }
+
+    public int[] colors() {
+        return colors.clone();
+    }
+
+    public float[] stops() {
+        return stops.clone();
+    }
+
+    public float angle() {
+        return angle;
+    }
+
+    public float offset() {
+        return offset;
+    }
+
+    public Mode getMode() {
+        return mode;
     }
 
     public int sample(float progress) {
@@ -102,4 +166,5 @@ public final class Gradient {
         };
     }
 }
+
 

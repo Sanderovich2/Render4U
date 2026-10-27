@@ -35,8 +35,10 @@ public final class BatchRenderState implements GuiElementRenderState {
         this.bounds = ScreenRectangle.empty();
     }
 
+    private static final int MAX_MEMBERS = 4096;
+
     boolean accepts(RenderPipeline pipeline, TextureSetup textureSetup, @Nullable ScreenRectangle scissor) {
-        return this.pipeline == pipeline && this.textureSetup.equals(textureSetup) && Objects.equals(this.scissor, scissor);
+        return members.size() < MAX_MEMBERS && this.pipeline == pipeline && (this.textureSetup == textureSetup || (this.textureSetup != null && this.textureSetup.equals(textureSetup))) && Objects.equals(this.scissor, scissor);
     }
 
     void add(GuiElementRenderState element, int x0, int y0, int x1, int y1) {

@@ -31,11 +31,14 @@ public final class DisplayBatcher {
 
     public static void begin(GuiGraphicsExtractor graphics) {
         flush();
-        recycle();
         session = graphics;
         Minecraft minecraft = Minecraft.getInstance();
         viewportWidth = minecraft.getWindow().getWidth();
         viewportHeight = minecraft.getWindow().getHeight();
+    }
+
+    public static void postDraw() {
+        recycle();
     }
 
     public static void end() {

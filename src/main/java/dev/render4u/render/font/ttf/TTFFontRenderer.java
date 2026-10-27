@@ -1,4 +1,4 @@
-package dev.render4u.render.font;
+package dev.render4u.render.font.ttf;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -25,7 +25,7 @@ import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.Nullable;
 import org.joml.Matrix3x2f;
 
-public final class FontRenderer {
+public final class TTFFontRenderer {
     private static final int ATLAS_SIZE = 1024;
     private static final float OVERSAMPLE = 2.0F;
 
@@ -49,6 +49,7 @@ public final class FontRenderer {
     private final String name;
     private final float size;
     private final Map<Character, Glyph> glyphMap = new HashMap<>();
+    private final Glyph[] fastGlyphs = new Glyph[1200];
     private final Identifier textureId;
     private volatile BufferedImage atlasImage;
     private float fontHeight;
@@ -57,7 +58,7 @@ public final class FontRenderer {
     public record Glyph(float x, float y, float width, float height, float u0, float v0, float u1, float v1, float advance) {
     }
 
-    public FontRenderer(String name, java.awt.Font awtFont, float size) {
+    public TTFFontRenderer(String name, java.awt.Font awtFont, float size) {
         this.name = name;
         this.size = size;
         this.textureId = Identifier.fromNamespaceAndPath("render4u", "font_" + name.toLowerCase().replaceAll("[^a-z0-9_]", "_") + "_" + (int) size);
@@ -110,8 +111,12 @@ public final class FontRenderer {
             float u1 = (float) (curX + charWidth) / ATLAS_SIZE;
             float v1 = (float) (curY + charHeight) / ATLAS_SIZE;
 
-            glyphMap.put(c, new Glyph(0, 0, (float) charWidth / OVERSAMPLE, (float) charHeight / OVERSAMPLE,
-                    u0, v0, u1, v1, (float) charWidth / OVERSAMPLE));
+            Glyph glyph = new Glyph(0, 0, (float) charWidth / OVERSAMPLE, (float) charHeight / OVERSAMPLE,
+                    u0, v0, u1, v1, (float) charWidth / OVERSAMPLE);
+            glyphMap.put(c, glyph);
+            if (c < fastGlyphs.length) {
+                fastGlyphs[c] = glyph;
+            }
 
             curX += charWidth + 4;
             if (charHeight > rowHeight) {
@@ -148,6 +153,10 @@ public final class FontRenderer {
         return dynamicTexture.getTextureView();
     }
 
+    private Glyph getGlyph(char c) {
+        return c < fastGlyphs.length ? fastGlyphs[c] : glyphMap.get(c);
+    }
+
     public float getStringWidth(String text) {
         if (text == null || text.isEmpty()) return 0.0F;
         float width = 0.0F;
@@ -157,7 +166,7 @@ public final class FontRenderer {
                 i++;
                 continue;
             }
-            Glyph glyph = glyphMap.get(c);
+            Glyph glyph = getGlyph(c);
             if (glyph != null) {
                 width += glyph.advance();
             } else {
@@ -224,7 +233,7 @@ public final class FontRenderer {
                 continue;
             }
 
-            Glyph glyph = glyphMap.get(c);
+            Glyph glyph = getGlyph(c);
             if (glyph != null) {
                 float gx0 = cursorX;
                 float gy0 = y;
