@@ -12,9 +12,9 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Minecraft-26.3-informational?style=flat-square&color=38BDF8" alt="Minecraft 26.3" />
-  <img src="https://img.shields.io/badge/Fabric%20Loader-0.19.5-informational?style=flat-square&color=A855F7" alt="Fabric 0.19.5" />
+  <img src="https://img.shields.io/badge/Fabric%20Loader-0.20.1-informational?style=flat-square&color=A855F7" alt="Fabric 0.20.1" />
   <img src="https://img.shields.io/badge/Java-25-orange?style=flat-square" alt="Java 25" />
-  <img src="https://img.shields.io/badge/Version-1.3.0-blue?style=flat-square" alt="Version 1.3.0" />
+  <img src="https://img.shields.io/badge/Version-1.3.1-blue?style=flat-square" alt="Version 1.3.1" />
   <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT License" />
 </p>
 
@@ -365,7 +365,7 @@ git clone https://github.com/Sanderovich2/Render4U.git
 cd Render4U
 ./gradlew build
 ```
-Готовый JAR-файл будет помещен в папку `build/libs/render4u-1.3.0.jar`.
+Готовый JAR-файл будет помещен в папку `build/libs/render4u-1.3.1.jar`.
 
 ### Запуск в среде разработки
 
