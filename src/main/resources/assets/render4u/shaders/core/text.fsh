@@ -21,7 +21,6 @@ void main() {
     vec2 screenTexSize = vec2(1.0) / max(fwidth(texCoord), vec2(1e-6));
     float screenPxRange = max(0.5 * dot(unitRange, screenTexSize), 1.0);
 
-    // params.y: low byte = outline dilation, high byte = blur / softness
     float outline = float(params.y & 255) * 0.00390625;
     float blur = float((params.y >> 8) & 255) * 0.05;
 

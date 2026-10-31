@@ -1,5 +1,7 @@
 package dev.render4u.render.font.ttf;
 
+import dev.render4u.Constants;
+
 import java.io.InputStream;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -7,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class TTFFontManager {
-    public static final String DIRECTORY = "/assets/render4u/fonts/ttf/";
+    public static final String DIRECTORY = "/assets/" + Constants.getModId() + "/fonts/ttf/";
     private static final Logger LOGGER = LoggerFactory.getLogger("Render4UTTFFontManager");
     private static final Map<String, TTFFont> FONTS = new ConcurrentHashMap<>();
 

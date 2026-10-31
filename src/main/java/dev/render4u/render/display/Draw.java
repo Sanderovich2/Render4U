@@ -2,6 +2,8 @@ package dev.render4u.render.display;
 
 import com.mojang.authlib.GameProfile;
 import dev.render4u.render.display.blur.Blur;
+import dev.render4u.render.display.element.DrawElement;
+import dev.render4u.render.display.element.DrawRect;
 import dev.render4u.render.display.head.PlayerHead;
 import dev.render4u.render.display.image.Image;
 import dev.render4u.render.display.shape.Circle;
@@ -14,7 +16,6 @@ import dev.render4u.render.font.msdf.MsdfFonts;
 import dev.render4u.render.font.msdf.Text;
 import dev.render4u.render.font.msdf.TextAlign;
 import dev.render4u.render.font.ttf.TTFFont;
-import dev.render4u.render.font.ttf.TTFFontManager;
 import dev.render4u.util.color.Color;
 import dev.render4u.util.color.ColorMath;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -62,6 +63,30 @@ public final class Draw {
         Shadow.of(x, y, w, h).radius(radius).blur(blur).color(color).render(g);
     }
 
+    public static void drawRect(GuiGraphicsExtractor g, DrawRect rect, float x, float y) {
+        if (rect != null) {
+            rect.render(g, x, y);
+        }
+    }
+
+    public static void drawShadow(GuiGraphicsExtractor g, DrawRect rect, float blur, float offsetX, float offsetY) {
+        if (rect != null) {
+            rect.drawShadow(g, blur, offsetX, offsetY);
+        }
+    }
+
+    public static void drawShadow(GuiGraphicsExtractor g, DrawRect rect, float blur, float offsetX, float offsetY, int color) {
+        if (rect != null) {
+            rect.drawShadow(g, blur, offsetX, offsetY, color);
+        }
+    }
+
+    public static void drawElement(GuiGraphicsExtractor g, DrawElement element, float x, float y) {
+        if (element != null) {
+            element.render(g, x, y);
+        }
+    }
+
     public static void glow(GuiGraphicsExtractor g, float x, float y, float w, float h, float radius,
                             float blur, float spread, int color) {
         Shadow.of(x, y, w, h).radius(radius).blur(blur).spread(spread).color(color).render(g);
@@ -73,6 +98,14 @@ public final class Draw {
 
     public static void blur(GuiGraphicsExtractor g, float x, float y, float w, float h, float radius, int strength, int tint) {
         Blur.of(x, y, w, h).radius(radius).strength(strength).tint(tint).render(g);
+    }
+
+    public static void blur(GuiGraphicsExtractor g, float x, float y, float w, float h, float radius, float alpha, int tint) {
+        Blur.of(x, y, w, h).radius(radius).strength(3).alpha(alpha).tint(tint).render(g);
+    }
+
+    public static void blur(GuiGraphicsExtractor g, float x, float y, float w, float h, float radius, int strength, float alpha, int tint) {
+        Blur.of(x, y, w, h).radius(radius).strength(strength).alpha(alpha).tint(tint).render(g);
     }
 
     public static void flowH(GuiGraphicsExtractor g, float x, float y, float w, float h, float radius, int from, int to) {
@@ -192,7 +225,11 @@ public final class Draw {
     }
 
     public static void headSelf(GuiGraphicsExtractor g, float x, float y, float size, float radius) {
-        PlayerHead.of(x, y, size).self().radius(radius).render(g);
+        headSelf(g, x, y, size, radius, 1.0f);
+    }
+
+    public static void headSelf(GuiGraphicsExtractor g, float x, float y, float size, float radius, float alpha) {
+        PlayerHead.of(x, y, size).self().radius(radius).alpha(alpha).render(g);
     }
 
     public static void headCircle(GuiGraphicsExtractor g, GameProfile profile, float x, float y, float size) {

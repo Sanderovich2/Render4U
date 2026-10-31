@@ -24,7 +24,7 @@ void main() {
     float w = max(blur, 0.5);
     float falloff = 1.0 - smoothstep(-w, w, d);
     float a = vertexColor.a * clamp(falloff * strength, 0.0, 1.0);
-    if (a <= 0.0) {
+    if (vertexColor.a <= 0.001 || a <= 0.0005) {
         discard;
     }
     float dither = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453) - 0.5;

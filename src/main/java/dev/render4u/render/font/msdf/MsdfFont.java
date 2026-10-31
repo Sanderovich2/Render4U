@@ -45,28 +45,11 @@ public final class MsdfFont {
         }
         FontData font = data();
         Glyph glyph = font.glyphs().get(codePoint);
-        if (glyph != null) {
-            return glyph;
-        }
-        if (isBullet(codePoint)) {
-            Glyph dash = font.glyphs().get('-');
-            if (dash != null) {
-                return dash;
-            }
-        }
-        return font.fallback();
+        return glyph != null ? glyph : font.fallback();
     }
 
     public boolean has(int codePoint) {
-        FontData font = data();
-        if (font.glyphs().containsKey(codePoint)) {
-            return true;
-        }
-        return isBullet(codePoint) && font.glyphs().containsKey((int) '-');
-    }
-
-    private static boolean isBullet(int codePoint) {
-        return codePoint == '•' || codePoint == '\u00B7' || codePoint == '\u2023' || codePoint == '\u2043' || codePoint == '\u25E6' || codePoint == '\u2219';
+        return data().glyphs().containsKey(codePoint);
     }
 
     public float advance(int codePoint) {

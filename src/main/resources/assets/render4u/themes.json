@@ -1,0 +1,50 @@
+[
+  {
+    "id": "purple",
+    "name": "Фиолетовый",
+    "translationKey": "theme.purple",
+    "firstColor": "#C9B8FB",
+    "secondColor": "#8B5CF6",
+    "hexDescription": "#C9B8FB - #8B5CF6"
+  },
+  {
+    "id": "blue",
+    "name": "Сапфир",
+    "translationKey": "theme.blue",
+    "firstColor": "#60A5FA",
+    "secondColor": "#2563EB",
+    "hexDescription": "#60A5FA - #2563EB"
+  },
+  {
+    "id": "emerald",
+    "name": "Изумруд",
+    "translationKey": "theme.emerald",
+    "firstColor": "#34D399",
+    "secondColor": "#059669",
+    "hexDescription": "#34D399 - #059669"
+  },
+  {
+    "id": "sunset",
+    "name": "Закат",
+    "translationKey": "theme.sunset",
+    "firstColor": "#FB923C",
+    "secondColor": "#EA580C",
+    "hexDescription": "#FB923C - #EA580C"
+  },
+  {
+    "id": "crimson",
+    "name": "Рубин",
+    "translationKey": "theme.crimson",
+    "firstColor": "#F87171",
+    "secondColor": "#DC2626",
+    "hexDescription": "#F87171 - #DC2626"
+  },
+  {
+    "id": "cyan",
+    "name": "Неон",
+    "translationKey": "theme.cyan",
+    "firstColor": "#22D3EE",
+    "secondColor": "#0891B2",
+    "hexDescription": "#22D3EE - #0891B2"
+  }
+]

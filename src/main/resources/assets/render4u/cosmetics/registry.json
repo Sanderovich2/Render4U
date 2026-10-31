@@ -1,0 +1,4610 @@
+{
+ "version": 1,
+ "items": [
+  {
+   "id": "pet_ember_fox",
+   "slot": "PET",
+   "rarity": "LEGENDARY",
+   "model": "pets/ember_fox",
+   "theme": "fire"
+  },
+  {
+   "id": "back_jetpack_comet",
+   "slot": "BACK",
+   "rarity": "EPIC",
+   "model": "clothing/jetpack_comet",
+   "theme": "tech"
+  },
+  {
+   "id": "char_samurai_wanderer",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "characters/samurai_wanderer",
+   "theme": "samurai"
+  },
+  {
+   "id": "weapon_wanderer_katana",
+   "slot": "SWORD",
+   "rarity": "LEGENDARY",
+   "model": "weapons/wanderer_katana",
+   "theme": "samurai"
+  },
+  {
+   "id": "pet_mini_dragon",
+   "slot": "PET",
+   "rarity": "LEGENDARY",
+   "model": "pets/mini_dragon"
+  },
+  {
+   "id": "pet_firefly_spirit",
+   "slot": "PET",
+   "rarity": "RARE",
+   "model": "pets/firefly_spirit"
+  },
+  {
+   "id": "pet_robot_ball",
+   "slot": "PET",
+   "rarity": "RARE",
+   "model": "pets/robot_ball"
+  },
+  {
+   "id": "pet_ghost_cat",
+   "slot": "PET",
+   "rarity": "EPIC",
+   "model": "pets/ghost_cat"
+  },
+  {
+   "id": "pet_crystal_turtle",
+   "slot": "PET",
+   "rarity": "EPIC",
+   "model": "pets/crystal_turtle"
+  },
+  {
+   "id": "pet_cloud_sheep",
+   "slot": "PET",
+   "rarity": "RARE",
+   "model": "pets/cloud_sheep"
+  },
+  {
+   "id": "pet_mushroom_buddy",
+   "slot": "PET",
+   "rarity": "COMMON",
+   "model": "pets/mushroom_buddy"
+  },
+  {
+   "id": "pet_mech_owl",
+   "slot": "PET",
+   "rarity": "EPIC",
+   "model": "pets/mech_owl"
+  },
+  {
+   "id": "pet_slime",
+   "slot": "PET",
+   "rarity": "COMMON",
+   "model": "pets/slime"
+  },
+  {
+   "id": "pet_shadow_raven",
+   "slot": "PET",
+   "rarity": "LEGENDARY",
+   "model": "pets/shadow_raven"
+  },
+  {
+   "id": "pet_sea_octopus",
+   "slot": "PET",
+   "rarity": "RARE",
+   "model": "pets/sea_octopus"
+  },
+  {
+   "id": "pet_star_bunny",
+   "slot": "PET",
+   "rarity": "MYTHIC",
+   "model": "pets/star_bunny"
+  },
+  {
+   "id": "pet_golem_pup",
+   "slot": "PET",
+   "rarity": "RARE",
+   "model": "pets/golem_pup"
+  },
+  {
+   "id": "pet_pumpkin_lantern",
+   "slot": "PET",
+   "rarity": "EPIC",
+   "model": "pets/pumpkin_lantern"
+  },
+  {
+   "id": "pet_teddy_bear",
+   "slot": "PET",
+   "rarity": "EPIC",
+   "model": "pets/teddy_bear"
+  },
+  {
+   "id": "head_gentleman_tophat",
+   "slot": "HEAD",
+   "rarity": "EPIC",
+   "model": "clothing/gentleman_tophat",
+   "set": "gentleman"
+  },
+  {
+   "id": "body_gentleman_tailcoat",
+   "slot": "BODY",
+   "rarity": "EPIC",
+   "model": "clothing/gentleman_tailcoat",
+   "set": "gentleman"
+  },
+  {
+   "id": "legs_gentleman_trousers",
+   "slot": "LEGS",
+   "rarity": "RARE",
+   "model": "clothing/gentleman_trousers",
+   "set": "gentleman"
+  },
+  {
+   "id": "back_gentleman_umbrella",
+   "slot": "BACK",
+   "rarity": "RARE",
+   "model": "clothing/gentleman_umbrella",
+   "set": "gentleman"
+  },
+  {
+   "id": "head_cyber_visor",
+   "slot": "HEAD",
+   "rarity": "EPIC",
+   "model": "clothing/cyber_visor",
+   "set": "cyber"
+  },
+  {
+   "id": "body_cyber_jacket",
+   "slot": "BODY",
+   "rarity": "EPIC",
+   "model": "clothing/cyber_jacket",
+   "set": "cyber"
+  },
+  {
+   "id": "legs_cyber_pants",
+   "slot": "LEGS",
+   "rarity": "RARE",
+   "model": "clothing/cyber_pants",
+   "set": "cyber"
+  },
+  {
+   "id": "back_cyber_pack",
+   "slot": "BACK",
+   "rarity": "LEGENDARY",
+   "model": "clothing/cyber_pack",
+   "set": "cyber"
+  },
+  {
+   "id": "head_knight_helm",
+   "slot": "HEAD",
+   "rarity": "EPIC",
+   "model": "clothing/knight_helm",
+   "set": "knight"
+  },
+  {
+   "id": "body_knight_armor",
+   "slot": "BODY",
+   "rarity": "LEGENDARY",
+   "model": "clothing/knight_armor",
+   "set": "knight"
+  },
+  {
+   "id": "legs_knight_greaves",
+   "slot": "LEGS",
+   "rarity": "RARE",
+   "model": "clothing/knight_greaves",
+   "set": "knight"
+  },
+  {
+   "id": "back_knight_shield",
+   "slot": "BACK",
+   "rarity": "EPIC",
+   "model": "clothing/knight_shield",
+   "set": "knight"
+  },
+  {
+   "id": "head_pirate_tricorne",
+   "slot": "HEAD",
+   "rarity": "EPIC",
+   "model": "clothing/pirate_tricorne",
+   "set": "pirate"
+  },
+  {
+   "id": "body_pirate_coat",
+   "slot": "BODY",
+   "rarity": "EPIC",
+   "model": "clothing/pirate_coat",
+   "set": "pirate"
+  },
+  {
+   "id": "legs_pirate_boots",
+   "slot": "LEGS",
+   "rarity": "RARE",
+   "model": "clothing/pirate_boots",
+   "set": "pirate"
+  },
+  {
+   "id": "back_pirate_parrot",
+   "slot": "BACK",
+   "rarity": "LEGENDARY",
+   "model": "clothing/pirate_parrot",
+   "set": "pirate"
+  },
+  {
+   "id": "head_ninja_hood",
+   "slot": "HEAD",
+   "rarity": "EPIC",
+   "model": "clothing/ninja_hood",
+   "set": "ninja"
+  },
+  {
+   "id": "body_ninja_garb",
+   "slot": "BODY",
+   "rarity": "EPIC",
+   "model": "clothing/ninja_garb",
+   "set": "ninja"
+  },
+  {
+   "id": "legs_ninja_tabi",
+   "slot": "LEGS",
+   "rarity": "RARE",
+   "model": "clothing/ninja_tabi",
+   "set": "ninja"
+  },
+  {
+   "id": "back_ninja_blades",
+   "slot": "BACK",
+   "rarity": "LEGENDARY",
+   "model": "clothing/ninja_blades",
+   "set": "ninja"
+  },
+  {
+   "id": "head_royal_crown",
+   "slot": "HEAD",
+   "rarity": "MYTHIC",
+   "model": "clothing/royal_crown"
+  },
+  {
+   "id": "head_neon_headphones",
+   "slot": "HEAD",
+   "rarity": "RARE",
+   "model": "clothing/neon_headphones"
+  },
+  {
+   "id": "head_oni_mask",
+   "slot": "HEAD",
+   "rarity": "EPIC",
+   "model": "clothing/oni_mask"
+  },
+  {
+   "id": "head_wizard_hat",
+   "slot": "HEAD",
+   "rarity": "EPIC",
+   "model": "clothing/wizard_hat"
+  },
+  {
+   "id": "head_viking_helm",
+   "slot": "HEAD",
+   "rarity": "RARE",
+   "model": "clothing/viking_helm"
+  },
+  {
+   "id": "body_bomber_jacket",
+   "slot": "BODY",
+   "rarity": "RARE",
+   "model": "clothing/bomber_jacket"
+  },
+  {
+   "id": "body_tactical_vest",
+   "slot": "BODY",
+   "rarity": "RARE",
+   "model": "clothing/tactical_vest"
+  },
+  {
+   "id": "body_arcane_robe",
+   "slot": "BODY",
+   "rarity": "LEGENDARY",
+   "model": "clothing/arcane_robe"
+  },
+  {
+   "id": "body_winter_parka",
+   "slot": "BODY",
+   "rarity": "COMMON",
+   "model": "clothing/winter_parka"
+  },
+  {
+   "id": "body_varsity_hoodie",
+   "slot": "BODY",
+   "rarity": "COMMON",
+   "model": "clothing/varsity_hoodie"
+  },
+  {
+   "id": "legs_cargo_pants",
+   "slot": "LEGS",
+   "rarity": "COMMON",
+   "model": "clothing/cargo_pants"
+  },
+  {
+   "id": "legs_ripped_jeans",
+   "slot": "LEGS",
+   "rarity": "COMMON",
+   "model": "clothing/ripped_jeans"
+  },
+  {
+   "id": "legs_cowboy_chaps",
+   "slot": "LEGS",
+   "rarity": "RARE",
+   "model": "clothing/cowboy_chaps"
+  },
+  {
+   "id": "legs_moon_boots",
+   "slot": "LEGS",
+   "rarity": "EPIC",
+   "model": "clothing/moon_boots"
+  },
+  {
+   "id": "legs_frost_greaves",
+   "slot": "LEGS",
+   "rarity": "LEGENDARY",
+   "model": "clothing/frost_greaves"
+  },
+  {
+   "id": "back_angel_wings",
+   "slot": "BACK",
+   "rarity": "MYTHIC",
+   "model": "clothing/angel_wings"
+  },
+  {
+   "id": "back_dragon_wings",
+   "slot": "BACK",
+   "rarity": "LEGENDARY",
+   "model": "clothing/dragon_wings"
+  },
+  {
+   "id": "back_explorer_pack",
+   "slot": "BACK",
+   "rarity": "RARE",
+   "model": "clothing/explorer_pack"
+  },
+  {
+   "id": "back_hunter_quiver",
+   "slot": "BACK",
+   "rarity": "COMMON",
+   "model": "clothing/hunter_quiver"
+  },
+  {
+   "id": "char_magical_girl",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "characters/magical_girl"
+  },
+  {
+   "id": "char_space_hunter",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "characters/space_hunter"
+  },
+  {
+   "id": "char_necromancer",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "characters/necromancer"
+  },
+  {
+   "id": "char_cyber_ninja",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "characters/cyber_ninja"
+  },
+  {
+   "id": "char_pirate_captain",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "characters/pirate_captain"
+  },
+  {
+   "id": "char_paladin",
+   "slot": "CHARACTER",
+   "rarity": "MYTHIC",
+   "model": "characters/paladin"
+  },
+  {
+   "id": "char_vampire_aristocrat",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "characters/vampire_aristocrat"
+  },
+  {
+   "id": "char_steampunk_mechanic",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "characters/steampunk_mechanic"
+  },
+  {
+   "id": "char_forest_elf",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "characters/forest_elf"
+  },
+  {
+   "id": "char_demon_berserker",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "characters/demon_berserker"
+  },
+  {
+   "id": "char_elemental_lord",
+   "slot": "CHARACTER",
+   "rarity": "MYTHIC",
+   "model": "characters/elemental_lord"
+  },
+  {
+   "id": "char_suit_agent",
+   "slot": "CHARACTER",
+   "rarity": "RARE",
+   "model": "characters/suit_agent"
+  },
+  {
+   "id": "char_rock_star",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "characters/rock_star"
+  },
+  {
+   "id": "char_mech_pilot",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "characters/mech_pilot"
+  },
+  {
+   "id": "char_ice_witch",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "characters/ice_witch"
+  },
+  {
+   "id": "char_desert_nomad",
+   "slot": "CHARACTER",
+   "rarity": "RARE",
+   "model": "characters/desert_nomad"
+  },
+  {
+   "id": "char_deep_sea_diver",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "characters/deep_sea_diver"
+  },
+  {
+   "id": "char_plague_doctor",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "characters/plague_doctor"
+  },
+  {
+   "id": "char_astronaut",
+   "slot": "CHARACTER",
+   "rarity": "RARE",
+   "model": "characters/astronaut"
+  },
+  {
+   "id": "char_gladiator",
+   "slot": "CHARACTER",
+   "rarity": "RARE",
+   "model": "characters/gladiator"
+  },
+  {
+   "id": "char_druid",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "characters/druid"
+  },
+  {
+   "id": "char_clockwork_android",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "characters/clockwork_android"
+  },
+  {
+   "id": "char_abyss_knight",
+   "slot": "CHARACTER",
+   "rarity": "MYTHIC",
+   "model": "characters/abyss_knight"
+  },
+  {
+   "id": "char_shaolin_monk",
+   "slot": "CHARACTER",
+   "rarity": "RARE",
+   "model": "characters/shaolin_monk"
+  },
+  {
+   "id": "weapon_knight_longsword",
+   "slot": "SWORD",
+   "rarity": "EPIC",
+   "model": "weapons/knight_longsword",
+   "theme": "knight"
+  },
+  {
+   "id": "weapon_cyber_blade",
+   "slot": "SWORD",
+   "rarity": "LEGENDARY",
+   "model": "weapons/cyber_blade",
+   "theme": "cyber"
+  },
+  {
+   "id": "weapon_pirate_cutlass",
+   "slot": "SWORD",
+   "rarity": "RARE",
+   "model": "weapons/pirate_cutlass",
+   "theme": "pirate"
+  },
+  {
+   "id": "weapon_frost_brand",
+   "slot": "SWORD",
+   "rarity": "LEGENDARY",
+   "model": "weapons/frost_brand",
+   "theme": "frost"
+  },
+  {
+   "id": "weapon_viking_axe",
+   "slot": "AXE",
+   "rarity": "RARE",
+   "model": "weapons/viking_axe"
+  },
+  {
+   "id": "weapon_berserker_axe",
+   "slot": "AXE",
+   "rarity": "LEGENDARY",
+   "model": "weapons/berserker_axe",
+   "theme": "demon"
+  },
+  {
+   "id": "weapon_gear_axe",
+   "slot": "AXE",
+   "rarity": "EPIC",
+   "model": "weapons/gear_axe",
+   "theme": "steampunk"
+  },
+  {
+   "id": "weapon_elven_hatchet",
+   "slot": "AXE",
+   "rarity": "RARE",
+   "model": "weapons/elven_hatchet",
+   "theme": "elf"
+  },
+  {
+   "id": "weapon_magma_axe",
+   "slot": "AXE",
+   "rarity": "MYTHIC",
+   "model": "weapons/magma_axe"
+  },
+  {
+   "id": "weapon_elven_longbow",
+   "slot": "BOW",
+   "rarity": "EPIC",
+   "model": "weapons/elven_longbow",
+   "theme": "elf"
+  },
+  {
+   "id": "weapon_hunter_recurve",
+   "slot": "BOW",
+   "rarity": "COMMON",
+   "model": "weapons/hunter_recurve"
+  },
+  {
+   "id": "weapon_crystal_bow",
+   "slot": "BOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/crystal_bow"
+  },
+  {
+   "id": "weapon_dragon_bow",
+   "slot": "BOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/dragon_bow",
+   "theme": "dragon"
+  },
+  {
+   "id": "weapon_cyber_bow",
+   "slot": "BOW",
+   "rarity": "EPIC",
+   "model": "weapons/cyber_bow",
+   "theme": "cyber"
+  },
+  {
+   "id": "weapon_paladin_hammer",
+   "slot": "MACE",
+   "rarity": "LEGENDARY",
+   "model": "weapons/paladin_hammer",
+   "theme": "paladin"
+  },
+  {
+   "id": "weapon_morning_star",
+   "slot": "MACE",
+   "rarity": "RARE",
+   "model": "weapons/morning_star"
+  },
+  {
+   "id": "weapon_crystal_scepter",
+   "slot": "MACE",
+   "rarity": "EPIC",
+   "model": "weapons/crystal_scepter"
+  },
+  {
+   "id": "weapon_skull_mace",
+   "slot": "MACE",
+   "rarity": "EPIC",
+   "model": "weapons/skull_mace",
+   "theme": "necromancer"
+  },
+  {
+   "id": "weapon_storm_maul",
+   "slot": "MACE",
+   "rarity": "MYTHIC",
+   "model": "weapons/storm_maul"
+  },
+  {
+   "id": "weapon_tidal_trident",
+   "slot": "SPEAR",
+   "rarity": "LEGENDARY",
+   "model": "weapons/tidal_trident",
+   "theme": "pirate"
+  },
+  {
+   "id": "weapon_dragon_lance",
+   "slot": "SPEAR",
+   "rarity": "EPIC",
+   "model": "weapons/dragon_lance",
+   "theme": "dragon"
+  },
+  {
+   "id": "weapon_phoenix_spear",
+   "slot": "SPEAR",
+   "rarity": "MYTHIC",
+   "model": "weapons/phoenix_spear"
+  },
+  {
+   "id": "weapon_knight_halberd",
+   "slot": "SPEAR",
+   "rarity": "RARE",
+   "model": "weapons/knight_halberd",
+   "theme": "knight"
+  },
+  {
+   "id": "weapon_cyber_pike",
+   "slot": "SPEAR",
+   "rarity": "EPIC",
+   "model": "weapons/cyber_pike",
+   "theme": "cyber"
+  },
+  {
+   "id": "cape_royal",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/royal",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_shadow",
+   "slot": "CAPE",
+   "rarity": "LEGENDARY",
+   "model": "capes/shadow",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_dragon",
+   "slot": "CAPE",
+   "rarity": "LEGENDARY",
+   "model": "capes/dragon",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_frost",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/frost",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_phoenix",
+   "slot": "CAPE",
+   "rarity": "MYTHIC",
+   "model": "capes/phoenix",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_galaxy",
+   "slot": "CAPE",
+   "rarity": "MYTHIC",
+   "model": "capes/galaxy",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_emerald",
+   "slot": "CAPE",
+   "rarity": "RARE",
+   "model": "capes/emerald",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_knight",
+   "slot": "CAPE",
+   "rarity": "RARE",
+   "model": "capes/knight_cloak",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_vampire",
+   "slot": "CAPE",
+   "rarity": "LEGENDARY",
+   "model": "capes/vampire",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_angel",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/angel",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_toxic",
+   "slot": "CAPE",
+   "rarity": "RARE",
+   "model": "capes/toxic",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_neon",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/neon",
+   "theme": "cape"
+  },
+  {
+   "id": "watch_rolex_submariner",
+   "slot": "WATCH",
+   "rarity": "LEGENDARY",
+   "model": "watches/rolex_submariner",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_rolex_hulk",
+   "slot": "WATCH",
+   "rarity": "LEGENDARY",
+   "model": "watches/rolex_hulk",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_rolex_gmt_pepsi",
+   "slot": "WATCH",
+   "rarity": "LEGENDARY",
+   "model": "watches/rolex_gmt_pepsi",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_rolex_daytona",
+   "slot": "WATCH",
+   "rarity": "MYTHIC",
+   "model": "watches/rolex_daytona",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_rolex_day_date",
+   "slot": "WATCH",
+   "rarity": "LEGENDARY",
+   "model": "watches/rolex_day_date",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_rolex_datejust",
+   "slot": "WATCH",
+   "rarity": "EPIC",
+   "model": "watches/rolex_datejust",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_patek_nautilus",
+   "slot": "WATCH",
+   "rarity": "MYTHIC",
+   "model": "watches/patek_nautilus",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_patek_aquanaut",
+   "slot": "WATCH",
+   "rarity": "EPIC",
+   "model": "watches/patek_aquanaut",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_patek_calatrava",
+   "slot": "WATCH",
+   "rarity": "EPIC",
+   "model": "watches/patek_calatrava",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_ap_royal_oak",
+   "slot": "WATCH",
+   "rarity": "MYTHIC",
+   "model": "watches/ap_royal_oak",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_ap_offshore",
+   "slot": "WATCH",
+   "rarity": "LEGENDARY",
+   "model": "watches/ap_offshore",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_richard_mille",
+   "slot": "WATCH",
+   "rarity": "MYTHIC",
+   "model": "watches/richard_mille",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_piaget_polo",
+   "slot": "WATCH",
+   "rarity": "LEGENDARY",
+   "model": "watches/piaget_polo",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_cartier_santos",
+   "slot": "WATCH",
+   "rarity": "EPIC",
+   "model": "watches/cartier_santos",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_hublot_big_bang",
+   "slot": "WATCH",
+   "rarity": "RARE",
+   "model": "watches/hublot_big_bang",
+   "theme": "watch"
+  },
+  {
+   "id": "neck_gold_cuban",
+   "slot": "NECK",
+   "rarity": "EPIC",
+   "model": "necklaces/gold_cuban",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_diamond_drop",
+   "slot": "NECK",
+   "rarity": "LEGENDARY",
+   "model": "necklaces/diamond_drop",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_ruby_heart",
+   "slot": "NECK",
+   "rarity": "LEGENDARY",
+   "model": "necklaces/ruby_heart",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_pearl_choker",
+   "slot": "NECK",
+   "rarity": "EPIC",
+   "model": "necklaces/pearl_choker",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_cross_silver",
+   "slot": "NECK",
+   "rarity": "RARE",
+   "model": "necklaces/cross_silver",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_emerald_lux",
+   "slot": "NECK",
+   "rarity": "LEGENDARY",
+   "model": "necklaces/emerald_lux",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_fang_tribal",
+   "slot": "NECK",
+   "rarity": "RARE",
+   "model": "necklaces/fang_tribal",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_amethyst",
+   "slot": "NECK",
+   "rarity": "EPIC",
+   "model": "necklaces/amethyst",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_dog_tags",
+   "slot": "NECK",
+   "rarity": "COMMON",
+   "model": "necklaces/dog_tags",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_sapphire_double",
+   "slot": "NECK",
+   "rarity": "LEGENDARY",
+   "model": "necklaces/sapphire_double",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_gold_coin",
+   "slot": "NECK",
+   "rarity": "RARE",
+   "model": "necklaces/gold_coin",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_neon_pulse",
+   "slot": "NECK",
+   "rarity": "EPIC",
+   "model": "necklaces/neon_pulse",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_obsidian_shard",
+   "slot": "NECK",
+   "rarity": "EPIC",
+   "model": "necklaces/obsidian_shard",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_choker_velvet",
+   "slot": "NECK",
+   "rarity": "RARE",
+   "model": "necklaces/choker_velvet",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_infinity_gold",
+   "slot": "NECK",
+   "rarity": "MYTHIC",
+   "model": "necklaces/infinity_gold",
+   "theme": "neck"
+  },
+  {
+   "id": "pol_putin",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "politicians/putin",
+   "theme": "politics"
+  },
+  {
+   "id": "pol_zelensky",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "politicians/zelensky",
+   "theme": "politics"
+  },
+  {
+   "id": "pol_trump",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "politicians/trump",
+   "theme": "politics"
+  },
+  {
+   "id": "pol_obama",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "politicians/obama",
+   "theme": "politics"
+  },
+  {
+   "id": "pol_lukashenko",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "politicians/lukashenko",
+   "theme": "politics"
+  },
+  {
+   "id": "pol_medvedev",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "politicians/medvedev",
+   "theme": "politics"
+  },
+  {
+   "id": "pol_zhirinovsky",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "politicians/zhirinovsky",
+   "theme": "politics"
+  },
+  {
+   "id": "pol_kadyrov",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "politicians/kadyrov",
+   "theme": "politics"
+  },
+  {
+   "id": "pol_nazarbayev",
+   "slot": "CHARACTER",
+   "rarity": "RARE",
+   "model": "politicians/nazarbayev",
+   "theme": "politics"
+  },
+  {
+   "id": "pol_tokayev",
+   "slot": "CHARACTER",
+   "rarity": "RARE",
+   "model": "politicians/tokayev",
+   "theme": "politics"
+  },
+  {
+   "id": "pol_lavrov",
+   "slot": "CHARACTER",
+   "rarity": "RARE",
+   "model": "politicians/lavrov",
+   "theme": "politics"
+  },
+  {
+   "id": "pet_axolotl",
+   "slot": "PET",
+   "rarity": "RARE",
+   "model": "pets/axolotl"
+  },
+  {
+   "id": "pet_penguin",
+   "slot": "PET",
+   "rarity": "COMMON",
+   "model": "pets/penguin"
+  },
+  {
+   "id": "pet_red_panda",
+   "slot": "PET",
+   "rarity": "EPIC",
+   "model": "pets/red_panda"
+  },
+  {
+   "id": "pet_corgi",
+   "slot": "PET",
+   "rarity": "COMMON",
+   "model": "pets/corgi"
+  },
+  {
+   "id": "pet_capybara",
+   "slot": "PET",
+   "rarity": "RARE",
+   "model": "pets/capybara"
+  },
+  {
+   "id": "pet_baby_phoenix",
+   "slot": "PET",
+   "rarity": "MYTHIC",
+   "model": "pets/baby_phoenix"
+  },
+  {
+   "id": "pet_jellyfish",
+   "slot": "PET",
+   "rarity": "EPIC",
+   "model": "pets/jellyfish"
+  },
+  {
+   "id": "pet_bumble_bee",
+   "slot": "PET",
+   "rarity": "RARE",
+   "model": "pets/bumble_bee"
+  },
+  {
+   "id": "pet_hedgehog",
+   "slot": "PET",
+   "rarity": "COMMON",
+   "model": "pets/hedgehog"
+  },
+  {
+   "id": "pet_frog_prince",
+   "slot": "PET",
+   "rarity": "RARE",
+   "model": "pets/frog_prince"
+  },
+  {
+   "id": "pet_koi_spirit",
+   "slot": "PET",
+   "rarity": "LEGENDARY",
+   "model": "pets/koi_spirit"
+  },
+  {
+   "id": "pet_yeti_cub",
+   "slot": "PET",
+   "rarity": "EPIC",
+   "model": "pets/yeti_cub"
+  },
+  {
+   "id": "pet_dino_hatchling",
+   "slot": "PET",
+   "rarity": "RARE",
+   "model": "pets/dino_hatchling"
+  },
+  {
+   "id": "pet_panda_cub",
+   "slot": "PET",
+   "rarity": "EPIC",
+   "model": "pets/panda_cub"
+  },
+  {
+   "id": "pet_ufo_drone",
+   "slot": "PET",
+   "rarity": "LEGENDARY",
+   "model": "pets/ufo_drone"
+  },
+  {
+   "id": "head_street_bucket_hat",
+   "slot": "HEAD",
+   "rarity": "COMMON",
+   "model": "clothing/street_bucket_hat"
+  },
+  {
+   "id": "head_samurai_kabuto",
+   "slot": "HEAD",
+   "rarity": "LEGENDARY",
+   "model": "clothing/samurai_kabuto"
+  },
+  {
+   "id": "head_astro_helmet",
+   "slot": "HEAD",
+   "rarity": "EPIC",
+   "model": "clothing/astro_helmet"
+  },
+  {
+   "id": "head_kitty_headphones",
+   "slot": "HEAD",
+   "rarity": "RARE",
+   "model": "clothing/kitty_headphones"
+  },
+  {
+   "id": "body_biker_jacket",
+   "slot": "BODY",
+   "rarity": "EPIC",
+   "model": "clothing/biker_jacket"
+  },
+  {
+   "id": "body_sakura_kimono",
+   "slot": "BODY",
+   "rarity": "MYTHIC",
+   "model": "clothing/sakura_kimono"
+  },
+  {
+   "id": "body_puffer_vest",
+   "slot": "BODY",
+   "rarity": "COMMON",
+   "model": "clothing/puffer_vest"
+  },
+  {
+   "id": "body_detective_trench",
+   "slot": "BODY",
+   "rarity": "LEGENDARY",
+   "model": "clothing/detective_trench"
+  },
+  {
+   "id": "legs_track_pants",
+   "slot": "LEGS",
+   "rarity": "COMMON",
+   "model": "clothing/track_pants"
+  },
+  {
+   "id": "legs_samurai_hakama",
+   "slot": "LEGS",
+   "rarity": "EPIC",
+   "model": "clothing/samurai_hakama"
+  },
+  {
+   "id": "legs_skater_shorts",
+   "slot": "LEGS",
+   "rarity": "RARE",
+   "model": "clothing/skater_shorts"
+  },
+  {
+   "id": "legs_highland_kilt",
+   "slot": "LEGS",
+   "rarity": "RARE",
+   "model": "clothing/highland_kilt"
+  },
+  {
+   "id": "back_guitar_gigbag",
+   "slot": "BACK",
+   "rarity": "RARE",
+   "model": "clothing/guitar_gigbag"
+  },
+  {
+   "id": "back_fairy_wings",
+   "slot": "BACK",
+   "rarity": "MYTHIC",
+   "model": "clothing/fairy_wings"
+  },
+  {
+   "id": "back_mech_tentacles",
+   "slot": "BACK",
+   "rarity": "LEGENDARY",
+   "model": "clothing/mech_tentacles"
+  },
+  {
+   "id": "cape_pilgrim",
+   "slot": "CAPE",
+   "rarity": "COMMON",
+   "model": "capes/pilgrim",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_raven",
+   "slot": "CAPE",
+   "rarity": "LEGENDARY",
+   "model": "capes/raven",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_swallowtail",
+   "slot": "CAPE",
+   "rarity": "COMMON",
+   "model": "capes/swallowtail",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_parade",
+   "slot": "CAPE",
+   "rarity": "RARE",
+   "model": "capes/parade",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_wayfarer",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/wayfarer",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_jinbaori",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/jinbaori",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_war_banner",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/war_banner",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_cathedral",
+   "slot": "CAPE",
+   "rarity": "LEGENDARY",
+   "model": "capes/cathedral",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_aurora",
+   "slot": "CAPE",
+   "rarity": "MYTHIC",
+   "model": "capes/aurora",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_lava",
+   "slot": "CAPE",
+   "rarity": "LEGENDARY",
+   "model": "capes/lava",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_sakura",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/sakura",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_hologram",
+   "slot": "CAPE",
+   "rarity": "MYTHIC",
+   "model": "capes/hologram",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_ermine",
+   "slot": "CAPE",
+   "rarity": "LEGENDARY",
+   "model": "capes/ermine",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_nomad",
+   "slot": "CAPE",
+   "rarity": "RARE",
+   "model": "capes/nomad",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_patchwork",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/patchwork",
+   "theme": "cape"
+  },
+  {
+   "id": "watch_omega_speedmaster",
+   "slot": "WATCH",
+   "rarity": "LEGENDARY",
+   "model": "watches/omega_speedmaster",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_casio_gshock",
+   "slot": "WATCH",
+   "rarity": "COMMON",
+   "model": "watches/casio_gshock",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_apple_ultra",
+   "slot": "WATCH",
+   "rarity": "EPIC",
+   "model": "watches/apple_ultra",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_tag_monaco",
+   "slot": "WATCH",
+   "rarity": "RARE",
+   "model": "watches/tag_monaco",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_breitling_navitimer",
+   "slot": "WATCH",
+   "rarity": "LEGENDARY",
+   "model": "watches/breitling_navitimer",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_jacob_astronomia",
+   "slot": "WATCH",
+   "rarity": "MYTHIC",
+   "model": "watches/jacob_astronomia",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_jacob_godfather",
+   "slot": "WATCH",
+   "rarity": "MYTHIC",
+   "model": "watches/jacob_godfather",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_tennis_bracelet",
+   "slot": "WATCH",
+   "rarity": "LEGENDARY",
+   "model": "watches/tennis_bracelet",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_tennis_emerald",
+   "slot": "WATCH",
+   "rarity": "LEGENDARY",
+   "model": "watches/tennis_emerald",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_tennis_sapphire",
+   "slot": "WATCH",
+   "rarity": "LEGENDARY",
+   "model": "watches/tennis_sapphire",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_tennis_ruby",
+   "slot": "WATCH",
+   "rarity": "LEGENDARY",
+   "model": "watches/tennis_ruby",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_tennis_rainbow",
+   "slot": "WATCH",
+   "rarity": "MYTHIC",
+   "model": "watches/tennis_rainbow",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_tennis_double",
+   "slot": "WATCH",
+   "rarity": "MYTHIC",
+   "model": "watches/tennis_double",
+   "theme": "watch"
+  },
+  {
+   "id": "watch_tennis_black",
+   "slot": "WATCH",
+   "rarity": "EPIC",
+   "model": "watches/tennis_black",
+   "theme": "watch"
+  },
+  {
+   "id": "neck_iced_cuban",
+   "slot": "NECK",
+   "rarity": "MYTHIC",
+   "model": "necklaces/iced_cuban",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_rosary",
+   "slot": "NECK",
+   "rarity": "RARE",
+   "model": "necklaces/rosary",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_name_plate",
+   "slot": "NECK",
+   "rarity": "EPIC",
+   "model": "necklaces/name_plate",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_usekh",
+   "slot": "NECK",
+   "rarity": "LEGENDARY",
+   "model": "necklaces/usekh",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_magatama",
+   "slot": "NECK",
+   "rarity": "RARE",
+   "model": "necklaces/magatama",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_locket",
+   "slot": "NECK",
+   "rarity": "EPIC",
+   "model": "necklaces/locket",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_claw_chain",
+   "slot": "NECK",
+   "rarity": "COMMON",
+   "model": "necklaces/claw_chain",
+   "theme": "neck"
+  },
+  {
+   "id": "neck_pearl_bow",
+   "slot": "NECK",
+   "rarity": "EPIC",
+   "model": "necklaces/pearl_bow",
+   "theme": "neck"
+  },
+  {
+   "id": "char_cowboy_gunslinger",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "characters/cowboy_gunslinger"
+  },
+  {
+   "id": "char_viking_jarl",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "characters/viking_jarl"
+  },
+  {
+   "id": "char_egyptian_pharaoh",
+   "slot": "CHARACTER",
+   "rarity": "MYTHIC",
+   "model": "characters/egyptian_pharaoh"
+  },
+  {
+   "id": "char_arctic_explorer",
+   "slot": "CHARACTER",
+   "rarity": "RARE",
+   "model": "characters/arctic_explorer"
+  },
+  {
+   "id": "char_mad_scientist",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "characters/mad_scientist"
+  },
+  {
+   "id": "char_jester_harlequin",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "characters/jester_harlequin"
+  },
+  {
+   "id": "char_netrunner",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "characters/netrunner"
+  },
+  {
+   "id": "char_templar_crusader",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "characters/templar_crusader"
+  },
+  {
+   "id": "char_jaguar_warrior",
+   "slot": "CHARACTER",
+   "rarity": "LEGENDARY",
+   "model": "characters/jaguar_warrior"
+  },
+  {
+   "id": "char_ghost_bride",
+   "slot": "CHARACTER",
+   "rarity": "MYTHIC",
+   "model": "characters/ghost_bride"
+  },
+  {
+   "id": "char_lava_golem",
+   "slot": "CHARACTER",
+   "rarity": "MYTHIC",
+   "model": "characters/lava_golem"
+  },
+  {
+   "id": "char_beekeeper",
+   "slot": "CHARACTER",
+   "rarity": "RARE",
+   "model": "characters/beekeeper"
+  },
+  {
+   "id": "char_fallen_angel",
+   "slot": "CHARACTER",
+   "rarity": "MYTHIC",
+   "model": "characters/fallen_angel"
+  },
+  {
+   "id": "char_idol_singer",
+   "slot": "CHARACTER",
+   "rarity": "EPIC",
+   "model": "characters/idol_singer"
+  },
+  {
+   "id": "char_firefighter",
+   "slot": "CHARACTER",
+   "rarity": "RARE",
+   "model": "characters/firefighter"
+  },
+  {
+   "id": "weapon_crossguard_saber",
+   "slot": "SWORD",
+   "rarity": "LEGENDARY",
+   "model": "weapons/crossguard_saber"
+  },
+  {
+   "id": "weapon_obsidian_greatsword",
+   "slot": "SWORD",
+   "rarity": "MYTHIC",
+   "model": "weapons/obsidian_greatsword",
+   "theme": "demon"
+  },
+  {
+   "id": "weapon_sakura_wakizashi",
+   "slot": "SWORD",
+   "rarity": "EPIC",
+   "model": "weapons/sakura_wakizashi",
+   "theme": "samurai"
+  },
+  {
+   "id": "weapon_labrys",
+   "slot": "AXE",
+   "rarity": "RARE",
+   "model": "weapons/labrys"
+  },
+  {
+   "id": "weapon_glacier_axe",
+   "slot": "AXE",
+   "rarity": "EPIC",
+   "model": "weapons/glacier_axe",
+   "theme": "frost"
+  },
+  {
+   "id": "weapon_chainsaw_axe",
+   "slot": "AXE",
+   "rarity": "LEGENDARY",
+   "model": "weapons/chainsaw_axe",
+   "theme": "tech"
+  },
+  {
+   "id": "weapon_bone_bow",
+   "slot": "BOW",
+   "rarity": "COMMON",
+   "model": "weapons/bone_bow",
+   "theme": "necromancer"
+  },
+  {
+   "id": "weapon_solar_bow",
+   "slot": "BOW",
+   "rarity": "MYTHIC",
+   "model": "weapons/solar_bow"
+  },
+  {
+   "id": "weapon_compound_bow",
+   "slot": "BOW",
+   "rarity": "EPIC",
+   "model": "weapons/compound_bow",
+   "theme": "tech"
+  },
+  {
+   "id": "weapon_meteor_flail",
+   "slot": "MACE",
+   "rarity": "LEGENDARY",
+   "model": "weapons/meteor_flail",
+   "theme": "fire"
+  },
+  {
+   "id": "weapon_rune_warhammer",
+   "slot": "MACE",
+   "rarity": "EPIC",
+   "model": "weapons/rune_warhammer"
+  },
+  {
+   "id": "weapon_jester_mace",
+   "slot": "MACE",
+   "rarity": "RARE",
+   "model": "weapons/jester_mace"
+  },
+  {
+   "id": "weapon_naginata",
+   "slot": "SPEAR",
+   "rarity": "EPIC",
+   "model": "weapons/naginata",
+   "theme": "samurai"
+  },
+  {
+   "id": "weapon_lightning_javelin",
+   "slot": "SPEAR",
+   "rarity": "MYTHIC",
+   "model": "weapons/lightning_javelin"
+  },
+  {
+   "id": "weapon_bamboo_spear",
+   "slot": "SPEAR",
+   "rarity": "COMMON",
+   "model": "weapons/bamboo_spear"
+  },
+  {
+   "id": "head_bogatyr_shelom",
+   "slot": "HEAD",
+   "rarity": "LEGENDARY",
+   "model": "clothing/bogatyr_shelom",
+   "set": "bogatyr"
+  },
+  {
+   "id": "body_bogatyr_kolchuga",
+   "slot": "BODY",
+   "rarity": "LEGENDARY",
+   "model": "clothing/bogatyr_kolchuga",
+   "set": "bogatyr"
+  },
+  {
+   "id": "legs_bogatyr_sapogi",
+   "slot": "LEGS",
+   "rarity": "EPIC",
+   "model": "clothing/bogatyr_sapogi",
+   "set": "bogatyr"
+  },
+  {
+   "id": "head_pharaoh_nemes",
+   "slot": "HEAD",
+   "rarity": "MYTHIC",
+   "model": "clothing/pharaoh_nemes",
+   "set": "pharaoh"
+  },
+  {
+   "id": "body_pharaoh_usekh",
+   "slot": "BODY",
+   "rarity": "LEGENDARY",
+   "model": "clothing/pharaoh_usekh",
+   "set": "pharaoh"
+  },
+  {
+   "id": "legs_pharaoh_shendyt",
+   "slot": "LEGS",
+   "rarity": "EPIC",
+   "model": "clothing/pharaoh_shendyt",
+   "set": "pharaoh"
+  },
+  {
+   "id": "head_steam_aviator",
+   "slot": "HEAD",
+   "rarity": "EPIC",
+   "model": "clothing/steam_aviator",
+   "set": "steampunk"
+  },
+  {
+   "id": "body_steam_greatcoat",
+   "slot": "BODY",
+   "rarity": "LEGENDARY",
+   "model": "clothing/steam_greatcoat",
+   "set": "steampunk"
+  },
+  {
+   "id": "legs_steam_boots",
+   "slot": "LEGS",
+   "rarity": "EPIC",
+   "model": "clothing/steam_boots",
+   "set": "steampunk"
+  },
+  {
+   "id": "back_steam_boiler",
+   "slot": "BACK",
+   "rarity": "MYTHIC",
+   "model": "clothing/steam_boiler",
+   "set": "steampunk"
+  },
+  {
+   "id": "head_plague_beak",
+   "slot": "HEAD",
+   "rarity": "LEGENDARY",
+   "model": "clothing/plague_beak",
+   "set": "plague"
+  },
+  {
+   "id": "body_plague_coat",
+   "slot": "BODY",
+   "rarity": "EPIC",
+   "model": "clothing/plague_coat",
+   "set": "plague"
+  },
+  {
+   "id": "legs_plague_boots",
+   "slot": "LEGS",
+   "rarity": "RARE",
+   "model": "clothing/plague_boots",
+   "set": "plague"
+  },
+  {
+   "id": "back_plague_satchel",
+   "slot": "BACK",
+   "rarity": "EPIC",
+   "model": "clothing/plague_satchel",
+   "set": "plague"
+  },
+  {
+   "id": "head_hoplite_corinthian",
+   "slot": "HEAD",
+   "rarity": "LEGENDARY",
+   "model": "clothing/hoplite_corinthian",
+   "set": "hoplite"
+  },
+  {
+   "id": "body_hoplite_cuirass",
+   "slot": "BODY",
+   "rarity": "LEGENDARY",
+   "model": "clothing/hoplite_cuirass",
+   "set": "hoplite"
+  },
+  {
+   "id": "legs_hoplite_greaves",
+   "slot": "LEGS",
+   "rarity": "EPIC",
+   "model": "clothing/hoplite_greaves",
+   "set": "hoplite"
+  },
+  {
+   "id": "back_hoplite_aspis",
+   "slot": "BACK",
+   "rarity": "EPIC",
+   "model": "clothing/hoplite_aspis",
+   "set": "hoplite"
+  },
+  {
+   "id": "head_tuareg_tagelmust",
+   "slot": "HEAD",
+   "rarity": "EPIC",
+   "model": "clothing/tuareg_tagelmust",
+   "set": "tuareg"
+  },
+  {
+   "id": "body_tuareg_robe",
+   "slot": "BODY",
+   "rarity": "EPIC",
+   "model": "clothing/tuareg_robe",
+   "set": "tuareg"
+  },
+  {
+   "id": "legs_tuareg_sirwal",
+   "slot": "LEGS",
+   "rarity": "RARE",
+   "model": "clothing/tuareg_sirwal",
+   "set": "tuareg"
+  },
+  {
+   "id": "head_racer_helmet",
+   "slot": "HEAD",
+   "rarity": "EPIC",
+   "model": "clothing/racer_helmet",
+   "set": "racer"
+  },
+  {
+   "id": "body_racer_suit",
+   "slot": "BODY",
+   "rarity": "EPIC",
+   "model": "clothing/racer_suit",
+   "set": "racer"
+  },
+  {
+   "id": "legs_racer_boots",
+   "slot": "LEGS",
+   "rarity": "RARE",
+   "model": "clothing/racer_boots",
+   "set": "racer"
+  },
+  {
+   "id": "head_mecha_helm",
+   "slot": "HEAD",
+   "rarity": "LEGENDARY",
+   "model": "clothing/mecha_helm",
+   "set": "mecha"
+  },
+  {
+   "id": "body_mecha_chest",
+   "slot": "BODY",
+   "rarity": "MYTHIC",
+   "model": "clothing/mecha_chest",
+   "set": "mecha"
+  },
+  {
+   "id": "legs_mecha_legs",
+   "slot": "LEGS",
+   "rarity": "LEGENDARY",
+   "model": "clothing/mecha_legs",
+   "set": "mecha"
+  },
+  {
+   "id": "back_mecha_thrusters",
+   "slot": "BACK",
+   "rarity": "MYTHIC",
+   "model": "clothing/mecha_thrusters",
+   "set": "mecha"
+  },
+  {
+   "id": "head_diver_helmet",
+   "slot": "HEAD",
+   "rarity": "LEGENDARY",
+   "model": "clothing/diver_helmet",
+   "set": "diver"
+  },
+  {
+   "id": "body_diver_suit",
+   "slot": "BODY",
+   "rarity": "EPIC",
+   "model": "clothing/diver_suit",
+   "set": "diver"
+  },
+  {
+   "id": "legs_diver_boots",
+   "slot": "LEGS",
+   "rarity": "EPIC",
+   "model": "clothing/diver_boots",
+   "set": "diver"
+  },
+  {
+   "id": "back_diver_tanks",
+   "slot": "BACK",
+   "rarity": "LEGENDARY",
+   "model": "clothing/diver_tanks",
+   "set": "diver"
+  },
+  {
+   "id": "body_hawaiian_shirt",
+   "slot": "BODY",
+   "rarity": "COMMON",
+   "model": "clothing/hawaiian_shirt"
+  },
+  {
+   "id": "body_bard_doublet",
+   "slot": "BODY",
+   "rarity": "RARE",
+   "model": "clothing/bard_doublet"
+  },
+  {
+   "id": "body_yellow_raincoat",
+   "slot": "BODY",
+   "rarity": "COMMON",
+   "model": "clothing/yellow_raincoat"
+  },
+  {
+   "id": "body_lab_coat",
+   "slot": "BODY",
+   "rarity": "RARE",
+   "model": "clothing/lab_coat"
+  },
+  {
+   "id": "legs_muay_thai",
+   "slot": "LEGS",
+   "rarity": "COMMON",
+   "model": "clothing/muay_thai"
+  },
+  {
+   "id": "legs_goth_platforms",
+   "slot": "LEGS",
+   "rarity": "RARE",
+   "model": "clothing/goth_platforms"
+  },
+  {
+   "id": "legs_ballet_tutu",
+   "slot": "LEGS",
+   "rarity": "RARE",
+   "model": "clothing/ballet_tutu"
+  },
+  {
+   "id": "legs_rocket_boots",
+   "slot": "LEGS",
+   "rarity": "EPIC",
+   "model": "clothing/rocket_boots"
+  },
+  {
+   "id": "legs_roller_skates",
+   "slot": "LEGS",
+   "rarity": "RARE",
+   "model": "clothing/roller_skates"
+  },
+  {
+   "id": "back_sashimono_banner",
+   "slot": "BACK",
+   "rarity": "EPIC",
+   "model": "clothing/sashimono_banner"
+  },
+  {
+   "id": "back_lantern_yoke",
+   "slot": "BACK",
+   "rarity": "RARE",
+   "model": "clothing/lantern_yoke"
+  },
+  {
+   "id": "back_coffin",
+   "slot": "BACK",
+   "rarity": "EPIC",
+   "model": "clothing/coffin"
+  },
+  {
+   "id": "back_holo_halo",
+   "slot": "BACK",
+   "rarity": "LEGENDARY",
+   "model": "clothing/holo_halo"
+  },
+  {
+   "id": "back_sapling_pot",
+   "slot": "BACK",
+   "rarity": "RARE",
+   "model": "clothing/sapling_pot"
+  },
+  {
+   "id": "back_scroll_case",
+   "slot": "BACK",
+   "rarity": "COMMON",
+   "model": "clothing/scroll_case"
+  },
+  {
+   "id": "back_balloon_bundle",
+   "slot": "BACK",
+   "rarity": "RARE",
+   "model": "clothing/balloon_bundle"
+  },
+  {
+   "id": "back_void_tendrils",
+   "slot": "BACK",
+   "rarity": "LEGENDARY",
+   "model": "clothing/void_tendrils"
+  },
+  {
+   "id": "back_boombox",
+   "slot": "BACK",
+   "rarity": "RARE",
+   "model": "clothing/boombox"
+  },
+  {
+   "id": "weapon_gladius",
+   "slot": "SWORD",
+   "rarity": "COMMON",
+   "model": "weapons/gladius"
+  },
+  {
+   "id": "weapon_zweihander",
+   "slot": "SWORD",
+   "rarity": "RARE",
+   "model": "weapons/zweihander"
+  },
+  {
+   "id": "weapon_sultan_scimitar",
+   "slot": "SWORD",
+   "rarity": "EPIC",
+   "model": "weapons/sultan_scimitar"
+  },
+  {
+   "id": "weapon_musketeer_rapier",
+   "slot": "SWORD",
+   "rarity": "RARE",
+   "model": "weapons/musketeer_rapier"
+  },
+  {
+   "id": "weapon_highland_claymore",
+   "slot": "SWORD",
+   "rarity": "RARE",
+   "model": "weapons/highland_claymore"
+  },
+  {
+   "id": "weapon_khopesh",
+   "slot": "SWORD",
+   "rarity": "EPIC",
+   "model": "weapons/khopesh"
+  },
+  {
+   "id": "weapon_flamberge",
+   "slot": "SWORD",
+   "rarity": "LEGENDARY",
+   "model": "weapons/flamberge"
+  },
+  {
+   "id": "weapon_void_runeblade",
+   "slot": "SWORD",
+   "rarity": "MYTHIC",
+   "model": "weapons/void_runeblade"
+  },
+  {
+   "id": "weapon_buster_sword",
+   "slot": "SWORD",
+   "rarity": "EPIC",
+   "model": "weapons/buster_sword"
+  },
+  {
+   "id": "weapon_leaf_blade",
+   "slot": "SWORD",
+   "rarity": "RARE",
+   "model": "weapons/leaf_blade"
+  },
+  {
+   "id": "weapon_bone_sword",
+   "slot": "SWORD",
+   "rarity": "COMMON",
+   "model": "weapons/bone_sword"
+  },
+  {
+   "id": "weapon_jade_dao",
+   "slot": "SWORD",
+   "rarity": "RARE",
+   "model": "weapons/jade_dao"
+  },
+  {
+   "id": "weapon_holy_avenger",
+   "slot": "SWORD",
+   "rarity": "LEGENDARY",
+   "model": "weapons/holy_avenger"
+  },
+  {
+   "id": "weapon_prism_sword",
+   "slot": "SWORD",
+   "rarity": "EPIC",
+   "model": "weapons/prism_sword"
+  },
+  {
+   "id": "weapon_shotel",
+   "slot": "SWORD",
+   "rarity": "COMMON",
+   "model": "weapons/shotel"
+  },
+  {
+   "id": "weapon_gunblade",
+   "slot": "SWORD",
+   "rarity": "LEGENDARY",
+   "model": "weapons/gunblade",
+   "theme": "tech"
+  },
+  {
+   "id": "weapon_candy_cane_sword",
+   "slot": "SWORD",
+   "rarity": "COMMON",
+   "model": "weapons/candy_cane_sword"
+  },
+  {
+   "id": "weapon_coral_blade",
+   "slot": "SWORD",
+   "rarity": "EPIC",
+   "model": "weapons/coral_blade"
+  },
+  {
+   "id": "weapon_thunder_nodachi",
+   "slot": "SWORD",
+   "rarity": "LEGENDARY",
+   "model": "weapons/thunder_nodachi",
+   "theme": "samurai"
+  },
+  {
+   "id": "weapon_bokken",
+   "slot": "SWORD",
+   "rarity": "COMMON",
+   "model": "weapons/bokken",
+   "theme": "samurai"
+  },
+  {
+   "id": "weapon_serpent_kris",
+   "slot": "SWORD",
+   "rarity": "RARE",
+   "model": "weapons/serpent_kris"
+  },
+  {
+   "id": "weapon_moonlight_greatsword",
+   "slot": "SWORD",
+   "rarity": "MYTHIC",
+   "model": "weapons/moonlight_greatsword"
+  },
+  {
+   "id": "weapon_bloodthirster",
+   "slot": "SWORD",
+   "rarity": "MYTHIC",
+   "model": "weapons/bloodthirster",
+   "theme": "demon"
+  },
+  {
+   "id": "weapon_pixel_sword",
+   "slot": "SWORD",
+   "rarity": "RARE",
+   "model": "weapons/pixel_sword"
+  },
+  {
+   "id": "weapon_clockwork_blade",
+   "slot": "SWORD",
+   "rarity": "EPIC",
+   "model": "weapons/clockwork_blade",
+   "theme": "tech"
+  },
+  {
+   "id": "weapon_yumi",
+   "slot": "BOW",
+   "rarity": "RARE",
+   "model": "weapons/yumi",
+   "theme": "samurai"
+  },
+  {
+   "id": "weapon_mongol_bow",
+   "slot": "BOW",
+   "rarity": "RARE",
+   "model": "weapons/mongol_bow"
+  },
+  {
+   "id": "weapon_yew_longbow",
+   "slot": "BOW",
+   "rarity": "COMMON",
+   "model": "weapons/yew_longbow"
+  },
+  {
+   "id": "weapon_vine_bow",
+   "slot": "BOW",
+   "rarity": "EPIC",
+   "model": "weapons/vine_bow",
+   "theme": "nature"
+  },
+  {
+   "id": "weapon_shadow_bow",
+   "slot": "BOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/shadow_bow",
+   "theme": "shadow"
+  },
+  {
+   "id": "weapon_storm_bow",
+   "slot": "BOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/storm_bow",
+   "theme": "storm"
+  },
+  {
+   "id": "weapon_cupid_bow",
+   "slot": "BOW",
+   "rarity": "RARE",
+   "model": "weapons/cupid_bow"
+  },
+  {
+   "id": "weapon_tidal_bow",
+   "slot": "BOW",
+   "rarity": "EPIC",
+   "model": "weapons/tidal_bow",
+   "theme": "ocean"
+  },
+  {
+   "id": "weapon_ember_bow",
+   "slot": "BOW",
+   "rarity": "EPIC",
+   "model": "weapons/ember_bow",
+   "theme": "fire"
+  },
+  {
+   "id": "weapon_scythian_bow",
+   "slot": "BOW",
+   "rarity": "RARE",
+   "model": "weapons/scythian_bow"
+  },
+  {
+   "id": "weapon_steampunk_bow",
+   "slot": "BOW",
+   "rarity": "EPIC",
+   "model": "weapons/steampunk_bow",
+   "theme": "steampunk"
+  },
+  {
+   "id": "weapon_void_bow",
+   "slot": "BOW",
+   "rarity": "MYTHIC",
+   "model": "weapons/void_bow",
+   "theme": "void"
+  },
+  {
+   "id": "weapon_moon_bow",
+   "slot": "BOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/moon_bow",
+   "theme": "moon"
+  },
+  {
+   "id": "weapon_bamboo_bow",
+   "slot": "BOW",
+   "rarity": "COMMON",
+   "model": "weapons/bamboo_bow"
+  },
+  {
+   "id": "weapon_antler_bow",
+   "slot": "BOW",
+   "rarity": "COMMON",
+   "model": "weapons/antler_bow"
+  },
+  {
+   "id": "weapon_serpent_bow",
+   "slot": "BOW",
+   "rarity": "EPIC",
+   "model": "weapons/serpent_bow"
+  },
+  {
+   "id": "weapon_rainbow_bow",
+   "slot": "BOW",
+   "rarity": "RARE",
+   "model": "weapons/rainbow_bow"
+  },
+  {
+   "id": "weapon_royal_bow",
+   "slot": "BOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/royal_bow"
+  },
+  {
+   "id": "weapon_spider_bow",
+   "slot": "BOW",
+   "rarity": "RARE",
+   "model": "weapons/spider_bow"
+  },
+  {
+   "id": "weapon_sakura_bow",
+   "slot": "BOW",
+   "rarity": "EPIC",
+   "model": "weapons/sakura_bow",
+   "theme": "samurai"
+  },
+  {
+   "id": "weapon_demon_bow",
+   "slot": "BOW",
+   "rarity": "MYTHIC",
+   "model": "weapons/demon_bow",
+   "theme": "demon"
+  },
+  {
+   "id": "weapon_constellation_bow",
+   "slot": "BOW",
+   "rarity": "MYTHIC",
+   "model": "weapons/constellation_bow"
+  },
+  {
+   "id": "weapon_wind_bow",
+   "slot": "BOW",
+   "rarity": "RARE",
+   "model": "weapons/wind_bow"
+  },
+  {
+   "id": "weapon_obsidian_bow",
+   "slot": "BOW",
+   "rarity": "EPIC",
+   "model": "weapons/obsidian_bow"
+  },
+  {
+   "id": "weapon_harp_bow",
+   "slot": "BOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/harp_bow"
+  },
+  {
+   "id": "weapon_shestoper",
+   "slot": "MACE",
+   "rarity": "COMMON",
+   "model": "weapons/shestoper"
+  },
+  {
+   "id": "weapon_hetman_bulava",
+   "slot": "MACE",
+   "rarity": "RARE",
+   "model": "weapons/hetman_bulava"
+  },
+  {
+   "id": "weapon_kanabo",
+   "slot": "MACE",
+   "rarity": "RARE",
+   "model": "weapons/kanabo",
+   "theme": "samurai"
+  },
+  {
+   "id": "weapon_macuahuitl",
+   "slot": "MACE",
+   "rarity": "EPIC",
+   "model": "weapons/macuahuitl"
+  },
+  {
+   "id": "weapon_caveman_club",
+   "slot": "MACE",
+   "rarity": "COMMON",
+   "model": "weapons/caveman_club"
+  },
+  {
+   "id": "weapon_judge_gavel",
+   "slot": "MACE",
+   "rarity": "RARE",
+   "model": "weapons/judge_gavel"
+  },
+  {
+   "id": "weapon_sledgehammer",
+   "slot": "MACE",
+   "rarity": "COMMON",
+   "model": "weapons/sledgehammer"
+  },
+  {
+   "id": "weapon_forge_hammer",
+   "slot": "MACE",
+   "rarity": "EPIC",
+   "model": "weapons/forge_hammer",
+   "theme": "fire"
+  },
+  {
+   "id": "weapon_holy_censer",
+   "slot": "MACE",
+   "rarity": "LEGENDARY",
+   "model": "weapons/holy_censer"
+  },
+  {
+   "id": "weapon_solar_mace",
+   "slot": "MACE",
+   "rarity": "LEGENDARY",
+   "model": "weapons/solar_mace"
+  },
+  {
+   "id": "weapon_lollipop_mace",
+   "slot": "MACE",
+   "rarity": "COMMON",
+   "model": "weapons/lollipop_mace"
+  },
+  {
+   "id": "weapon_anchor_mace",
+   "slot": "MACE",
+   "rarity": "EPIC",
+   "model": "weapons/anchor_mace",
+   "theme": "pirate"
+  },
+  {
+   "id": "weapon_bell_mace",
+   "slot": "MACE",
+   "rarity": "RARE",
+   "model": "weapons/bell_mace"
+  },
+  {
+   "id": "weapon_geode_mace",
+   "slot": "MACE",
+   "rarity": "EPIC",
+   "model": "weapons/geode_mace"
+  },
+  {
+   "id": "weapon_gravity_hammer",
+   "slot": "MACE",
+   "rarity": "MYTHIC",
+   "model": "weapons/gravity_hammer",
+   "theme": "tech"
+  },
+  {
+   "id": "weapon_triple_flail",
+   "slot": "MACE",
+   "rarity": "RARE",
+   "model": "weapons/triple_flail"
+  },
+  {
+   "id": "weapon_tiki_club",
+   "slot": "MACE",
+   "rarity": "RARE",
+   "model": "weapons/tiki_club"
+  },
+  {
+   "id": "weapon_void_scepter",
+   "slot": "MACE",
+   "rarity": "MYTHIC",
+   "model": "weapons/void_scepter",
+   "theme": "void"
+  },
+  {
+   "id": "weapon_dragon_skull_maul",
+   "slot": "MACE",
+   "rarity": "LEGENDARY",
+   "model": "weapons/dragon_skull_maul",
+   "theme": "fire"
+  },
+  {
+   "id": "weapon_bone_club",
+   "slot": "MACE",
+   "rarity": "COMMON",
+   "model": "weapons/bone_club"
+  },
+  {
+   "id": "weapon_royal_scepter",
+   "slot": "MACE",
+   "rarity": "LEGENDARY",
+   "model": "weapons/royal_scepter",
+   "theme": "royal"
+  },
+  {
+   "id": "weapon_urchin_mace",
+   "slot": "MACE",
+   "rarity": "EPIC",
+   "model": "weapons/urchin_mace",
+   "theme": "sea"
+  },
+  {
+   "id": "weapon_clock_hammer",
+   "slot": "MACE",
+   "rarity": "EPIC",
+   "model": "weapons/clock_hammer",
+   "theme": "steampunk"
+  },
+  {
+   "id": "weapon_mushroom_mace",
+   "slot": "MACE",
+   "rarity": "RARE",
+   "model": "weapons/mushroom_mace"
+  },
+  {
+   "id": "weapon_brazier_mace",
+   "slot": "MACE",
+   "rarity": "MYTHIC",
+   "model": "weapons/brazier_mace",
+   "theme": "fire"
+  },
+  {
+   "id": "head_artist_beret",
+   "slot": "HEAD",
+   "rarity": "COMMON",
+   "model": "clothing/artist_beret"
+  },
+  {
+   "id": "head_chef_toque",
+   "slot": "HEAD",
+   "rarity": "COMMON",
+   "model": "clothing/chef_toque"
+  },
+  {
+   "id": "head_firefighter_helmet",
+   "slot": "HEAD",
+   "rarity": "RARE",
+   "model": "clothing/firefighter_helmet"
+  },
+  {
+   "id": "head_jester_cap",
+   "slot": "HEAD",
+   "rarity": "RARE",
+   "model": "clothing/jester_cap"
+  },
+  {
+   "id": "head_pumpkin_lantern",
+   "slot": "HEAD",
+   "rarity": "EPIC",
+   "model": "clothing/pumpkin_lantern"
+  },
+  {
+   "id": "head_frog_hat",
+   "slot": "HEAD",
+   "rarity": "COMMON",
+   "model": "clothing/frog_hat"
+  },
+  {
+   "id": "head_mariachi_sombrero",
+   "slot": "HEAD",
+   "rarity": "RARE",
+   "model": "clothing/mariachi_sombrero"
+  },
+  {
+   "id": "head_ice_tiara",
+   "slot": "HEAD",
+   "rarity": "LEGENDARY",
+   "model": "clothing/ice_tiara",
+   "theme": "frost"
+  },
+  {
+   "id": "head_seraph_halo",
+   "slot": "HEAD",
+   "rarity": "MYTHIC",
+   "model": "clothing/seraph_halo",
+   "theme": "holy"
+  },
+  {
+   "id": "head_deerstalker",
+   "slot": "HEAD",
+   "rarity": "COMMON",
+   "model": "clothing/deerstalker"
+  },
+  {
+   "id": "head_kitsune_mask",
+   "slot": "HEAD",
+   "rarity": "EPIC",
+   "model": "clothing/kitsune_mask",
+   "theme": "samurai"
+  },
+  {
+   "id": "head_maharaja_turban",
+   "slot": "HEAD",
+   "rarity": "LEGENDARY",
+   "model": "clothing/maharaja_turban",
+   "theme": "royal"
+  },
+  {
+   "id": "head_amanita_cap",
+   "slot": "HEAD",
+   "rarity": "RARE",
+   "model": "clothing/amanita_cap"
+  },
+  {
+   "id": "head_graduation_cap",
+   "slot": "HEAD",
+   "rarity": "COMMON",
+   "model": "clothing/graduation_cap"
+  },
+  {
+   "id": "head_propeller_beanie",
+   "slot": "HEAD",
+   "rarity": "COMMON",
+   "model": "clothing/propeller_beanie"
+  },
+  {
+   "id": "back_monarch_wings",
+   "slot": "BACK",
+   "rarity": "EPIC",
+   "model": "clothing/monarch_wings"
+  },
+  {
+   "id": "back_teddy_backpack",
+   "slot": "BACK",
+   "rarity": "COMMON",
+   "model": "clothing/teddy_backpack"
+  },
+  {
+   "id": "back_turtle_shell",
+   "slot": "BACK",
+   "rarity": "RARE",
+   "model": "clothing/turtle_shell"
+  },
+  {
+   "id": "back_skateboard",
+   "slot": "BACK",
+   "rarity": "COMMON",
+   "model": "clothing/skateboard"
+  },
+  {
+   "id": "back_surfboard",
+   "slot": "BACK",
+   "rarity": "COMMON",
+   "model": "clothing/surfboard"
+  },
+  {
+   "id": "back_greatsword_sheath",
+   "slot": "BACK",
+   "rarity": "EPIC",
+   "model": "clothing/greatsword_sheath"
+  },
+  {
+   "id": "back_clockwork_key",
+   "slot": "BACK",
+   "rarity": "RARE",
+   "model": "clothing/clockwork_key",
+   "theme": "steampunk"
+  },
+  {
+   "id": "back_phoenix_wings",
+   "slot": "BACK",
+   "rarity": "MYTHIC",
+   "model": "clothing/phoenix_wings",
+   "theme": "fire"
+  },
+  {
+   "id": "back_ice_crystal_wings",
+   "slot": "BACK",
+   "rarity": "LEGENDARY",
+   "model": "clothing/ice_crystal_wings",
+   "theme": "frost"
+  },
+  {
+   "id": "back_flower_basket",
+   "slot": "BACK",
+   "rarity": "RARE",
+   "model": "clothing/flower_basket"
+  },
+  {
+   "id": "cape_capelet",
+   "slot": "CAPE",
+   "rarity": "RARE",
+   "model": "capes/capelet",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_journey_scarf",
+   "slot": "CAPE",
+   "rarity": "LEGENDARY",
+   "model": "capes/journey_scarf",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_ranger_hood",
+   "slot": "CAPE",
+   "rarity": "RARE",
+   "model": "capes/ranger_hood",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_tattered_wraith",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/tattered_wraith",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_quetzal",
+   "slot": "CAPE",
+   "rarity": "LEGENDARY",
+   "model": "capes/quetzal",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_wolf_pelt",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/wolf_pelt",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_hero",
+   "slot": "CAPE",
+   "rarity": "RARE",
+   "model": "capes/hero",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_matador",
+   "slot": "CAPE",
+   "rarity": "RARE",
+   "model": "capes/matador",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_opera",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/opera",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_mino",
+   "slot": "CAPE",
+   "rarity": "COMMON",
+   "model": "capes/mino",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_pelisse",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/pelisse",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_stained_glass",
+   "slot": "CAPE",
+   "rarity": "MYTHIC",
+   "model": "capes/stained_glass",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_waterfall",
+   "slot": "CAPE",
+   "rarity": "MYTHIC",
+   "model": "capes/waterfall",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_ghillie",
+   "slot": "CAPE",
+   "rarity": "RARE",
+   "model": "capes/ghillie",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_lamellar",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/lamellar",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_bat",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/bat",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_kasaya",
+   "slot": "CAPE",
+   "rarity": "RARE",
+   "model": "capes/kasaya",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_origami",
+   "slot": "CAPE",
+   "rarity": "LEGENDARY",
+   "model": "capes/origami",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_jellyfish",
+   "slot": "CAPE",
+   "rarity": "MYTHIC",
+   "model": "capes/jellyfish",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_sail",
+   "slot": "CAPE",
+   "rarity": "RARE",
+   "model": "capes/sail",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_jarl_fur",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/jarl_fur",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_highwayman",
+   "slot": "CAPE",
+   "rarity": "LEGENDARY",
+   "model": "capes/highwayman",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_crystal_shards",
+   "slot": "CAPE",
+   "rarity": "MYTHIC",
+   "model": "capes/crystal_shards",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_horo",
+   "slot": "CAPE",
+   "rarity": "LEGENDARY",
+   "model": "capes/horo",
+   "theme": "cape"
+  },
+  {
+   "id": "cape_cloud",
+   "slot": "CAPE",
+   "rarity": "EPIC",
+   "model": "capes/cloud",
+   "theme": "cape"
+  },
+  {
+   "id": "weapon_tomahawk",
+   "slot": "AXE",
+   "rarity": "COMMON",
+   "model": "weapons/tomahawk"
+  },
+  {
+   "id": "weapon_executioner_axe",
+   "slot": "AXE",
+   "rarity": "RARE",
+   "model": "weapons/executioner_axe"
+  },
+  {
+   "id": "weapon_fire_axe",
+   "slot": "AXE",
+   "rarity": "COMMON",
+   "model": "weapons/fire_axe"
+  },
+  {
+   "id": "weapon_dwarven_axe",
+   "slot": "AXE",
+   "rarity": "EPIC",
+   "model": "weapons/dwarven_axe"
+  },
+  {
+   "id": "weapon_crescent_axe",
+   "slot": "AXE",
+   "rarity": "LEGENDARY",
+   "model": "weapons/crescent_axe",
+   "theme": "moon"
+  },
+  {
+   "id": "weapon_bardiche",
+   "slot": "AXE",
+   "rarity": "RARE",
+   "model": "weapons/bardiche"
+  },
+  {
+   "id": "weapon_butcher_cleaver",
+   "slot": "AXE",
+   "rarity": "RARE",
+   "model": "weapons/butcher_cleaver"
+  },
+  {
+   "id": "weapon_shark_tooth_axe",
+   "slot": "AXE",
+   "rarity": "EPIC",
+   "model": "weapons/shark_tooth_axe"
+  },
+  {
+   "id": "weapon_stone_axe",
+   "slot": "AXE",
+   "rarity": "COMMON",
+   "model": "weapons/stone_axe"
+  },
+  {
+   "id": "weapon_stormbreaker",
+   "slot": "AXE",
+   "rarity": "MYTHIC",
+   "model": "weapons/stormbreaker",
+   "theme": "storm"
+  },
+  {
+   "id": "weapon_lumberjack_axe",
+   "slot": "AXE",
+   "rarity": "COMMON",
+   "model": "weapons/lumberjack_axe"
+  },
+  {
+   "id": "weapon_jade_dragon_axe",
+   "slot": "AXE",
+   "rarity": "LEGENDARY",
+   "model": "weapons/jade_dragon_axe",
+   "theme": "jade"
+  },
+  {
+   "id": "weapon_amethyst_axe",
+   "slot": "AXE",
+   "rarity": "EPIC",
+   "model": "weapons/amethyst_axe"
+  },
+  {
+   "id": "weapon_soul_reaver",
+   "slot": "AXE",
+   "rarity": "MYTHIC",
+   "model": "weapons/soul_reaver",
+   "theme": "necromancer"
+  },
+  {
+   "id": "weapon_epsilon_axe",
+   "slot": "AXE",
+   "rarity": "RARE",
+   "model": "weapons/epsilon_axe",
+   "theme": "pharaoh"
+  },
+  {
+   "id": "weapon_plasma_axe",
+   "slot": "AXE",
+   "rarity": "LEGENDARY",
+   "model": "weapons/plasma_axe",
+   "theme": "tech"
+  },
+  {
+   "id": "weapon_guitar_axe",
+   "slot": "AXE",
+   "rarity": "EPIC",
+   "model": "weapons/guitar_axe"
+  },
+  {
+   "id": "weapon_sunforge_axe",
+   "slot": "AXE",
+   "rarity": "LEGENDARY",
+   "model": "weapons/sunforge_axe",
+   "theme": "fire"
+  },
+  {
+   "id": "weapon_bat_wing_axe",
+   "slot": "AXE",
+   "rarity": "RARE",
+   "model": "weapons/bat_wing_axe",
+   "theme": "vampire"
+  },
+  {
+   "id": "weapon_celtic_axe",
+   "slot": "AXE",
+   "rarity": "RARE",
+   "model": "weapons/celtic_axe"
+  },
+  {
+   "id": "weapon_root_axe",
+   "slot": "AXE",
+   "rarity": "EPIC",
+   "model": "weapons/root_axe",
+   "theme": "druid"
+  },
+  {
+   "id": "weapon_pumpkin_axe",
+   "slot": "AXE",
+   "rarity": "COMMON",
+   "model": "weapons/pumpkin_axe"
+  },
+  {
+   "id": "weapon_masakari",
+   "slot": "AXE",
+   "rarity": "RARE",
+   "model": "weapons/masakari",
+   "theme": "samurai"
+  },
+  {
+   "id": "weapon_rift_axe",
+   "slot": "AXE",
+   "rarity": "MYTHIC",
+   "model": "weapons/rift_axe",
+   "theme": "void"
+  },
+  {
+   "id": "weapon_ice_axe",
+   "slot": "AXE",
+   "rarity": "COMMON",
+   "model": "weapons/ice_axe"
+  },
+  {
+   "id": "weapon_dory",
+   "slot": "SPEAR",
+   "rarity": "COMMON",
+   "model": "weapons/dory",
+   "theme": "hoplite"
+  },
+  {
+   "id": "weapon_assegai",
+   "slot": "SPEAR",
+   "rarity": "COMMON",
+   "model": "weapons/assegai"
+  },
+  {
+   "id": "weapon_guandao",
+   "slot": "SPEAR",
+   "rarity": "LEGENDARY",
+   "model": "weapons/guandao",
+   "theme": "jade"
+  },
+  {
+   "id": "weapon_glaive",
+   "slot": "SPEAR",
+   "rarity": "RARE",
+   "model": "weapons/glaive"
+  },
+  {
+   "id": "weapon_partisan",
+   "slot": "SPEAR",
+   "rarity": "RARE",
+   "model": "weapons/partisan",
+   "theme": "royal"
+  },
+  {
+   "id": "weapon_hades_bident",
+   "slot": "SPEAR",
+   "rarity": "MYTHIC",
+   "model": "weapons/hades_bident",
+   "theme": "underworld"
+  },
+  {
+   "id": "weapon_war_scythe",
+   "slot": "SPEAR",
+   "rarity": "EPIC",
+   "model": "weapons/war_scythe",
+   "theme": "necromancer"
+  },
+  {
+   "id": "weapon_jumonji_yari",
+   "slot": "SPEAR",
+   "rarity": "RARE",
+   "model": "weapons/jumonji_yari",
+   "theme": "samurai"
+  },
+  {
+   "id": "weapon_harpoon",
+   "slot": "SPEAR",
+   "rarity": "COMMON",
+   "model": "weapons/harpoon",
+   "theme": "sea"
+  },
+  {
+   "id": "weapon_pitchfork",
+   "slot": "SPEAR",
+   "rarity": "COMMON",
+   "model": "weapons/pitchfork"
+  },
+  {
+   "id": "weapon_gungnir",
+   "slot": "SPEAR",
+   "rarity": "LEGENDARY",
+   "model": "weapons/gungnir",
+   "theme": "norse"
+  },
+  {
+   "id": "weapon_holy_lance",
+   "slot": "SPEAR",
+   "rarity": "LEGENDARY",
+   "model": "weapons/holy_lance",
+   "theme": "holy"
+  },
+  {
+   "id": "weapon_glacier_spike",
+   "slot": "SPEAR",
+   "rarity": "EPIC",
+   "model": "weapons/glacier_spike",
+   "theme": "frost"
+  },
+  {
+   "id": "weapon_plasma_lance",
+   "slot": "SPEAR",
+   "rarity": "EPIC",
+   "model": "weapons/plasma_lance",
+   "theme": "tech"
+  },
+  {
+   "id": "weapon_bone_spear",
+   "slot": "SPEAR",
+   "rarity": "COMMON",
+   "model": "weapons/bone_spear"
+  },
+  {
+   "id": "weapon_serpent_spear",
+   "slot": "SPEAR",
+   "rarity": "EPIC",
+   "model": "weapons/serpent_spear"
+  },
+  {
+   "id": "weapon_lotus_spear",
+   "slot": "SPEAR",
+   "rarity": "RARE",
+   "model": "weapons/lotus_spear"
+  },
+  {
+   "id": "weapon_feather_spear",
+   "slot": "SPEAR",
+   "rarity": "RARE",
+   "model": "weapons/feather_spear"
+  },
+  {
+   "id": "weapon_void_spear",
+   "slot": "SPEAR",
+   "rarity": "MYTHIC",
+   "model": "weapons/void_spear",
+   "theme": "void"
+  },
+  {
+   "id": "weapon_banner_spear",
+   "slot": "SPEAR",
+   "rarity": "EPIC",
+   "model": "weapons/banner_spear"
+  },
+  {
+   "id": "weapon_demon_trident",
+   "slot": "SPEAR",
+   "rarity": "LEGENDARY",
+   "model": "weapons/demon_trident",
+   "theme": "fire"
+  },
+  {
+   "id": "weapon_moon_halberd",
+   "slot": "SPEAR",
+   "rarity": "LEGENDARY",
+   "model": "weapons/moon_halberd",
+   "theme": "moon"
+  },
+  {
+   "id": "weapon_lantern_spear",
+   "slot": "SPEAR",
+   "rarity": "RARE",
+   "model": "weapons/lantern_spear"
+  },
+  {
+   "id": "weapon_crystal_spire",
+   "slot": "SPEAR",
+   "rarity": "EPIC",
+   "model": "weapons/crystal_spire"
+  },
+  {
+   "id": "weapon_drill_lance",
+   "slot": "SPEAR",
+   "rarity": "MYTHIC",
+   "model": "weapons/drill_lance",
+   "theme": "tech"
+  },
+  {
+   "id": "weapon_xbow_inferno",
+   "slot": "CROSSBOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/xbow_inferno",
+   "theme": "held5_inferno"
+  },
+  {
+   "id": "weapon_xbow_frost",
+   "slot": "CROSSBOW",
+   "rarity": "EPIC",
+   "model": "weapons/xbow_frost",
+   "theme": "held5_frost"
+  },
+  {
+   "id": "weapon_xbow_void",
+   "slot": "CROSSBOW",
+   "rarity": "MYTHIC",
+   "model": "weapons/xbow_void",
+   "theme": "held5_void"
+  },
+  {
+   "id": "weapon_xbow_crown",
+   "slot": "CROSSBOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/xbow_crown",
+   "theme": "held5_crown"
+  },
+  {
+   "id": "weapon_xbow_emerald",
+   "slot": "CROSSBOW",
+   "rarity": "EPIC",
+   "model": "weapons/xbow_emerald",
+   "theme": "held5_emerald"
+  },
+  {
+   "id": "weapon_xbow_amethyst",
+   "slot": "CROSSBOW",
+   "rarity": "EPIC",
+   "model": "weapons/xbow_amethyst",
+   "theme": "held5_amethyst"
+  },
+  {
+   "id": "weapon_xbow_storm",
+   "slot": "CROSSBOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/xbow_storm",
+   "theme": "held5_storm"
+  },
+  {
+   "id": "weapon_xbow_abyss",
+   "slot": "CROSSBOW",
+   "rarity": "EPIC",
+   "model": "weapons/xbow_abyss",
+   "theme": "held5_abyss"
+  },
+  {
+   "id": "weapon_xbow_sakura",
+   "slot": "CROSSBOW",
+   "rarity": "RARE",
+   "model": "weapons/xbow_sakura",
+   "theme": "held5_sakura"
+  },
+  {
+   "id": "weapon_xbow_neon",
+   "slot": "CROSSBOW",
+   "rarity": "EPIC",
+   "model": "weapons/xbow_neon",
+   "theme": "held5_neon"
+  },
+  {
+   "id": "weapon_xbow_cogwork",
+   "slot": "CROSSBOW",
+   "rarity": "RARE",
+   "model": "weapons/xbow_cogwork",
+   "theme": "held5_cogwork"
+  },
+  {
+   "id": "weapon_xbow_bone",
+   "slot": "CROSSBOW",
+   "rarity": "EPIC",
+   "model": "weapons/xbow_bone",
+   "theme": "held5_bone"
+  },
+  {
+   "id": "weapon_xbow_blood",
+   "slot": "CROSSBOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/xbow_blood",
+   "theme": "held5_blood"
+  },
+  {
+   "id": "weapon_xbow_sun",
+   "slot": "CROSSBOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/xbow_sun",
+   "theme": "held5_sun"
+  },
+  {
+   "id": "weapon_xbow_moon",
+   "slot": "CROSSBOW",
+   "rarity": "EPIC",
+   "model": "weapons/xbow_moon",
+   "theme": "held5_moon"
+  },
+  {
+   "id": "weapon_xbow_nether",
+   "slot": "CROSSBOW",
+   "rarity": "RARE",
+   "model": "weapons/xbow_nether",
+   "theme": "held5_nether"
+  },
+  {
+   "id": "weapon_xbow_ender",
+   "slot": "CROSSBOW",
+   "rarity": "EPIC",
+   "model": "weapons/xbow_ender",
+   "theme": "held5_ender"
+  },
+  {
+   "id": "weapon_xbow_candy",
+   "slot": "CROSSBOW",
+   "rarity": "RARE",
+   "model": "weapons/xbow_candy",
+   "theme": "held5_candy"
+  },
+  {
+   "id": "weapon_xbow_toxin",
+   "slot": "CROSSBOW",
+   "rarity": "RARE",
+   "model": "weapons/xbow_toxin",
+   "theme": "held5_toxin"
+  },
+  {
+   "id": "weapon_xbow_jungle",
+   "slot": "CROSSBOW",
+   "rarity": "COMMON",
+   "model": "weapons/xbow_jungle",
+   "theme": "held5_jungle"
+  },
+  {
+   "id": "weapon_xbow_pharaoh",
+   "slot": "CROSSBOW",
+   "rarity": "EPIC",
+   "model": "weapons/xbow_pharaoh",
+   "theme": "held5_pharaoh"
+  },
+  {
+   "id": "weapon_xbow_rune",
+   "slot": "CROSSBOW",
+   "rarity": "RARE",
+   "model": "weapons/xbow_rune",
+   "theme": "held5_rune"
+  },
+  {
+   "id": "weapon_xbow_galaxy",
+   "slot": "CROSSBOW",
+   "rarity": "MYTHIC",
+   "model": "weapons/xbow_galaxy",
+   "theme": "held5_galaxy"
+  },
+  {
+   "id": "weapon_xbow_obsidian",
+   "slot": "CROSSBOW",
+   "rarity": "EPIC",
+   "model": "weapons/xbow_obsidian",
+   "theme": "held5_obsidian"
+  },
+  {
+   "id": "weapon_xbow_prismarine",
+   "slot": "CROSSBOW",
+   "rarity": "RARE",
+   "model": "weapons/xbow_prismarine",
+   "theme": "held5_prismarine"
+  },
+  {
+   "id": "weapon_xbow_dragon",
+   "slot": "CROSSBOW",
+   "rarity": "MYTHIC",
+   "model": "weapons/xbow_dragon",
+   "theme": "held5_dragon"
+  },
+  {
+   "id": "weapon_xbow_angel",
+   "slot": "CROSSBOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/xbow_angel",
+   "theme": "held5_angel"
+  },
+  {
+   "id": "weapon_xbow_demon",
+   "slot": "CROSSBOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/xbow_demon",
+   "theme": "held5_demon"
+  },
+  {
+   "id": "weapon_xbow_ruby",
+   "slot": "CROSSBOW",
+   "rarity": "EPIC",
+   "model": "weapons/xbow_ruby",
+   "theme": "held5_ruby"
+  },
+  {
+   "id": "weapon_xbow_sapphire",
+   "slot": "CROSSBOW",
+   "rarity": "EPIC",
+   "model": "weapons/xbow_sapphire",
+   "theme": "held5_sapphire"
+  },
+  {
+   "id": "weapon_xbow_copper",
+   "slot": "CROSSBOW",
+   "rarity": "COMMON",
+   "model": "weapons/xbow_copper",
+   "theme": "held5_copper"
+  },
+  {
+   "id": "weapon_xbow_glitch",
+   "slot": "CROSSBOW",
+   "rarity": "MYTHIC",
+   "model": "weapons/xbow_glitch",
+   "theme": "held5_glitch"
+  },
+  {
+   "id": "weapon_xbow_rainbow",
+   "slot": "CROSSBOW",
+   "rarity": "LEGENDARY",
+   "model": "weapons/xbow_rainbow",
+   "theme": "held5_rainbow"
+  },
+  {
+   "id": "item_gapple_inferno",
+   "slot": "GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/gapple_inferno",
+   "theme": "held5_inferno"
+  },
+  {
+   "id": "item_gapple_frost",
+   "slot": "GAPPLE",
+   "rarity": "RARE",
+   "model": "items/gapple_frost",
+   "theme": "held5_frost"
+  },
+  {
+   "id": "item_gapple_void",
+   "slot": "GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/gapple_void",
+   "theme": "held5_void"
+  },
+  {
+   "id": "item_gapple_crown",
+   "slot": "GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/gapple_crown",
+   "theme": "held5_crown"
+  },
+  {
+   "id": "item_gapple_emerald",
+   "slot": "GAPPLE",
+   "rarity": "RARE",
+   "model": "items/gapple_emerald",
+   "theme": "held5_emerald"
+  },
+  {
+   "id": "item_gapple_amethyst",
+   "slot": "GAPPLE",
+   "rarity": "RARE",
+   "model": "items/gapple_amethyst",
+   "theme": "held5_amethyst"
+  },
+  {
+   "id": "item_gapple_storm",
+   "slot": "GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/gapple_storm",
+   "theme": "held5_storm"
+  },
+  {
+   "id": "item_gapple_abyss",
+   "slot": "GAPPLE",
+   "rarity": "RARE",
+   "model": "items/gapple_abyss",
+   "theme": "held5_abyss"
+  },
+  {
+   "id": "item_gapple_sakura",
+   "slot": "GAPPLE",
+   "rarity": "COMMON",
+   "model": "items/gapple_sakura",
+   "theme": "held5_sakura"
+  },
+  {
+   "id": "item_gapple_neon",
+   "slot": "GAPPLE",
+   "rarity": "RARE",
+   "model": "items/gapple_neon",
+   "theme": "held5_neon"
+  },
+  {
+   "id": "item_gapple_cogwork",
+   "slot": "GAPPLE",
+   "rarity": "COMMON",
+   "model": "items/gapple_cogwork",
+   "theme": "held5_cogwork"
+  },
+  {
+   "id": "item_gapple_bone",
+   "slot": "GAPPLE",
+   "rarity": "RARE",
+   "model": "items/gapple_bone",
+   "theme": "held5_bone"
+  },
+  {
+   "id": "item_gapple_blood",
+   "slot": "GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/gapple_blood",
+   "theme": "held5_blood"
+  },
+  {
+   "id": "item_gapple_sun",
+   "slot": "GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/gapple_sun",
+   "theme": "held5_sun"
+  },
+  {
+   "id": "item_gapple_moon",
+   "slot": "GAPPLE",
+   "rarity": "RARE",
+   "model": "items/gapple_moon",
+   "theme": "held5_moon"
+  },
+  {
+   "id": "item_gapple_nether",
+   "slot": "GAPPLE",
+   "rarity": "COMMON",
+   "model": "items/gapple_nether",
+   "theme": "held5_nether"
+  },
+  {
+   "id": "item_gapple_ender",
+   "slot": "GAPPLE",
+   "rarity": "RARE",
+   "model": "items/gapple_ender",
+   "theme": "held5_ender"
+  },
+  {
+   "id": "item_gapple_candy",
+   "slot": "GAPPLE",
+   "rarity": "COMMON",
+   "model": "items/gapple_candy",
+   "theme": "held5_candy"
+  },
+  {
+   "id": "item_gapple_toxin",
+   "slot": "GAPPLE",
+   "rarity": "COMMON",
+   "model": "items/gapple_toxin",
+   "theme": "held5_toxin"
+  },
+  {
+   "id": "item_gapple_jungle",
+   "slot": "GAPPLE",
+   "rarity": "COMMON",
+   "model": "items/gapple_jungle",
+   "theme": "held5_jungle"
+  },
+  {
+   "id": "item_gapple_pharaoh",
+   "slot": "GAPPLE",
+   "rarity": "RARE",
+   "model": "items/gapple_pharaoh",
+   "theme": "held5_pharaoh"
+  },
+  {
+   "id": "item_gapple_rune",
+   "slot": "GAPPLE",
+   "rarity": "COMMON",
+   "model": "items/gapple_rune",
+   "theme": "held5_rune"
+  },
+  {
+   "id": "item_gapple_galaxy",
+   "slot": "GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/gapple_galaxy",
+   "theme": "held5_galaxy"
+  },
+  {
+   "id": "item_gapple_obsidian",
+   "slot": "GAPPLE",
+   "rarity": "RARE",
+   "model": "items/gapple_obsidian",
+   "theme": "held5_obsidian"
+  },
+  {
+   "id": "item_gapple_prismarine",
+   "slot": "GAPPLE",
+   "rarity": "COMMON",
+   "model": "items/gapple_prismarine",
+   "theme": "held5_prismarine"
+  },
+  {
+   "id": "item_gapple_dragon",
+   "slot": "GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/gapple_dragon",
+   "theme": "held5_dragon"
+  },
+  {
+   "id": "item_gapple_angel",
+   "slot": "GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/gapple_angel",
+   "theme": "held5_angel"
+  },
+  {
+   "id": "item_gapple_demon",
+   "slot": "GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/gapple_demon",
+   "theme": "held5_demon"
+  },
+  {
+   "id": "item_gapple_ruby",
+   "slot": "GAPPLE",
+   "rarity": "RARE",
+   "model": "items/gapple_ruby",
+   "theme": "held5_ruby"
+  },
+  {
+   "id": "item_gapple_sapphire",
+   "slot": "GAPPLE",
+   "rarity": "RARE",
+   "model": "items/gapple_sapphire",
+   "theme": "held5_sapphire"
+  },
+  {
+   "id": "item_gapple_copper",
+   "slot": "GAPPLE",
+   "rarity": "COMMON",
+   "model": "items/gapple_copper",
+   "theme": "held5_copper"
+  },
+  {
+   "id": "item_gapple_glitch",
+   "slot": "GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/gapple_glitch",
+   "theme": "held5_glitch"
+  },
+  {
+   "id": "item_gapple_rainbow",
+   "slot": "GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/gapple_rainbow",
+   "theme": "held5_rainbow"
+  },
+  {
+   "id": "item_egapple_inferno",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "MYTHIC",
+   "model": "items/egapple_inferno",
+   "theme": "held5_inferno"
+  },
+  {
+   "id": "item_egapple_frost",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/egapple_frost",
+   "theme": "held5_frost"
+  },
+  {
+   "id": "item_egapple_void",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "MYTHIC",
+   "model": "items/egapple_void",
+   "theme": "held5_void"
+  },
+  {
+   "id": "item_egapple_crown",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "MYTHIC",
+   "model": "items/egapple_crown",
+   "theme": "held5_crown"
+  },
+  {
+   "id": "item_egapple_emerald",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/egapple_emerald",
+   "theme": "held5_emerald"
+  },
+  {
+   "id": "item_egapple_amethyst",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/egapple_amethyst",
+   "theme": "held5_amethyst"
+  },
+  {
+   "id": "item_egapple_storm",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "MYTHIC",
+   "model": "items/egapple_storm",
+   "theme": "held5_storm"
+  },
+  {
+   "id": "item_egapple_abyss",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/egapple_abyss",
+   "theme": "held5_abyss"
+  },
+  {
+   "id": "item_egapple_sakura",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/egapple_sakura",
+   "theme": "held5_sakura"
+  },
+  {
+   "id": "item_egapple_neon",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/egapple_neon",
+   "theme": "held5_neon"
+  },
+  {
+   "id": "item_egapple_cogwork",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/egapple_cogwork",
+   "theme": "held5_cogwork"
+  },
+  {
+   "id": "item_egapple_bone",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/egapple_bone",
+   "theme": "held5_bone"
+  },
+  {
+   "id": "item_egapple_blood",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "MYTHIC",
+   "model": "items/egapple_blood",
+   "theme": "held5_blood"
+  },
+  {
+   "id": "item_egapple_sun",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "MYTHIC",
+   "model": "items/egapple_sun",
+   "theme": "held5_sun"
+  },
+  {
+   "id": "item_egapple_moon",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/egapple_moon",
+   "theme": "held5_moon"
+  },
+  {
+   "id": "item_egapple_nether",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/egapple_nether",
+   "theme": "held5_nether"
+  },
+  {
+   "id": "item_egapple_ender",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/egapple_ender",
+   "theme": "held5_ender"
+  },
+  {
+   "id": "item_egapple_candy",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/egapple_candy",
+   "theme": "held5_candy"
+  },
+  {
+   "id": "item_egapple_toxin",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/egapple_toxin",
+   "theme": "held5_toxin"
+  },
+  {
+   "id": "item_egapple_jungle",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "RARE",
+   "model": "items/egapple_jungle",
+   "theme": "held5_jungle"
+  },
+  {
+   "id": "item_egapple_pharaoh",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/egapple_pharaoh",
+   "theme": "held5_pharaoh"
+  },
+  {
+   "id": "item_egapple_rune",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/egapple_rune",
+   "theme": "held5_rune"
+  },
+  {
+   "id": "item_egapple_galaxy",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "MYTHIC",
+   "model": "items/egapple_galaxy",
+   "theme": "held5_galaxy"
+  },
+  {
+   "id": "item_egapple_obsidian",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/egapple_obsidian",
+   "theme": "held5_obsidian"
+  },
+  {
+   "id": "item_egapple_prismarine",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "EPIC",
+   "model": "items/egapple_prismarine",
+   "theme": "held5_prismarine"
+  },
+  {
+   "id": "item_egapple_dragon",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "MYTHIC",
+   "model": "items/egapple_dragon",
+   "theme": "held5_dragon"
+  },
+  {
+   "id": "item_egapple_angel",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "MYTHIC",
+   "model": "items/egapple_angel",
+   "theme": "held5_angel"
+  },
+  {
+   "id": "item_egapple_demon",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "MYTHIC",
+   "model": "items/egapple_demon",
+   "theme": "held5_demon"
+  },
+  {
+   "id": "item_egapple_ruby",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/egapple_ruby",
+   "theme": "held5_ruby"
+  },
+  {
+   "id": "item_egapple_sapphire",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "LEGENDARY",
+   "model": "items/egapple_sapphire",
+   "theme": "held5_sapphire"
+  },
+  {
+   "id": "item_egapple_copper",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "RARE",
+   "model": "items/egapple_copper",
+   "theme": "held5_copper"
+  },
+  {
+   "id": "item_egapple_glitch",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "MYTHIC",
+   "model": "items/egapple_glitch",
+   "theme": "held5_glitch"
+  },
+  {
+   "id": "item_egapple_rainbow",
+   "slot": "ENCHANTED_GAPPLE",
+   "rarity": "MYTHIC",
+   "model": "items/egapple_rainbow",
+   "theme": "held5_rainbow"
+  },
+  {
+   "id": "item_totem_inferno",
+   "slot": "TOTEM",
+   "rarity": "LEGENDARY",
+   "model": "items/totem_inferno",
+   "theme": "held5_inferno"
+  },
+  {
+   "id": "item_totem_frost",
+   "slot": "TOTEM",
+   "rarity": "EPIC",
+   "model": "items/totem_frost",
+   "theme": "held5_frost"
+  },
+  {
+   "id": "item_totem_void",
+   "slot": "TOTEM",
+   "rarity": "MYTHIC",
+   "model": "items/totem_void",
+   "theme": "held5_void"
+  },
+  {
+   "id": "item_totem_crown",
+   "slot": "TOTEM",
+   "rarity": "LEGENDARY",
+   "model": "items/totem_crown",
+   "theme": "held5_crown"
+  },
+  {
+   "id": "item_totem_emerald",
+   "slot": "TOTEM",
+   "rarity": "EPIC",
+   "model": "items/totem_emerald",
+   "theme": "held5_emerald"
+  },
+  {
+   "id": "item_totem_amethyst",
+   "slot": "TOTEM",
+   "rarity": "EPIC",
+   "model": "items/totem_amethyst",
+   "theme": "held5_amethyst"
+  },
+  {
+   "id": "item_totem_storm",
+   "slot": "TOTEM",
+   "rarity": "LEGENDARY",
+   "model": "items/totem_storm",
+   "theme": "held5_storm"
+  },
+  {
+   "id": "item_totem_abyss",
+   "slot": "TOTEM",
+   "rarity": "EPIC",
+   "model": "items/totem_abyss",
+   "theme": "held5_abyss"
+  },
+  {
+   "id": "item_totem_sakura",
+   "slot": "TOTEM",
+   "rarity": "RARE",
+   "model": "items/totem_sakura",
+   "theme": "held5_sakura"
+  },
+  {
+   "id": "item_totem_neon",
+   "slot": "TOTEM",
+   "rarity": "EPIC",
+   "model": "items/totem_neon",
+   "theme": "held5_neon"
+  },
+  {
+   "id": "item_totem_cogwork",
+   "slot": "TOTEM",
+   "rarity": "RARE",
+   "model": "items/totem_cogwork",
+   "theme": "held5_cogwork"
+  },
+  {
+   "id": "item_totem_bone",
+   "slot": "TOTEM",
+   "rarity": "EPIC",
+   "model": "items/totem_bone",
+   "theme": "held5_bone"
+  },
+  {
+   "id": "item_totem_blood",
+   "slot": "TOTEM",
+   "rarity": "LEGENDARY",
+   "model": "items/totem_blood",
+   "theme": "held5_blood"
+  },
+  {
+   "id": "item_totem_sun",
+   "slot": "TOTEM",
+   "rarity": "LEGENDARY",
+   "model": "items/totem_sun",
+   "theme": "held5_sun"
+  },
+  {
+   "id": "item_totem_moon",
+   "slot": "TOTEM",
+   "rarity": "EPIC",
+   "model": "items/totem_moon",
+   "theme": "held5_moon"
+  },
+  {
+   "id": "item_totem_nether",
+   "slot": "TOTEM",
+   "rarity": "RARE",
+   "model": "items/totem_nether",
+   "theme": "held5_nether"
+  },
+  {
+   "id": "item_totem_ender",
+   "slot": "TOTEM",
+   "rarity": "EPIC",
+   "model": "items/totem_ender",
+   "theme": "held5_ender"
+  },
+  {
+   "id": "item_totem_candy",
+   "slot": "TOTEM",
+   "rarity": "RARE",
+   "model": "items/totem_candy",
+   "theme": "held5_candy"
+  },
+  {
+   "id": "item_totem_toxin",
+   "slot": "TOTEM",
+   "rarity": "RARE",
+   "model": "items/totem_toxin",
+   "theme": "held5_toxin"
+  },
+  {
+   "id": "item_totem_jungle",
+   "slot": "TOTEM",
+   "rarity": "COMMON",
+   "model": "items/totem_jungle",
+   "theme": "held5_jungle"
+  },
+  {
+   "id": "item_totem_pharaoh",
+   "slot": "TOTEM",
+   "rarity": "EPIC",
+   "model": "items/totem_pharaoh",
+   "theme": "held5_pharaoh"
+  },
+  {
+   "id": "item_totem_rune",
+   "slot": "TOTEM",
+   "rarity": "RARE",
+   "model": "items/totem_rune",
+   "theme": "held5_rune"
+  },
+  {
+   "id": "item_totem_galaxy",
+   "slot": "TOTEM",
+   "rarity": "MYTHIC",
+   "model": "items/totem_galaxy",
+   "theme": "held5_galaxy"
+  },
+  {
+   "id": "item_totem_obsidian",
+   "slot": "TOTEM",
+   "rarity": "EPIC",
+   "model": "items/totem_obsidian",
+   "theme": "held5_obsidian"
+  },
+  {
+   "id": "item_totem_prismarine",
+   "slot": "TOTEM",
+   "rarity": "RARE",
+   "model": "items/totem_prismarine",
+   "theme": "held5_prismarine"
+  },
+  {
+   "id": "item_totem_dragon",
+   "slot": "TOTEM",
+   "rarity": "MYTHIC",
+   "model": "items/totem_dragon",
+   "theme": "held5_dragon"
+  },
+  {
+   "id": "item_totem_angel",
+   "slot": "TOTEM",
+   "rarity": "LEGENDARY",
+   "model": "items/totem_angel",
+   "theme": "held5_angel"
+  },
+  {
+   "id": "item_totem_demon",
+   "slot": "TOTEM",
+   "rarity": "LEGENDARY",
+   "model": "items/totem_demon",
+   "theme": "held5_demon"
+  },
+  {
+   "id": "item_totem_ruby",
+   "slot": "TOTEM",
+   "rarity": "EPIC",
+   "model": "items/totem_ruby",
+   "theme": "held5_ruby"
+  },
+  {
+   "id": "item_totem_sapphire",
+   "slot": "TOTEM",
+   "rarity": "EPIC",
+   "model": "items/totem_sapphire",
+   "theme": "held5_sapphire"
+  },
+  {
+   "id": "item_totem_copper",
+   "slot": "TOTEM",
+   "rarity": "COMMON",
+   "model": "items/totem_copper",
+   "theme": "held5_copper"
+  },
+  {
+   "id": "item_totem_glitch",
+   "slot": "TOTEM",
+   "rarity": "MYTHIC",
+   "model": "items/totem_glitch",
+   "theme": "held5_glitch"
+  },
+  {
+   "id": "item_totem_rainbow",
+   "slot": "TOTEM",
+   "rarity": "LEGENDARY",
+   "model": "items/totem_rainbow",
+   "theme": "held5_rainbow"
+  },
+  {
+   "id": "item_anchor_inferno",
+   "slot": "ANCHOR",
+   "rarity": "LEGENDARY",
+   "model": "items/anchor_inferno",
+   "theme": "held5_inferno"
+  },
+  {
+   "id": "item_anchor_frost",
+   "slot": "ANCHOR",
+   "rarity": "EPIC",
+   "model": "items/anchor_frost",
+   "theme": "held5_frost"
+  },
+  {
+   "id": "item_anchor_void",
+   "slot": "ANCHOR",
+   "rarity": "MYTHIC",
+   "model": "items/anchor_void",
+   "theme": "held5_void"
+  },
+  {
+   "id": "item_anchor_crown",
+   "slot": "ANCHOR",
+   "rarity": "LEGENDARY",
+   "model": "items/anchor_crown",
+   "theme": "held5_crown"
+  },
+  {
+   "id": "item_anchor_emerald",
+   "slot": "ANCHOR",
+   "rarity": "EPIC",
+   "model": "items/anchor_emerald",
+   "theme": "held5_emerald"
+  },
+  {
+   "id": "item_anchor_amethyst",
+   "slot": "ANCHOR",
+   "rarity": "EPIC",
+   "model": "items/anchor_amethyst",
+   "theme": "held5_amethyst"
+  },
+  {
+   "id": "item_anchor_storm",
+   "slot": "ANCHOR",
+   "rarity": "LEGENDARY",
+   "model": "items/anchor_storm",
+   "theme": "held5_storm"
+  },
+  {
+   "id": "item_anchor_abyss",
+   "slot": "ANCHOR",
+   "rarity": "EPIC",
+   "model": "items/anchor_abyss",
+   "theme": "held5_abyss"
+  },
+  {
+   "id": "item_anchor_sakura",
+   "slot": "ANCHOR",
+   "rarity": "RARE",
+   "model": "items/anchor_sakura",
+   "theme": "held5_sakura"
+  },
+  {
+   "id": "item_anchor_neon",
+   "slot": "ANCHOR",
+   "rarity": "EPIC",
+   "model": "items/anchor_neon",
+   "theme": "held5_neon"
+  },
+  {
+   "id": "item_anchor_cogwork",
+   "slot": "ANCHOR",
+   "rarity": "RARE",
+   "model": "items/anchor_cogwork",
+   "theme": "held5_cogwork"
+  },
+  {
+   "id": "item_anchor_bone",
+   "slot": "ANCHOR",
+   "rarity": "EPIC",
+   "model": "items/anchor_bone",
+   "theme": "held5_bone"
+  },
+  {
+   "id": "item_anchor_blood",
+   "slot": "ANCHOR",
+   "rarity": "LEGENDARY",
+   "model": "items/anchor_blood",
+   "theme": "held5_blood"
+  },
+  {
+   "id": "item_anchor_sun",
+   "slot": "ANCHOR",
+   "rarity": "LEGENDARY",
+   "model": "items/anchor_sun",
+   "theme": "held5_sun"
+  },
+  {
+   "id": "item_anchor_moon",
+   "slot": "ANCHOR",
+   "rarity": "EPIC",
+   "model": "items/anchor_moon",
+   "theme": "held5_moon"
+  },
+  {
+   "id": "item_anchor_nether",
+   "slot": "ANCHOR",
+   "rarity": "RARE",
+   "model": "items/anchor_nether",
+   "theme": "held5_nether"
+  },
+  {
+   "id": "item_anchor_ender",
+   "slot": "ANCHOR",
+   "rarity": "EPIC",
+   "model": "items/anchor_ender",
+   "theme": "held5_ender"
+  },
+  {
+   "id": "item_anchor_candy",
+   "slot": "ANCHOR",
+   "rarity": "RARE",
+   "model": "items/anchor_candy",
+   "theme": "held5_candy"
+  },
+  {
+   "id": "item_anchor_toxin",
+   "slot": "ANCHOR",
+   "rarity": "RARE",
+   "model": "items/anchor_toxin",
+   "theme": "held5_toxin"
+  },
+  {
+   "id": "item_anchor_jungle",
+   "slot": "ANCHOR",
+   "rarity": "COMMON",
+   "model": "items/anchor_jungle",
+   "theme": "held5_jungle"
+  },
+  {
+   "id": "item_anchor_pharaoh",
+   "slot": "ANCHOR",
+   "rarity": "EPIC",
+   "model": "items/anchor_pharaoh",
+   "theme": "held5_pharaoh"
+  },
+  {
+   "id": "item_anchor_rune",
+   "slot": "ANCHOR",
+   "rarity": "RARE",
+   "model": "items/anchor_rune",
+   "theme": "held5_rune"
+  },
+  {
+   "id": "item_anchor_galaxy",
+   "slot": "ANCHOR",
+   "rarity": "MYTHIC",
+   "model": "items/anchor_galaxy",
+   "theme": "held5_galaxy"
+  },
+  {
+   "id": "item_anchor_obsidian",
+   "slot": "ANCHOR",
+   "rarity": "EPIC",
+   "model": "items/anchor_obsidian",
+   "theme": "held5_obsidian"
+  },
+  {
+   "id": "item_anchor_prismarine",
+   "slot": "ANCHOR",
+   "rarity": "RARE",
+   "model": "items/anchor_prismarine",
+   "theme": "held5_prismarine"
+  },
+  {
+   "id": "item_anchor_dragon",
+   "slot": "ANCHOR",
+   "rarity": "MYTHIC",
+   "model": "items/anchor_dragon",
+   "theme": "held5_dragon"
+  },
+  {
+   "id": "item_anchor_angel",
+   "slot": "ANCHOR",
+   "rarity": "LEGENDARY",
+   "model": "items/anchor_angel",
+   "theme": "held5_angel"
+  },
+  {
+   "id": "item_anchor_demon",
+   "slot": "ANCHOR",
+   "rarity": "LEGENDARY",
+   "model": "items/anchor_demon",
+   "theme": "held5_demon"
+  },
+  {
+   "id": "item_anchor_ruby",
+   "slot": "ANCHOR",
+   "rarity": "EPIC",
+   "model": "items/anchor_ruby",
+   "theme": "held5_ruby"
+  },
+  {
+   "id": "item_anchor_sapphire",
+   "slot": "ANCHOR",
+   "rarity": "EPIC",
+   "model": "items/anchor_sapphire",
+   "theme": "held5_sapphire"
+  },
+  {
+   "id": "item_anchor_copper",
+   "slot": "ANCHOR",
+   "rarity": "COMMON",
+   "model": "items/anchor_copper",
+   "theme": "held5_copper"
+  },
+  {
+   "id": "item_anchor_glitch",
+   "slot": "ANCHOR",
+   "rarity": "MYTHIC",
+   "model": "items/anchor_glitch",
+   "theme": "held5_glitch"
+  },
+  {
+   "id": "item_anchor_rainbow",
+   "slot": "ANCHOR",
+   "rarity": "LEGENDARY",
+   "model": "items/anchor_rainbow",
+   "theme": "held5_rainbow"
+  },
+  {
+   "id": "item_crystal_inferno",
+   "slot": "CRYSTAL",
+   "rarity": "LEGENDARY",
+   "model": "items/crystal_inferno",
+   "theme": "held5_inferno"
+  },
+  {
+   "id": "item_crystal_frost",
+   "slot": "CRYSTAL",
+   "rarity": "EPIC",
+   "model": "items/crystal_frost",
+   "theme": "held5_frost"
+  },
+  {
+   "id": "item_crystal_void",
+   "slot": "CRYSTAL",
+   "rarity": "MYTHIC",
+   "model": "items/crystal_void",
+   "theme": "held5_void"
+  },
+  {
+   "id": "item_crystal_crown",
+   "slot": "CRYSTAL",
+   "rarity": "LEGENDARY",
+   "model": "items/crystal_crown",
+   "theme": "held5_crown"
+  },
+  {
+   "id": "item_crystal_emerald",
+   "slot": "CRYSTAL",
+   "rarity": "EPIC",
+   "model": "items/crystal_emerald",
+   "theme": "held5_emerald"
+  },
+  {
+   "id": "item_crystal_amethyst",
+   "slot": "CRYSTAL",
+   "rarity": "EPIC",
+   "model": "items/crystal_amethyst",
+   "theme": "held5_amethyst"
+  },
+  {
+   "id": "item_crystal_storm",
+   "slot": "CRYSTAL",
+   "rarity": "LEGENDARY",
+   "model": "items/crystal_storm",
+   "theme": "held5_storm"
+  },
+  {
+   "id": "item_crystal_abyss",
+   "slot": "CRYSTAL",
+   "rarity": "EPIC",
+   "model": "items/crystal_abyss",
+   "theme": "held5_abyss"
+  },
+  {
+   "id": "item_crystal_sakura",
+   "slot": "CRYSTAL",
+   "rarity": "RARE",
+   "model": "items/crystal_sakura",
+   "theme": "held5_sakura"
+  },
+  {
+   "id": "item_crystal_neon",
+   "slot": "CRYSTAL",
+   "rarity": "EPIC",
+   "model": "items/crystal_neon",
+   "theme": "held5_neon"
+  },
+  {
+   "id": "item_crystal_cogwork",
+   "slot": "CRYSTAL",
+   "rarity": "RARE",
+   "model": "items/crystal_cogwork",
+   "theme": "held5_cogwork"
+  },
+  {
+   "id": "item_crystal_bone",
+   "slot": "CRYSTAL",
+   "rarity": "EPIC",
+   "model": "items/crystal_bone",
+   "theme": "held5_bone"
+  },
+  {
+   "id": "item_crystal_blood",
+   "slot": "CRYSTAL",
+   "rarity": "LEGENDARY",
+   "model": "items/crystal_blood",
+   "theme": "held5_blood"
+  },
+  {
+   "id": "item_crystal_sun",
+   "slot": "CRYSTAL",
+   "rarity": "LEGENDARY",
+   "model": "items/crystal_sun",
+   "theme": "held5_sun"
+  },
+  {
+   "id": "item_crystal_moon",
+   "slot": "CRYSTAL",
+   "rarity": "EPIC",
+   "model": "items/crystal_moon",
+   "theme": "held5_moon"
+  },
+  {
+   "id": "item_crystal_nether",
+   "slot": "CRYSTAL",
+   "rarity": "RARE",
+   "model": "items/crystal_nether",
+   "theme": "held5_nether"
+  },
+  {
+   "id": "item_crystal_ender",
+   "slot": "CRYSTAL",
+   "rarity": "EPIC",
+   "model": "items/crystal_ender",
+   "theme": "held5_ender"
+  },
+  {
+   "id": "item_crystal_candy",
+   "slot": "CRYSTAL",
+   "rarity": "RARE",
+   "model": "items/crystal_candy",
+   "theme": "held5_candy"
+  },
+  {
+   "id": "item_crystal_toxin",
+   "slot": "CRYSTAL",
+   "rarity": "RARE",
+   "model": "items/crystal_toxin",
+   "theme": "held5_toxin"
+  },
+  {
+   "id": "item_crystal_jungle",
+   "slot": "CRYSTAL",
+   "rarity": "COMMON",
+   "model": "items/crystal_jungle",
+   "theme": "held5_jungle"
+  },
+  {
+   "id": "item_crystal_pharaoh",
+   "slot": "CRYSTAL",
+   "rarity": "EPIC",
+   "model": "items/crystal_pharaoh",
+   "theme": "held5_pharaoh"
+  },
+  {
+   "id": "item_crystal_rune",
+   "slot": "CRYSTAL",
+   "rarity": "RARE",
+   "model": "items/crystal_rune",
+   "theme": "held5_rune"
+  },
+  {
+   "id": "item_crystal_galaxy",
+   "slot": "CRYSTAL",
+   "rarity": "MYTHIC",
+   "model": "items/crystal_galaxy",
+   "theme": "held5_galaxy"
+  },
+  {
+   "id": "item_crystal_obsidian",
+   "slot": "CRYSTAL",
+   "rarity": "EPIC",
+   "model": "items/crystal_obsidian",
+   "theme": "held5_obsidian"
+  },
+  {
+   "id": "item_crystal_prismarine",
+   "slot": "CRYSTAL",
+   "rarity": "RARE",
+   "model": "items/crystal_prismarine",
+   "theme": "held5_prismarine"
+  },
+  {
+   "id": "item_crystal_dragon",
+   "slot": "CRYSTAL",
+   "rarity": "MYTHIC",
+   "model": "items/crystal_dragon",
+   "theme": "held5_dragon"
+  },
+  {
+   "id": "item_crystal_angel",
+   "slot": "CRYSTAL",
+   "rarity": "LEGENDARY",
+   "model": "items/crystal_angel",
+   "theme": "held5_angel"
+  },
+  {
+   "id": "item_crystal_demon",
+   "slot": "CRYSTAL",
+   "rarity": "LEGENDARY",
+   "model": "items/crystal_demon",
+   "theme": "held5_demon"
+  },
+  {
+   "id": "item_crystal_ruby",
+   "slot": "CRYSTAL",
+   "rarity": "EPIC",
+   "model": "items/crystal_ruby",
+   "theme": "held5_ruby"
+  },
+  {
+   "id": "item_crystal_sapphire",
+   "slot": "CRYSTAL",
+   "rarity": "EPIC",
+   "model": "items/crystal_sapphire",
+   "theme": "held5_sapphire"
+  },
+  {
+   "id": "item_crystal_copper",
+   "slot": "CRYSTAL",
+   "rarity": "COMMON",
+   "model": "items/crystal_copper",
+   "theme": "held5_copper"
+  },
+  {
+   "id": "item_crystal_glitch",
+   "slot": "CRYSTAL",
+   "rarity": "MYTHIC",
+   "model": "items/crystal_glitch",
+   "theme": "held5_glitch"
+  },
+  {
+   "id": "item_crystal_rainbow",
+   "slot": "CRYSTAL",
+   "rarity": "LEGENDARY",
+   "model": "items/crystal_rainbow",
+   "theme": "held5_rainbow"
+  },
+  {
+   "id": "item_totem_putin",
+   "slot": "TOTEM",
+   "rarity": "LEGENDARY",
+   "model": "items/totem_putin",
+   "theme": "politics"
+  }
+ ],
+ "sets": [
+  {
+   "id": "gentleman",
+   "color": "#e3c35a",
+   "particle": "dust:#e8d27a:0.8"
+  },
+  {
+   "id": "cyber",
+   "color": "#28f0ff",
+   "particle": "electric_spark"
+  },
+  {
+   "id": "knight",
+   "color": "#e3c35a",
+   "particle": "enchanted_hit"
+  },
+  {
+   "id": "pirate",
+   "color": "#d4af37",
+   "particle": "splash"
+  },
+  {
+   "id": "ninja",
+   "color": "#8e1b24",
+   "particle": "large_smoke"
+  },
+  {
+   "id": "bogatyr",
+   "color": "#b83a2b",
+   "particle": "dust:#e8c872:0.8"
+  },
+  {
+   "id": "pharaoh",
+   "color": "#e3b23c",
+   "particle": "dust:#f1c40f:0.7"
+  },
+  {
+   "id": "steampunk",
+   "color": "#b5793a",
+   "particle": "white_smoke"
+  },
+  {
+   "id": "plague",
+   "color": "#6b8f3a",
+   "particle": "dust:#8aa04a:0.7"
+  },
+  {
+   "id": "hoplite",
+   "color": "#b08d57",
+   "particle": "crit"
+  },
+  {
+   "id": "tuareg",
+   "color": "#2c3e91",
+   "particle": "dust:#d9b77a:0.8"
+  },
+  {
+   "id": "racer",
+   "color": "#e10600",
+   "particle": "firework"
+  },
+  {
+   "id": "mecha",
+   "color": "#ff6a2a",
+   "particle": "end_rod"
+  },
+  {
+   "id": "diver",
+   "color": "#c7923e",
+   "particle": "bubble_pop"
+  }
+ ]
+}

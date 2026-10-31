@@ -32,7 +32,6 @@ public final class DisplayUtil {
     public static void render(Minecraft minecraft, GameRenderState state) {
         long start = System.nanoTime();
         GuiGraphicsExtractor graphics = new GuiGraphicsExtractor(minecraft, state.guiRenderState, 0, 0);
-        graphics.nextStratum();
         graphics.pose().pushMatrix();
         graphics.pose().scale(SCALE / (float) minecraft.getWindow().getGuiScale());
         DisplayBatcher.begin(graphics);

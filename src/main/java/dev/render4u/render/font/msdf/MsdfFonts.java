@@ -1,5 +1,7 @@
 package dev.render4u.render.font.msdf;
 
+import dev.render4u.Constants;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -7,13 +9,17 @@ import java.util.Map;
 import net.minecraft.resources.Identifier;
 
 public final class MsdfFonts {
-    private static final String NAMESPACE = "render4u";
+    private static final String NAMESPACE = Constants.getModId();
     private static final String DIRECTORY = "fonts/msdf/";
     private static final Map<String, MsdfFont> REGISTRY = new LinkedHashMap<>();
 
     public static final MsdfFont SF_MEDIUM = register("sfmedium");
     public static final MsdfFont SF_SEMIBOLD = register("sfsemibold");
     public static final MsdfFont SF_BOLD = register("sfbold");
+    public static final MsdfFont ICONS = register("icons");
+    public static final MsdfFont ARBUZ_ICONS = register("arbuzicons");
+    public static final MsdfFont ROBOTO = register("roboto");
+    public static final MsdfFont LOGO = register("logo");
 
     private static MsdfFont defaultFont = SF_MEDIUM;
 

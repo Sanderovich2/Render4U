@@ -217,7 +217,6 @@ public final class Text {
             return;
         }
 
-        // Render shader effect pass (outline / shadow / glow) if configured
         if (effect != null && (effect.color() >>> 24) > 0) {
             int outlineByte = Math.clamp(Math.round(effect.spread() * 40.0F), 0, 255);
             int blurByte = Math.clamp(Math.round(effect.blur() * 20.0F), 0, 255);
@@ -232,7 +231,6 @@ public final class Text {
             DisplayBatcher.submit(graphics, effectState);
         }
 
-        // Render primary text
         DisplayBatcher.submit(graphics, build(graphics, layout));
     }
 

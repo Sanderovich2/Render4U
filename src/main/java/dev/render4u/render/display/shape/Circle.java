@@ -3,7 +3,6 @@ package dev.render4u.render.display.shape;
 import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import dev.render4u.render.display.Pipelines;
 import dev.render4u.render.display.batch.DisplayBatcher;
-import dev.render4u.util.color.Color;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.navigation.ScreenRectangle;
 import org.jspecify.annotations.Nullable;

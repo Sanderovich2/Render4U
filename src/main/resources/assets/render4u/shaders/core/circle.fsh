@@ -33,10 +33,13 @@ void main() {
     float r = halfSize.x;
     float ri = innerRadius();
     float dist = length(localPos);
-    float d = max(dist - r, ri - dist);
+    float d = dist - r;
+    if (ri > 0.0) {
+        d = max(d, ri - dist);
+    }
     float a0 = startAngle();
     float a1 = endAngle();
-    if (a1 - a0 < TAU) {
+    if (a1 - a0 < TAU - 0.01) {
         float ang = atan(localPos.y, localPos.x);
         float rel = mod(ang - a0, TAU);
         if (rel > a1 - a0) {

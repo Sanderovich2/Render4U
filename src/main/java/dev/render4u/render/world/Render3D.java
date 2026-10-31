@@ -1,14 +1,14 @@
 package dev.render4u.render.world;
 
 import dev.render4u.render.display.DisplayUtil;
+import dev.render4u.render.display.element.DrawElement;
+import dev.render4u.render.display.element.DrawRect;
 import dev.render4u.render.display.shape.RoundedRect;
 import dev.render4u.render.font.ttf.TTFFont;
 import dev.render4u.render.font.ttf.TTFFontManager;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
@@ -32,6 +32,18 @@ public final class Render3D {
     private static final Vector4f CLIP = new Vector4f();
     private static final Vector2f SCRATCH_A = new Vector2f();
     private static final Vector2f SCRATCH_B = new Vector2f();
+
+    private static final int[][] BOX_EDGES = {
+            {0, 1}, {1, 3}, {3, 2}, {2, 0},
+            {4, 5}, {5, 7}, {7, 6}, {6, 4},
+            {0, 4}, {1, 5}, {2, 6}, {3, 7}
+    };
+    private static final Vector4f[] CLIP_CORNERS = new Vector4f[8];
+    static {
+        for (int i = 0; i < 8; i++) {
+            CLIP_CORNERS[i] = new Vector4f();
+        }
+    }
 
     private static Vec3 cameraPos = Vec3.ZERO;
     private static boolean frameCacheValid;
@@ -68,25 +80,82 @@ public final class Render3D {
         return project(pos.x, pos.y, pos.z);
     }
 
-    public static @Nullable ScreenBox projectBox(AABB box) {
-        float minX = Float.MAX_VALUE;
-        float minY = Float.MAX_VALUE;
-        float maxX = -Float.MAX_VALUE;
-        float maxY = -Float.MAX_VALUE;
-        boolean anyVisible = false;
-
-        for (int i = 0; i < 8; i++) {
-            if (!projectInto(cornerX(box, i), cornerY(box, i), cornerZ(box, i), SCRATCH_A)) {
-                continue;
-            }
-            anyVisible = true;
-            minX = Math.min(minX, SCRATCH_A.x);
-            minY = Math.min(minY, SCRATCH_A.y);
-            maxX = Math.max(maxX, SCRATCH_A.x);
-            maxY = Math.max(maxY, SCRATCH_A.y);
+    public static @Nullable ScreenBox projectBox(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
+        if (!prepare(Minecraft.getInstance())) {
+            return null;
         }
 
-        return anyVisible ? new ScreenBox(minX, minY, maxX, maxY) : null;
+        float nearW = 0.05f;
+        boolean anyInFront = false;
+
+        for (int i = 0; i < 8; i++) {
+            double cx = (i & 1) == 0 ? minX : maxX;
+            double cy = (i & 4) == 0 ? minY : maxY;
+            double cz = (i & 2) == 0 ? minZ : maxZ;
+
+            Vector4f c = CLIP_CORNERS[i];
+            c.set((float) (cx - cameraPos.x), (float) (cy - cameraPos.y), (float) (cz - cameraPos.z), 1.0f);
+            VIEW_PROJECTION.transform(c);
+            if (c.w > nearW) {
+                anyInFront = true;
+            }
+        }
+
+        if (!anyInFront) {
+            return null;
+        }
+
+        float sMinX = Float.MAX_VALUE;
+        float sMinY = Float.MAX_VALUE;
+        float sMaxX = -Float.MAX_VALUE;
+        float sMaxY = -Float.MAX_VALUE;
+        boolean anyPoint = false;
+
+        float dispW = DisplayUtil.width();
+        float dispH = DisplayUtil.height();
+
+        for (int i = 0; i < 8; i++) {
+            Vector4f c = CLIP_CORNERS[i];
+            if (c.w > nearW) {
+                float invW = 1.0f / c.w;
+                float sx = (c.x * invW * 0.5f + 0.5f) * dispW;
+                float sy = (1.0f - (c.y * invW * 0.5f + 0.5f)) * dispH;
+                sMinX = Math.min(sMinX, sx);
+                sMinY = Math.min(sMinY, sy);
+                sMaxX = Math.max(sMaxX, sx);
+                sMaxY = Math.max(sMaxY, sy);
+                anyPoint = true;
+            }
+        }
+
+        for (int[] edge : BOX_EDGES) {
+            Vector4f a = CLIP_CORNERS[edge[0]];
+            Vector4f b = CLIP_CORNERS[edge[1]];
+
+            boolean aIn = a.w > nearW;
+            boolean bIn = b.w > nearW;
+
+            if (aIn ^ bIn) {
+                float t = (nearW - a.w) / (b.w - a.w);
+                float ix = a.x + t * (b.x - a.x);
+                float iy = a.y + t * (b.y - a.y);
+                float invW = 1.0f / nearW;
+                float sx = (ix * invW * 0.5f + 0.5f) * dispW;
+                float sy = (1.0f - (iy * invW * 0.5f + 0.5f)) * dispH;
+
+                sMinX = Math.min(sMinX, sx);
+                sMinY = Math.min(sMinY, sy);
+                sMaxX = Math.max(sMaxX, sx);
+                sMaxY = Math.max(sMaxY, sy);
+                anyPoint = true;
+            }
+        }
+
+        return anyPoint ? new ScreenBox(sMinX, sMinY, sMaxX, sMaxY) : null;
+    }
+
+    public static @Nullable ScreenBox projectBox(AABB box) {
+        return projectBox(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ);
     }
 
     public static void drawLine(GuiGraphicsExtractor graphics, float x1, float y1, float x2, float y2, int color, float thickness) {
@@ -108,23 +177,113 @@ public final class Render3D {
         graphics.pose().popMatrix();
     }
 
-    public static void drawTracer(GuiGraphicsExtractor graphics, double targetX, double targetY, double targetZ, int color, float thickness) {
-        Vector2f target = project(targetX, targetY, targetZ);
+    public static void draw2DLine(GuiGraphicsExtractor graphics, double pos3D_X, double pos3D_Y, double pos3D_Z, float screen2D_X, float screen2D_Y, int color, float thickness) {
+        Vector2f target = project(pos3D_X, pos3D_Y, pos3D_Z);
         if (target == null) {
             return;
         }
-
-        float originX = DisplayUtil.width() * 0.5F;
-        float originY = DisplayUtil.height() * 0.5F;
-        drawLine(graphics, originX, originY, target.x, target.y, color, thickness);
+        drawLine(graphics, screen2D_X, screen2D_Y, target.x, target.y, color, thickness);
     }
 
-    public static void drawTracer(GuiGraphicsExtractor graphics, Vec3 target, int color, float thickness) {
-        drawTracer(graphics, target.x, target.y, target.z, color, thickness);
+    public static void draw2DLine(GuiGraphicsExtractor graphics, float pos3D_X, float pos3D_Y, float pos3D_Z, float screen2D_X, float screen2D_Y, int color, float thickness) {
+        draw2DLine(graphics, (double) pos3D_X, (double) pos3D_Y, (double) pos3D_Z, screen2D_X, screen2D_Y, color, thickness);
     }
 
-    public static void drawBox2D(GuiGraphicsExtractor graphics, AABB box, int color, float thickness) {
-        ScreenBox screen = projectBox(box);
+    public static void draw3DLine(GuiGraphicsExtractor graphics, double x1, double y1, double z1, double x2, double y2, double z2, int color, float thickness) {
+        Vector2f p1 = project(x1, y1, z1);
+        Vector2f p2 = project(x2, y2, z2);
+        if (p1 == null || p2 == null) {
+            return;
+        }
+        drawLine(graphics, p1.x, p1.y, p2.x, p2.y, color, thickness);
+    }
+
+    public static void draw3DLine(GuiGraphicsExtractor graphics, float x1, float y1, float z1, float x2, float y2, float z2, int color, float thickness) {
+        draw3DLine(graphics, (double) x1, (double) y1, (double) z1, (double) x2, (double) y2, (double) z2, color, thickness);
+    }
+
+    public static void draw2DElement(GuiGraphicsExtractor graphics, double pos3D_X, double pos3D_Y, double pos3D_Z, DrawElement element, float scale2D_X, float scale2D_Y) {
+        if (element == null) {
+            return;
+        }
+        Vector2f screen = project(pos3D_X, pos3D_Y, pos3D_Z);
+        if (screen == null) {
+            return;
+        }
+
+        graphics.pose().pushMatrix();
+        graphics.pose().translate(screen.x, screen.y);
+        if (scale2D_X != 1.0F || scale2D_Y != 1.0F) {
+            graphics.pose().scale(scale2D_X, scale2D_Y);
+        }
+        if (element instanceof DrawRect rect) {
+            rect.render(graphics, -rect.width * 0.5F, -rect.height * 0.5F);
+        } else {
+            element.render(graphics, 0.0F, 0.0F);
+        }
+        graphics.pose().popMatrix();
+    }
+
+    public static void draw2DElement(GuiGraphicsExtractor graphics, float pos3D_X, float pos3D_Y, float pos3D_Z, DrawElement element, float scale2D_X, float scale2D_Y) {
+        draw2DElement(graphics, (double) pos3D_X, (double) pos3D_Y, (double) pos3D_Z, element, scale2D_X, scale2D_Y);
+    }
+
+    public static void draw2DElement(GuiGraphicsExtractor graphics, double pos3D_X, double pos3D_Y, double pos3D_Z, DrawElement element) {
+        draw2DElement(graphics, pos3D_X, pos3D_Y, pos3D_Z, element, 1.0F, 1.0F);
+    }
+
+    public static void draw3DBox(GuiGraphicsExtractor graphics, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, int color, float thickness) {
+        Vector2f[] points = new Vector2f[8];
+        for (int i = 0; i < 8; i++) {
+            double cx = (i & 1) == 0 ? minX : maxX;
+            double cy = (i & 4) == 0 ? minY : maxY;
+            double cz = (i & 2) == 0 ? minZ : maxZ;
+            points[i] = project(cx, cy, cz);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            int next = (i + 1) & 3;
+            drawProjectedEdge(graphics, points[i], points[next], color, thickness);
+            drawProjectedEdge(graphics, points[i + 4], points[next + 4], color, thickness);
+            drawProjectedEdge(graphics, points[i], points[i + 4], color, thickness);
+        }
+    }
+
+    public static void draw3DBox(GuiGraphicsExtractor graphics, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int color, float thickness) {
+        draw3DBox(graphics, (double) minX, (double) minY, (double) minZ, (double) maxX, (double) maxY, (double) maxZ, color, thickness);
+    }
+
+    public static void draw3DBoxBySize(GuiGraphicsExtractor graphics, double x, double y, double z, double sizeX, double sizeY, double sizeZ, int color, float thickness) {
+        draw3DBox(graphics, x, y, z, x + sizeX, y + sizeY, z + sizeZ, color, thickness);
+    }
+
+    public static void draw3DBox(GuiGraphicsExtractor graphics, Matrix4f transform, int color, float thickness) {
+        Vector2f[] points = new Vector2f[8];
+        Vector4f v = new Vector4f();
+        for (int i = 0; i < 8; i++) {
+            float x = (i & 1) == 0 ? -0.5F : 0.5F;
+            float y = (i & 4) == 0 ? -0.5F : 0.5F;
+            float z = (i & 2) == 0 ? -0.5F : 0.5F;
+            v.set(x, y, z, 1.0F);
+            transform.transform(v);
+            points[i] = project(v.x, v.y, v.z);
+        }
+        for (int i = 0; i < 4; i++) {
+            int next = (i + 1) & 3;
+            drawProjectedEdge(graphics, points[i], points[next], color, thickness);
+            drawProjectedEdge(graphics, points[i + 4], points[next + 4], color, thickness);
+            drawProjectedEdge(graphics, points[i], points[i + 4], color, thickness);
+        }
+    }
+
+    private static void drawProjectedEdge(GuiGraphicsExtractor graphics, @Nullable Vector2f p1, @Nullable Vector2f p2, int color, float thickness) {
+        if (p1 != null && p2 != null) {
+            drawLine(graphics, p1.x, p1.y, p2.x, p2.y, color, thickness);
+        }
+    }
+
+    public static void drawBox2D(GuiGraphicsExtractor graphics, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, int color, float thickness) {
+        ScreenBox screen = projectBox(minX, minY, minZ, maxX, maxY, maxZ);
         if (screen == null) {
             return;
         }
@@ -135,8 +294,8 @@ public final class Render3D {
         drawLine(graphics, screen.minX, screen.maxY, screen.minX, screen.minY, color, thickness);
     }
 
-    public static void drawCornerBox2D(GuiGraphicsExtractor graphics, AABB box, int color, float thickness, float cornerLength) {
-        ScreenBox screen = projectBox(box);
+    public static void drawCornerBox2D(GuiGraphicsExtractor graphics, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, int color, float thickness, float cornerLength) {
+        ScreenBox screen = projectBox(minX, minY, minZ, maxX, maxY, maxZ);
         if (screen == null) {
             return;
         }
@@ -160,17 +319,30 @@ public final class Render3D {
         drawLine(graphics, x2, y2, x2, y2 - len, color, thickness);
     }
 
-    public static void drawBox3D(GuiGraphicsExtractor graphics, AABB box, int color, float thickness) {
-        for (int i = 0; i < 4; i++) {
-            int next = (i + 1) & 3;
-            edge(graphics, box, i, next, color, thickness);
-            edge(graphics, box, i + 4, next + 4, color, thickness);
-            edge(graphics, box, i, i + 4, color, thickness);
-        }
+    public static void drawTracer(GuiGraphicsExtractor graphics, double targetX, double targetY, double targetZ, int color, float thickness) {
+        float originX = DisplayUtil.width() * 0.5F;
+        float originY = DisplayUtil.height() * 0.5F;
+        draw2DLine(graphics, targetX, targetY, targetZ, originX, originY, color, thickness);
     }
 
-    public static void drawBlockBox3D(GuiGraphicsExtractor graphics, BlockPos pos, int color, float thickness) {
-        drawBox3D(graphics, new AABB(pos), color, thickness);
+    public static void drawTracer(GuiGraphicsExtractor graphics, Vec3 target, int color, float thickness) {
+        drawTracer(graphics, target.x, target.y, target.z, color, thickness);
+    }
+
+    public static void drawTracer(GuiGraphicsExtractor graphics, double targetX, double targetY, double targetZ, float originScreenX, float originScreenY, int color, float thickness) {
+        draw2DLine(graphics, targetX, targetY, targetZ, originScreenX, originScreenY, color, thickness);
+    }
+
+    public static void drawBox2D(GuiGraphicsExtractor graphics, AABB box, int color, float thickness) {
+        drawBox2D(graphics, box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ, color, thickness);
+    }
+
+    public static void drawCornerBox2D(GuiGraphicsExtractor graphics, AABB box, int color, float thickness, float cornerLength) {
+        drawCornerBox2D(graphics, box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ, color, thickness, cornerLength);
+    }
+
+    public static void drawBox3D(GuiGraphicsExtractor graphics, AABB box, int color, float thickness) {
+        draw3DBox(graphics, box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ, color, thickness);
     }
 
     public static void drawNametag(GuiGraphicsExtractor graphics, TTFFont font, String text, double x, double y, double z, float size, int textColor, int bgColor) {
@@ -208,35 +380,11 @@ public final class Render3D {
         drawNametag(graphics, formatted, x, y, z, 0xFFFFFFFF, color);
     }
 
-    public static AABB entityBox(Entity entity, float partialTick) {
-        Vec3 lerped = entity.getPosition(partialTick);
-        return entity.getBoundingBox().move(lerped.x - entity.getX(), lerped.y - entity.getY(), lerped.z - entity.getZ());
-    }
-
-    public static void drawEntityBox2D(GuiGraphicsExtractor graphics, Entity entity, float partialTick, int color, float thickness) {
-        drawBox2D(graphics, entityBox(entity, partialTick), color, thickness);
-    }
-
-    public static void drawEntityCornerBox2D(GuiGraphicsExtractor graphics, Entity entity, float partialTick, int color, float thickness, float cornerLength) {
-        drawCornerBox2D(graphics, entityBox(entity, partialTick), color, thickness, cornerLength);
-    }
-
-    public static void drawEntityTracer(GuiGraphicsExtractor graphics, Entity entity, float partialTick, int color, float thickness) {
-        Vec3 center = entityBox(entity, partialTick).getCenter();
-        drawTracer(graphics, center.x, center.y, center.z, color, thickness);
-    }
-
-    public static void drawEntityNametag(GuiGraphicsExtractor graphics, Entity entity, float partialTick, int textColor, int bgColor) {
-        AABB box = entityBox(entity, partialTick);
-        Vec3 center = box.getCenter();
-        drawNametag(graphics, entity.getName().getString(), center.x, box.maxY + 0.3, center.z, textColor, bgColor);
-    }
-
     private static boolean prepare(Minecraft minecraft) {
         if (frameCacheValid) {
             return true;
         }
-        if (minecraft.gameRenderer == null) {
+        if (minecraft == null || minecraft.gameRenderer == null) {
             return false;
         }
         Camera camera = minecraft.gameRenderer.mainCamera();
@@ -268,24 +416,5 @@ public final class Render3D {
         dest.set((CLIP.x * invW * 0.5F + 0.5F) * DisplayUtil.width(),
                 (1.0F - (CLIP.y * invW * 0.5F + 0.5F)) * DisplayUtil.height());
         return true;
-    }
-
-    private static void edge(GuiGraphicsExtractor graphics, AABB box, int from, int to, int color, float thickness) {
-        if (projectInto(cornerX(box, from), cornerY(box, from), cornerZ(box, from), SCRATCH_A)
-                && projectInto(cornerX(box, to), cornerY(box, to), cornerZ(box, to), SCRATCH_B)) {
-            drawLine(graphics, SCRATCH_A.x, SCRATCH_A.y, SCRATCH_B.x, SCRATCH_B.y, color, thickness);
-        }
-    }
-
-    private static double cornerX(AABB box, int corner) {
-        return (corner & 1) == 0 ? box.minX : box.maxX;
-    }
-
-    private static double cornerY(AABB box, int corner) {
-        return (corner & 4) == 0 ? box.minY : box.maxY;
-    }
-
-    private static double cornerZ(AABB box, int corner) {
-        return (corner & 2) == 0 ? box.minZ : box.maxZ;
     }
 }

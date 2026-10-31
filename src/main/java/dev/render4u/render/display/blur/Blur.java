@@ -324,6 +324,13 @@ public final class Blur extends RectBuilder<Blur> {
     }
 
     private static int toScreen(int gui) {
+        try {
+            Minecraft mc = Minecraft.getInstance();
+            if (mc != null && mc.getWindow() != null) {
+                return Math.round(gui * (float) mc.getWindow().getGuiScale());
+            }
+        } catch (Throwable ignored) {
+        }
         return Math.round(gui * DisplayUtil.SCALE);
     }
 
