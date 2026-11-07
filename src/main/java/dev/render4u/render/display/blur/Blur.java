@@ -191,8 +191,11 @@ public final class Blur extends RectBuilder<Blur> {
     private static final float MAX_RADIUS = 31.5F;
     private static final float OPACITY_STEPS = 31.0F;
 
+    public static boolean globalGlass = true;
+
     private Type type = Type.GAUSSIAN;
     private int strength = 3;
+    private boolean glass = true;
 
     private Blur() {
         corners(0, 0, 0, 0);
@@ -388,7 +391,21 @@ public final class Blur extends RectBuilder<Blur> {
         return tint(color.argb());
     }
 
+    public Blur glass(boolean glass) {
+        this.glass = glass;
+        return self();
+    }
+
+    public boolean isGlass() {
+        return glass;
+    }
+
     public RenderState build(GuiGraphicsExtractor graphics) {
+        float px = this.x;
+        float py = this.y;
+        if (dragId != null) {
+            dev.render4u.render.drag.DragManager.INSTANCE.register(dragId, px, py, width, height, 0.0f, true);
+        }
         float maxRadius = Math.min(Math.min(width, height) * 0.5F, MAX_RADIUS);
         int topLeft = packRadius(radiusTopLeft, maxRadius, 2.0F, 6);
         int topRight = packRadius(radiusTopRight, maxRadius, 2.0F, 6);
@@ -396,10 +413,13 @@ public final class Blur extends RectBuilder<Blur> {
         int bottomLeft = packRadius(radiusBottomLeft, maxRadius, 2.0F, 6);
         int opacity = Math.round(alpha * OPACITY_STEPS);
         Key key = new Key(type, strength);
+        int level = type.outputLevel(strength) & 3;
+        int glassBit = (glass && globalGlass) ? 1 : 0;
+        int paramsTop = topLeft | (topRight << 6) | (level << 12) | (glassBit << 14) | ((opacity & 1) << 15);
+        int paramsBottom = bottomLeft | (bottomRight << 6) | ((opacity >> 1) << 12);
         return new RenderState(
-                key, DisplayBatcher.pose(graphics), x, y, width, height,
-                topLeft | topRight << 6 | type.outputLevel(strength) << 12 | (opacity & 1) << 15,
-                bottomLeft | bottomRight << 6 | (opacity >> 1) << 12,
+                key, DisplayBatcher.pose(graphics), px, py, width, height,
+                paramsTop, paramsBottom,
                 colorTopLeft, colorTopRight, colorBottomRight, colorBottomLeft,
                 graphics.scissorStack.peek()
         );

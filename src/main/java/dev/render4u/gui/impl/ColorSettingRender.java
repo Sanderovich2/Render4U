@@ -14,8 +14,6 @@ import java.awt.Color;
 
 public class ColorSettingRender extends SettingRender {
     private static final Identifier HUE_TEXTURE = Identifier.fromNamespaceAndPath("render4u", "textures/gui/hue.png");
-    public static final float ROW_H = 24.0f;
-    public static final float EXPANDED_H = 105.0f;
 
     private ColorSetting open = null;
     private String activePart = "";
@@ -42,17 +40,17 @@ public class ColorSettingRender extends SettingRender {
     public float height(Setting<?> s, float k) {
         ColorSetting cs = (ColorSetting) s;
         float openProgress = gui.getAnim("cp_open_" + cs.getName(), open == cs ? 1.0f : 0.0f);
-        float extra = (EXPANDED_H + (cs.hasAlpha() ? 18.0f : 0.0f)) * k;
-        return (ROW_H * k + 6.0f * k) + extra * openProgress;
+        float extra = (105.0f + (cs.hasAlpha() ? 18.0f : 0.0f)) * k;
+        return (30.0f * k) + extra * openProgress;
     }
 
     private void layout(ColorSetting cs, float x, float y, float w, float k) {
         prevW = 32.0f * k;
         prevH = 14.0f * k;
         prevX = x + w - prevW;
-        prevY = y + (ROW_H * k - prevH) / 2.0f;
+        prevY = y + (24.0f * k - prevH) / 2.0f;
 
-        float topY = y + ROW_H * k + 4.0f * k;
+        float topY = y + 28.0f * k;
         svX = x;
         svW = w;
         svH = 55.0f * k;
@@ -116,7 +114,7 @@ public class ColorSettingRender extends SettingRender {
     public boolean click(Setting<?> s, float mx, float my, float x, float y, float w, float k, int button) {
         ColorSetting cs = (ColorSetting) s;
         layout(cs, x, y, w, k);
-        if (my >= y && my <= y + ROW_H * k && mx >= x && mx <= x + w) {
+        if (my >= y && my <= y + 24.0f * k && mx >= x && mx <= x + w) {
             open = (open == cs) ? null : cs;
             activePart = "";
             return true;

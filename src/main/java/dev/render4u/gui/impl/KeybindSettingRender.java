@@ -13,7 +13,6 @@ import dev.render4u.util.color.ColorMath;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class KeybindSettingRender extends SettingRender {
-    public static final float ROW_H = 22.0f;
     private KeybindSetting binding = null;
 
     public KeybindSettingRender(ClickGuiScreen gui) {
@@ -46,13 +45,13 @@ public class KeybindSettingRender extends SettingRender {
 
     @Override
     public float height(Setting<?> s, float k) {
-        return ROW_H * k + 6.0f * k;
+        return 28.0f * k;
     }
 
     @Override
     public void render(GuiGraphicsExtractor g, Setting<?> s, float x, float y, float w, float k, float a, float mx, float my, float dt) {
         KeybindSetting ks = (KeybindSetting) s;
-        float rowH = ROW_H * k;
+        float rowH = 22.0f * k;
 
         boolean isBind = (binding == ks);
         String bindText = isBind ? "..." : ks.getKeyName();
@@ -84,7 +83,7 @@ public class KeybindSettingRender extends SettingRender {
     @Override
     public boolean click(Setting<?> s, float mx, float my, float x, float y, float w, float k, int button) {
         KeybindSetting ks = (KeybindSetting) s;
-        float rowH = ROW_H * k;
+        float rowH = 22.0f * k;
 
         boolean isBind = (binding == ks);
         String bindText = isBind ? "..." : ks.getKeyName();

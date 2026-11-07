@@ -17,7 +17,11 @@ float cornerRadius() {
 }
 
 int blurLevel() {
-    return (radii.x >> 12) & 7;
+    return (radii.x >> 12) & 3;
+}
+
+bool isGlass() {
+    return ((radii.x >> 14) & 1) == 1;
 }
 
 float opacity() {
@@ -25,17 +29,47 @@ float opacity() {
     return float(steps) / 31.0;
 }
 
+vec3 sampleBlur(sampler2D tex, vec2 uv) {
+    vec2 texel = 1.0 / vec2(textureSize(tex, 0));
+    vec2 halfTexel = 0.5 * texel;
+    uv = clamp(uv, halfTexel, 1.0 - halfTexel);
+    vec2 h = texel * 0.85;
+
+    vec3 sum = texture(tex, uv + vec2(-h.x * 2.0, 0.0)).rgb;
+    sum += texture(tex, uv + vec2(h.x * 2.0, 0.0)).rgb;
+    sum += texture(tex, uv + vec2(0.0, h.y * 2.0)).rgb;
+    sum += texture(tex, uv + vec2(0.0, -h.y * 2.0)).rgb;
+    sum += texture(tex, uv + vec2(-h.x, h.y)).rgb * 2.0;
+    sum += texture(tex, uv + vec2(h.x, h.y)).rgb * 2.0;
+    sum += texture(tex, uv + vec2(h.x, -h.y)).rgb * 2.0;
+    sum += texture(tex, uv + vec2(-h.x, -h.y)).rgb * 2.0;
+    return sum / 12.0;
+}
+
 void main() {
     float r = cornerRadius();
     vec2 q = abs(localPos) - halfSize + r;
     float d = min(max(q.x, q.y), 0.0) + length(max(q, 0.0)) - r;
-    float coverage = clamp(0.5 - d / max(fwidth(d), 1e-4), 0.0, 1.0);
+    float aa = max(fwidth(d), 1e-4);
+    float coverage = clamp(0.5 - d / aa, 0.0, 1.0);
     float a = coverage * opacity();
     if (a <= 0.0) {
         discard;
     }
-    vec2 uv = gl_FragCoord.xy / (vec2(textureSize(Sampler0, 0)) * float(1 << blurLevel()));
-    vec3 color = mix(texture(Sampler0, uv).rgb, vertexColor.rgb, vertexColor.a);
-    float dither = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453) - 0.5;
-    fragColor = vec4(color + dither / 255.0, a);
+
+    vec2 screenSize = vec2(textureSize(Sampler0, 0)) * float(1 << blurLevel());
+    vec2 screenUV = gl_FragCoord.xy / screenSize;
+
+    vec3 color = sampleBlur(Sampler0, screenUV);
+
+    if (isGlass()) {
+        float luma = dot(color, vec3(0.2126, 0.7152, 0.0722));
+        color = clamp(mix(vec3(luma), color, 1.20), 0.0, 1.0);
+    }
+
+    if (vertexColor.a > 0.0) {
+        color = mix(color, vertexColor.rgb, vertexColor.a);
+    }
+
+    fragColor = vec4(color, a);
 }

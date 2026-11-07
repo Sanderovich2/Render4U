@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class GuiRendererMixin {
     @Inject(method = "draw", at = @At("HEAD"))
     private void render4u$processBlur(CallbackInfo ci) {
+        dev.render4u.render.drag.DragManager.INSTANCE.update();
         Blur.process();
     }
 

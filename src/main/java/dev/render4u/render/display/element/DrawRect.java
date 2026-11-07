@@ -20,6 +20,8 @@ public class DrawRect implements DrawElement {
 
     public int blur = 0;
     public int blurTint = 0;
+    public boolean glass = true;
+    public String dragId;
 
     public DrawOutline outline;
     public DrawRounding rounding;
@@ -114,6 +116,16 @@ public class DrawRect implements DrawElement {
         return this;
     }
 
+    public DrawRect draggable(String dragId) {
+        this.dragId = dragId;
+        return this;
+    }
+
+    public DrawRect glass(boolean glass) {
+        this.glass = glass;
+        return this;
+    }
+
     public DrawRect outline(DrawOutline outline) {
         this.outline = outline;
         return this;
@@ -169,6 +181,9 @@ public class DrawRect implements DrawElement {
     }
 
     public void render(GuiGraphicsExtractor graphics, float posX, float posY, float overrideWidth, float overrideHeight) {
+        if (dragId != null) {
+            dev.render4u.render.drag.DragManager.INSTANCE.register(dragId, posX, posY, overrideWidth, overrideHeight, 0.0f, true);
+        }
         this.x = posX;
         this.y = posY;
         if (overrideWidth <= 0.0F || overrideHeight <= 0.0F || alpha <= 0.0F) {
@@ -188,6 +203,7 @@ public class DrawRect implements DrawElement {
             Blur b = Blur.of(posX, posY, overrideWidth, overrideHeight)
                     .radius(rTL, rTR, rBR, rBL)
                     .strength(blur)
+                    .glass(glass)
                     .alpha(alpha);
             if (blurTint != 0) {
                 b.tint(blurTint);

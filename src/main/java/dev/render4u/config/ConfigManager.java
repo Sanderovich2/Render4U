@@ -72,6 +72,9 @@ public final class ConfigManager {
                     }
                 }
             }
+            if (root.has("dragOffsets") && root.get("dragOffsets").isJsonObject()) {
+                dev.render4u.render.drag.DragManager.INSTANCE.fromJson(root.getAsJsonObject("dragOffsets"));
+            }
             if (root.has("modules") && root.get("modules").isJsonObject()) {
                 JsonObject modsObj = root.getAsJsonObject("modules");
                 for (Module module : ModuleManager.getModules()) {
@@ -145,6 +148,7 @@ public final class ConfigManager {
             if (Lang.current != null) {
                 root.addProperty("language", Lang.current.name());
             }
+            root.add("dragOffsets", dev.render4u.render.drag.DragManager.INSTANCE.toJson());
             JsonObject modsObj = new JsonObject();
             for (Module module : ModuleManager.getModules()) {
                 JsonObject modObj = new JsonObject();

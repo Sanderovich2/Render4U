@@ -12,17 +12,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class ProfilePopupRender {
-    public static final float POP_W = 246.0f;
-    public static final float POP_H = 182.0f;
-    public static final float POP_PAD = 14.0f;
-
-    public static final float POP_ROW_Y = 48.0f;
-    public static final float POP_ROW_H = 26.0f;
-    public static final float POP_SLIDER_Y = 118.0f;
-    public static final float POP_VIEW_Y = 144.0f;
-    public static final float POP_BTN_W = 66.0f;
-    public static final float POP_BTN_H = 22.0f;
-
     private final ClickGuiScreen gui;
     private boolean sliderDragging = false;
     private float dragStartMx;
@@ -38,8 +27,8 @@ public class ProfilePopupRender {
     }
 
     public boolean isHovering(float winX, float profY, float k, float mx, float my) {
-        float pw = POP_W * k;
-        float ph = POP_H * k;
+        float pw = 246.0f * k;
+        float ph = 182.0f * k;
         float px = winX + 12.0f * k;
         float py = profY - ph - 10.0f * k;
         return mx >= px && mx <= px + pw && my >= py && my <= py + ph;
@@ -51,20 +40,20 @@ public class ProfilePopupRender {
 
         float easeP = ClickGuiScreen.easeOutCubic(a);
         float scaleP = 0.95f + 0.05f * easeP;
-        float pw = POP_W * k * scaleP;
-        float ph = POP_H * k * scaleP;
+        float pw = 246.0f * k * scaleP;
+        float ph = 182.0f * k * scaleP;
         float px = winX + 12.0f * k;
         float slide = (1.0f - easeP) * 10.0f * k;
         float py = profY - ph - 10.0f * k + slide;
-        float pad = POP_PAD * k;
+        float pad = 14.0f * k;
 
         int accentPrimary = Theme.current.getFirstColor();
         DrawRect.create()
                 .bounds(px, py, pw, ph)
                 .rounding(10.0f * k)
-                .bg(0xF40F131C)
-                .shadow(20.0f * k, 0.0f, 0.0f, 0xDD000000)
-                .outline(1.2f, 0x3B4A5C7E)
+                .bg(0xF610131E)
+                .shadow(24.0f * k, 0.0f, 6.0f * k, 0xDD000000)
+                .outline(1.0f, 0x2A3548)
                 .alpha(a)
                 .render(g);
         float avSize = 24.0f * k;
@@ -86,27 +75,27 @@ public class ProfilePopupRender {
         Draw.line(g, ccx + cr, ccy - cr, ccx - cr, ccy + cr, 1.3f * k, ColorMath.multiplyAlpha(closeCol, a));
         Draw.rect(g, px + pad, py + 38.0f * k, pw - pad * 2.0f, 1.0f, 0.5f, ColorMath.multiplyAlpha(0x18FFFFFF, a));
         float rowW = pw - pad * 2.0f;
-        float ry0 = py + POP_ROW_Y * k;
-        boolean hov0 = (mx >= px + pad && mx <= px + pad + rowW && my >= ry0 - 4.0f * k && my <= ry0 + POP_ROW_H * k - 4.0f * k);
+        float ry0 = py + 48.0f * k;
+        boolean hov0 = (mx >= px + pad && mx <= px + pad + rowW && my >= ry0 - 4.0f * k && my <= ry0 + 22.0f * k);
         float aHov0 = gui.animValue("pop_row0_hov", hov0 ? 1.0f : 0.0f, dt, 16.0f);
         if (aHov0 > 0.01f) {
-            Draw.rect(g, px + pad, ry0 - 4.0f * k, rowW, POP_ROW_H * k, 5.0f * k, ColorMath.multiplyAlpha(0x14FFFFFF, aHov0 * a));
+            Draw.rect(g, px + pad, ry0 - 4.0f * k, rowW, 26.0f * k, 5.0f * k, ColorMath.multiplyAlpha(0x14FFFFFF, aHov0 * a));
         }
         Draw.text(g, MsdfFonts.SF_MEDIUM, Lang.tr("theme"), px + pad + 6.0f * k, ry0 + 2.0f * k, 10.0f * k, ColorMath.multiplyAlpha(0xFF9CA3AF, a));
         String themeName = Theme.current.getName();
         float tw = MsdfFonts.SF_MEDIUM.width(themeName, 10.0f * k);
         Draw.text(g, MsdfFonts.SF_MEDIUM, themeName, px + pw - pad - 6.0f * k - tw, ry0 + 2.0f * k, 10.0f * k, ColorMath.multiplyAlpha(ColorMath.lerp(0xFFE2E8F0, accentPrimary, aHov0), a));
-        float ry1 = py + (POP_ROW_Y + POP_ROW_H) * k;
-        boolean hov1 = (mx >= px + pad && mx <= px + pad + rowW && my >= ry1 - 4.0f * k && my <= ry1 + POP_ROW_H * k - 4.0f * k);
+        float ry1 = py + 74.0f * k;
+        boolean hov1 = (mx >= px + pad && mx <= px + pad + rowW && my >= ry1 - 4.0f * k && my <= ry1 + 22.0f * k);
         float aHov1 = gui.animValue("pop_row1_hov", hov1 ? 1.0f : 0.0f, dt, 16.0f);
         if (aHov1 > 0.01f) {
-            Draw.rect(g, px + pad, ry1 - 4.0f * k, rowW, POP_ROW_H * k, 5.0f * k, ColorMath.multiplyAlpha(0x14FFFFFF, aHov1 * a));
+            Draw.rect(g, px + pad, ry1 - 4.0f * k, rowW, 26.0f * k, 5.0f * k, ColorMath.multiplyAlpha(0x14FFFFFF, aHov1 * a));
         }
         Draw.text(g, MsdfFonts.SF_MEDIUM, Lang.tr("language"), px + pad + 6.0f * k, ry1 + 2.0f * k, 10.0f * k, ColorMath.multiplyAlpha(0xFF9CA3AF, a));
         String langName = Lang.current.getDisplayName();
         float lw = MsdfFonts.SF_MEDIUM.width(langName, 10.0f * k);
         Draw.text(g, MsdfFonts.SF_MEDIUM, langName, px + pw - pad - 6.0f * k - lw, ry1 + 2.0f * k, 10.0f * k, ColorMath.multiplyAlpha(ColorMath.lerp(0xFFE2E8F0, accentPrimary, aHov1), a));
-        float slY = py + POP_SLIDER_Y * k;
+        float slY = py + 118.0f * k;
         float slX = px + pad + 6.0f * k;
         float slW = pw - pad * 2.0f - 12.0f * k;
 
@@ -126,11 +115,11 @@ public class ProfilePopupRender {
         float knobR = sliderDragging ? 5.2f * k : 4.2f * k;
         Draw.circle(g, knobX, knobY, knobR, ColorMath.multiplyAlpha(0xFFFFFFFF, a));
         Draw.circleRing(g, knobX, knobY, knobR, 1.0f * k, ColorMath.multiplyAlpha(accentPrimary, a));
-        float vy = py + POP_VIEW_Y * k;
+        float vy = py + 144.0f * k;
         Draw.text(g, MsdfFonts.SF_MEDIUM, Lang.tr("guiView"), slX, vy + 4.5f * k, 9.5f * k, ColorMath.multiplyAlpha(0xFF9CA3AF, a));
 
-        float btnW = POP_BTN_W * k;
-        float btnH = POP_BTN_H * k;
+        float btnW = 66.0f * k;
+        float btnH = 22.0f * k;
         float btnFullX = px + pw - pad - btnW * 2.0f - 6.0f * k;
         float btnCompX = px + pw - pad - btnW;
         boolean fullActive = !ClickGuiScreen.compact;
@@ -159,11 +148,11 @@ public class ProfilePopupRender {
 
     public boolean handleClick(float winX, float winY, float sidebarW, float winH, float profY,
                              float k, float mx, float my, int button) {
-        float pw = POP_W * k;
-        float ph = POP_H * k;
+        float pw = 246.0f * k;
+        float ph = 182.0f * k;
         float px = winX + 12.0f * k;
         float py = profY - ph - 10.0f * k;
-        float pad = POP_PAD * k;
+        float pad = 14.0f * k;
         if (mx < px || mx > px + pw || my < py || my > py + ph) {
             gui.setProfilePopupOpen(false);
             return true;
@@ -177,22 +166,22 @@ public class ProfilePopupRender {
             return true;
         }
         float rowW = pw - pad * 2.0f;
-        float ry0 = py + POP_ROW_Y * k;
-        if (mx >= px + pad && mx <= px + pad + rowW && my >= ry0 - 4.0f * k && my <= ry0 + POP_ROW_H * k - 4.0f * k) {
+        float ry0 = py + 48.0f * k;
+        if (mx >= px + pad && mx <= px + pad + rowW && my >= ry0 - 4.0f * k && my <= ry0 + 22.0f * k) {
             int idx = Theme.ALL.indexOf(Theme.current);
             Theme next = Theme.ALL.get((idx + 1) % Theme.ALL.size());
             Theme.current = next;
             ConfigManager.save();
             return true;
         }
-        float ry1 = py + (POP_ROW_Y + POP_ROW_H) * k;
-        if (mx >= px + pad && mx <= px + pad + rowW && my >= ry1 - 4.0f * k && my <= ry1 + POP_ROW_H * k - 4.0f * k) {
+        float ry1 = py + 74.0f * k;
+        if (mx >= px + pad && mx <= px + pad + rowW && my >= ry1 - 4.0f * k && my <= ry1 + 22.0f * k) {
             Lang next = (Lang.current == Lang.RU ? Lang.EN : Lang.RU);
             Lang.setLanguage(next);
             ConfigManager.save();
             return true;
         }
-        float slY = py + POP_SLIDER_Y * k;
+        float slY = py + 118.0f * k;
         float slX = px + pad + 6.0f * k;
         float slW = pw - pad * 2.0f - 12.0f * k;
         if (mx >= slX - 6.0f * k && mx <= slX + slW + 6.0f * k && my >= slY - 10.0f * k && my <= slY + 12.0f * k) {
@@ -204,9 +193,9 @@ public class ProfilePopupRender {
             sliderDragging = true;
             return true;
         }
-        float vy = py + POP_VIEW_Y * k;
-        float btnW = POP_BTN_W * k;
-        float btnH = POP_BTN_H * k;
+        float vy = py + 144.0f * k;
+        float btnW = 66.0f * k;
+        float btnH = 22.0f * k;
         float btnFullX = px + pw - pad - btnW * 2.0f - 6.0f * k;
         float btnCompX = px + pw - pad - btnW;
 

@@ -64,8 +64,8 @@ public class ModuleCardRender {
         float drawCy = cy - cardLift;
 
         int accentPrimary = Theme.current.getFirstColor();
-        int cardBg = ColorMath.lerp(0xEE12151F, 0xF5181E2E, hov);
-        int cardBorder = ColorMath.lerp(0x262D384D, 0x4B485A7E, hov);
+        int cardBg = ColorMath.lerp(0xB8121624, 0xCE181F30, hov);
+        int cardBorder = ColorMath.lerp(0x222D384D, ColorMath.multiplyAlpha(accentPrimary, 0.55f), hov);
 
         DrawRect card = DrawRect.create()
                 .bounds(cx, drawCy, colW, cardH)

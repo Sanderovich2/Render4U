@@ -11,9 +11,6 @@ import dev.render4u.util.color.ColorMath;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class ModeSettingRender extends SettingRender {
-    public static final float CHIP_H = 18.0f;
-    public static final float GAP = 5.0f;
-
     public ModeSettingRender(ClickGuiScreen gui) {
         super(gui);
     }
@@ -22,8 +19,8 @@ public class ModeSettingRender extends SettingRender {
     public float height(Setting<?> s, float k) {
         ModeSetting ms = (ModeSetting) s;
         float labelH = 14.0f * k;
-        float chipH = CHIP_H * k;
-        float gap = GAP * k;
+        float chipH = 18.0f * k;
+        float gap = 5.0f * k;
         float innerW = 212.0f * k;
         float curX = 0;
         int rows = 1;
@@ -45,8 +42,8 @@ public class ModeSettingRender extends SettingRender {
     public void render(GuiGraphicsExtractor g, Setting<?> s, float x, float y, float w, float k, float a, float mx, float my, float dt) {
         ModeSetting ms = (ModeSetting) s;
         float labelH = 14.0f * k;
-        float chipH = CHIP_H * k;
-        float gap = GAP * k;
+        float chipH = 18.0f * k;
+        float gap = 5.0f * k;
         Draw.text(g, MsdfFonts.SF_MEDIUM, ms.getName(), x, y, 10.0f * k, ColorMath.multiplyAlpha(0xFFE2E8F0, a));
 
         float curX = x;
@@ -89,8 +86,8 @@ public class ModeSettingRender extends SettingRender {
     public boolean click(Setting<?> s, float mx, float my, float x, float y, float w, float k, int button) {
         ModeSetting ms = (ModeSetting) s;
         float labelH = 14.0f * k;
-        float chipH = CHIP_H * k;
-        float gap = GAP * k;
+        float chipH = 18.0f * k;
+        float gap = 5.0f * k;
 
         float curX = x;
         float curY = y + labelH + 4.0f * k;

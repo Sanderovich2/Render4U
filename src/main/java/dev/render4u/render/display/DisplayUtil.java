@@ -30,6 +30,8 @@ public final class DisplayUtil {
     }
 
     public static void render(Minecraft minecraft, GameRenderState state) {
+        dev.render4u.render.drag.DragManager.INSTANCE.beginFrame(dev.render4u.render.drag.DragManager.Context.HUD);
+        dev.render4u.render.drag.DragManager.INSTANCE.update();
         long start = System.nanoTime();
         GuiGraphicsExtractor graphics = new GuiGraphicsExtractor(minecraft, state.guiRenderState, 0, 0);
         graphics.pose().pushMatrix();

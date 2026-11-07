@@ -12,30 +12,26 @@ import dev.render4u.util.color.ColorMath;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class BooleanSettingRender extends SettingRender {
-    public static final float ROW_H = 28.0f;
-    public static final float SWITCH_W = 28.0f;
-    public static final float SWITCH_H = 15.0f;
-
     public BooleanSettingRender(ClickGuiScreen gui) {
         super(gui);
     }
 
     @Override
     public float height(Setting<?> s, float k) {
-        return ROW_H * k + 5.0f * k;
+        return 33.0f * k;
     }
 
     @Override
     public void render(GuiGraphicsExtractor g, Setting<?> s, float x, float y, float w, float k, float a, float mx, float my, float dt) {
         BooleanSetting bs = (BooleanSetting) s;
-        float rh = ROW_H * k;
+        float rh = 28.0f * k;
 
         boolean hovered = (mx >= x && mx <= x + w && my >= y && my <= y + rh);
         float hv = gui.animValue("bshov_" + bs.getName(), hovered ? 1.0f : 0.0f, dt, 14.0f);
         float tog = gui.animValue("bstog_" + bs.getName(), bs.isEnabled() ? 1.0f : 0.0f, dt, 16.0f);
 
-        int boxBg = ColorMath.lerp(0x990F131C, 0xD01F2028, hv);
-        int boxBorder = ColorMath.lerp(0x22354258, 0x4BFFFFFF, hv);
+        int boxBg = ColorMath.lerp(0x40141824, 0x661F2436, hv);
+        int boxBorder = ColorMath.lerp(0x18FFFFFF, 0x35FFFFFF, hv);
         DrawRect.create()
                 .bounds(x, y, w, rh)
                 .rounding(7.0f * k)
@@ -48,8 +44,8 @@ public class BooleanSettingRender extends SettingRender {
         int textCol = ColorMath.lerp(0xFFCBD5E1, 0xFFFFFFFF, hv);
         Draw.text(g, MsdfFonts.SF_MEDIUM, bs.getName(), x + 10.0f * k, y + (rh - fontSize) / 2.0f, fontSize, ColorMath.multiplyAlpha(textCol, a));
 
-        float sw = SWITCH_W * k;
-        float sh = SWITCH_H * k;
+        float sw = 28.0f * k;
+        float sh = 15.0f * k;
         float sx = x + w - 10.0f * k - sw;
         float sy = y + (rh - sh) / 2.0f;
 
@@ -76,7 +72,7 @@ public class BooleanSettingRender extends SettingRender {
     @Override
     public boolean click(Setting<?> s, float mx, float my, float x, float y, float w, float k, int button) {
         BooleanSetting bs = (BooleanSetting) s;
-        float rh = ROW_H * k;
+        float rh = 28.0f * k;
         if (my >= y && my <= y + rh && mx >= x && mx <= x + w) {
             bs.toggle();
             ConfigManager.save();

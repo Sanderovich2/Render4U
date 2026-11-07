@@ -16,7 +16,6 @@ import net.minecraft.client.input.CharacterEvent;
 import net.minecraft.client.input.KeyEvent;
 
 public class StringSettingRender extends SettingRender {
-    public static final float BASE_H = 38.0f;
     private StringSetting focusedSetting = null;
 
     public StringSettingRender(ClickGuiScreen gui) {
@@ -36,7 +35,7 @@ public class StringSettingRender extends SettingRender {
 
     @Override
     public float height(Setting<?> s, float k) {
-        return BASE_H * k;
+        return 38.0f * k;
     }
 
     @Override

@@ -108,6 +108,18 @@ public final class Draw {
         Blur.of(x, y, w, h).radius(radius).strength(strength).alpha(alpha).tint(tint).render(g);
     }
 
+    public static void glass(GuiGraphicsExtractor g, float x, float y, float w, float h, float radius, int tint) {
+        Blur.of(x, y, w, h).radius(radius).strength(3).glass(true).tint(tint).render(g);
+    }
+
+    public static void glass(GuiGraphicsExtractor g, float x, float y, float w, float h, float radius, int strength, int tint) {
+        Blur.of(x, y, w, h).radius(radius).strength(strength).glass(true).tint(tint).render(g);
+    }
+
+    public static void glass(GuiGraphicsExtractor g, float x, float y, float w, float h, float radius, int strength, float alpha, int tint) {
+        Blur.of(x, y, w, h).radius(radius).strength(strength).glass(true).alpha(alpha).tint(tint).render(g);
+    }
+
     public static void flowH(GuiGraphicsExtractor g, float x, float y, float w, float h, float radius, int from, int to) {
         float phase = phase();
         int a = ColorMath.lerp(from, to, wave(phase));

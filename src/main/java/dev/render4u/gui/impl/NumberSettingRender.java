@@ -15,7 +15,6 @@ import net.minecraft.client.input.CharacterEvent;
 import net.minecraft.client.input.KeyEvent;
 
 public class NumberSettingRender extends SettingRender {
-    public static final float BASE_H = 32.0f;
     private NumberSetting dragging = null;
     private NumberSetting editingSetting = null;
     private String inputBuffer = "";
@@ -47,7 +46,7 @@ public class NumberSettingRender extends SettingRender {
 
     @Override
     public float height(Setting<?> s, float k) {
-        return BASE_H * k;
+        return 32.0f * k;
     }
 
     @Override

@@ -113,11 +113,31 @@ public class SettingsPanelRender {
         return false;
     }
 
+    public float computeContentHeight(Module mod, float k) {
+        if (mod == null) return 140.0f * k;
+        float h = 0.0f;
+        for (Setting<?> setting : mod.getSettings()) {
+            if (!setting.isVisible()) continue;
+            SettingRender sr = getRender(setting);
+            if (sr != null) {
+                h += sr.height(setting, k);
+            }
+        }
+        return h;
+    }
+
+    public float computePanelHeight(Module mod, float k, float screenH) {
+        float contentH = computeContentHeight(mod, k);
+        float idealH = 46.0f * k + contentH + 12.0f * k;
+        float maxH = Math.min(380.0f * k, screenH - 50.0f * k);
+        return Math.max(130.0f * k, Math.min(idealH, maxH));
+    }
+
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollY, float k, float screenW, float screenH) {
         if (currentModule == null) return false;
 
         float panelW = 240.0f * k;
-        float panelH = Math.min(360.0f * k, screenH - 40.0f * k);
+        float panelH = computePanelHeight(currentModule, k, screenH);
         float panelX = (screenW - panelW) / 2.0f;
         float panelY = (screenH - panelH) / 2.0f;
 
@@ -145,17 +165,17 @@ public class SettingsPanelRender {
         scrollOffset += (targetScroll - scrollOffset) * scrollFactor;
 
         float panelW = 240.0f * k * scaleM;
-        float panelH = Math.min(360.0f * k, screenH - 40.0f * k) * scaleM;
+        float panelH = computePanelHeight(mod, k, screenH) * scaleM;
         float panelX = (screenW - panelW) / 2.0f;
         float slide = (1.0f - easeA) * 14.0f * k;
         float panelY = (screenH - panelH) / 2.0f + slide;
-        Draw.rect(g, 0, 0, screenW, screenH, 0, ColorMath.multiplyAlpha(0x66000000, easeA));
+        Draw.rect(g, 0, 0, screenW, screenH, 0, ColorMath.multiplyAlpha(0x60000000, easeA));
         DrawRect.create()
                 .bounds(panelX, panelY, panelW, panelH)
                 .rounding(14.0f * k)
-                .bg(0xF813131B)
-                .shadow(24.0f * k, 0.0f, 0.0f, 0xDD000000)
-                .outline(1.2f, 0x333A384F)
+                .bg(0xF6111420)
+                .shadow(28.0f * k, 0.0f, 8.0f * k, 0xDD000000)
+                .outline(1.0f, 0x2A3548)
                 .alpha(easeA)
                 .render(g);
         String title = mod.getName();
@@ -203,7 +223,7 @@ public class SettingsPanelRender {
         if (currentModule == null) return false;
 
         float panelW = 240.0f * k;
-        float panelH = Math.min(360.0f * k, screenH - 40.0f * k);
+        float panelH = computePanelHeight(currentModule, k, screenH);
         float panelX = (screenW - panelW) / 2.0f;
         float panelY = (screenH - panelH) / 2.0f;
         if (mx < panelX || mx > panelX + panelW || my < panelY || my > panelY + panelH) {
@@ -240,7 +260,7 @@ public class SettingsPanelRender {
         if (currentModule == null) return;
 
         float panelW = 240.0f * k;
-        float panelH = Math.min(360.0f * k, screenH - 40.0f * k);
+        float panelH = computePanelHeight(currentModule, k, screenH);
         float panelX = (screenW - panelW) / 2.0f;
         float panelY = (screenH - panelH) / 2.0f;
 
@@ -269,9 +289,14 @@ public class SettingsPanelRender {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private SettingRender getRender(Setting<?> setting) {
+        if (setting == null) return null;
+        SettingRender sr = renders.get(setting.getClass());
+        if (sr != null) return sr;
         for (Map.Entry<Class<? extends Setting<?>>, SettingRender> entry : renders.entrySet()) {
             if (entry.getKey().isInstance(setting)) {
+                renders.put((Class<? extends Setting<?>>) setting.getClass(), entry.getValue());
                 return entry.getValue();
             }
         }

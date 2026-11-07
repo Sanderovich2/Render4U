@@ -13,12 +13,18 @@ import dev.render4u.util.color.ColorMath;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
+import java.util.Arrays;
+
 public class SidebarRender {
     public static final Category[] CATEGORIES = {
             Category.COMBAT, Category.MOVEMENT,
             Category.RENDER, Category.PLAYER,
             Category.MISC, Category.THEMES
     };
+
+    private static final float[] CAT_REL_YS = {66.0f, 96.0f, 158.0f, 188.0f, 250.0f, 280.0f};
+    private static final String[] SEL_KEYS = Arrays.stream(CATEGORIES).map(c -> "sel_" + c.name()).toArray(String[]::new);
+    private static final String[] HOV_KEYS = Arrays.stream(CATEGORIES).map(c -> "hov_tab_" + c.name()).toArray(String[]::new);
 
     private final ClickGuiScreen gui;
 
@@ -33,58 +39,31 @@ public class SidebarRender {
         int accentPrimary = Theme.current.getFirstColor();
         int accentSecondary = Theme.current.getSecondColor();
         Draw.rect(g, winX + sidebarW, winY + 12.0f * k, 1.0f, winH - 24.0f * k, 0.5f, ColorMath.multiplyAlpha(0x18FFFFFF, winAlpha));
-        float logoSize = 27.0f * k;
         float logoX = winX + 16.0f * k;
         float logoY = winY + 16.0f * k;
+        float logoSize = 27.0f * k;
         Draw.text(g, MsdfFonts.LOGO, "A", logoX, logoY, logoSize, ColorMath.multiplyAlpha(accentPrimary, winAlpha));
         Draw.text(g, MsdfFonts.SF_BOLD, Constants.getName(), logoX + logoSize + 3.0f * k, winY + 18.0f * k, 12.0f * k, ColorMath.multiplyAlpha(0xFFFFFFFF, winAlpha));
         Draw.text(g, MsdfFonts.SF_MEDIUM, "v" + Constants.getVersion(), logoX + logoSize + 3.0f * k, winY + 30.0f * k, 8.0f * k, ColorMath.multiplyAlpha(0xFF64748B, winAlpha));
         Draw.text(g, MsdfFonts.SF_MEDIUM, Lang.tr("main"), winX + 22.0f * k, winY + 54.0f * k, 8.0f * k, ColorMath.multiplyAlpha(0xFF5B6476, winAlpha));
         Draw.text(g, MsdfFonts.SF_MEDIUM, Lang.tr("general"), winX + 22.0f * k, winY + 146.0f * k, 8.0f * k, ColorMath.multiplyAlpha(0xFF5B6476, winAlpha));
         Draw.text(g, MsdfFonts.SF_MEDIUM, Lang.tr("other"), winX + 22.0f * k, winY + 238.0f * k, 8.0f * k, ColorMath.multiplyAlpha(0xFF5B6476, winAlpha));
-        float[] catYs = {
-                winY + 66.0f * k, winY + 96.0f * k,
-                winY + 158.0f * k, winY + 188.0f * k,
-                winY + 250.0f * k, winY + 280.0f * k
-        };
 
         float tabX = winX + 10.0f * k;
         float tabW = sidebarW - 20.0f * k;
         float tabH = 26.0f * k;
-        float activeTargetY = -1.0f;
-        for (int i = 0; i < CATEGORIES.length; i++) {
-            if (CATEGORIES[i] == gui.getSelectedCategory() && gui.getSearchQuery().isEmpty()) {
-                activeTargetY = catYs[i];
-                break;
-            }
-        }
-        if (activeTargetY > 0) {
-            if (!gui.hasAnim("side_ind_y")) {
-                gui.setAnim("side_ind_y", activeTargetY);
-            }
-            float indY = gui.animValue("side_ind_y", activeTargetY, dt, 18.0f);
-            if (indY > 0) {
-                DrawRect.create()
-                        .bounds(tabX, indY + 5.0f * k, 3.0f * k, tabH - 10.0f * k)
-                        .rounding(1.5f * k)
-                        .bg(accentPrimary)
-                        .shadow(6.0f * k, 0.0f, 0.0f, ColorMath.multiplyAlpha(accentPrimary, 0.65f))
-                        .alpha(winAlpha)
-                        .render(g);
-            }
-        }
 
         for (int i = 0; i < CATEGORIES.length; i++) {
             Category cat = CATEGORIES[i];
-            float ty = catYs[i];
+            float ty = winY + CAT_REL_YS[i] * k;
             boolean selected = (cat == gui.getSelectedCategory() && gui.getSearchQuery().isEmpty());
             boolean hovered = (mx >= tabX && mx <= tabX + tabW && my >= ty && my <= ty + tabH);
 
-            if (!gui.hasAnim("sel_" + cat.name())) {
-                gui.setAnim("sel_" + cat.name(), selected ? 1.0f : 0.0f);
+            if (!gui.hasAnim(SEL_KEYS[i])) {
+                gui.setAnim(SEL_KEYS[i], selected ? 1.0f : 0.0f);
             }
-            float selv = gui.animValue("sel_" + cat.name(), selected ? 1.0f : 0.0f, dt, 16.0f);
-            float hov = gui.animValue("hov_tab_" + cat.name(), hovered ? 1.0f : 0.0f, dt, 16.0f);
+            float selv = gui.animValue(SEL_KEYS[i], selected ? 1.0f : 0.0f, dt, 16.0f);
+            float hov = gui.animValue(HOV_KEYS[i], hovered ? 1.0f : 0.0f, dt, 16.0f);
 
             float bgAlpha = Math.max(hov * 0.45f, selv);
             if (bgAlpha > 0.01f) {
@@ -135,18 +114,13 @@ public class SidebarRender {
             gui.setProfilePopupOpen(!gui.isProfilePopupOpen());
             return true;
         }
-        float[] catYs = {
-                winY + 66.0f * k, winY + 96.0f * k,
-                winY + 158.0f * k, winY + 188.0f * k,
-                winY + 250.0f * k, winY + 280.0f * k
-        };
 
         float tabX = winX + 10.0f * k;
         float tabW = sidebarW - 20.0f * k;
         float tabH = 26.0f * k;
 
         for (int i = 0; i < CATEGORIES.length; i++) {
-            float ty = catYs[i];
+            float ty = winY + CAT_REL_YS[i] * k;
             if (mx >= tabX && mx <= tabX + tabW && my >= ty && my <= ty + tabH) {
                 if (gui.getSelectedCategory() != CATEGORIES[i] || !gui.getSearchQuery().isEmpty()) {
                     gui.setSelectedCategory(CATEGORIES[i]);

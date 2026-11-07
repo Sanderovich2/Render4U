@@ -19,6 +19,10 @@ public abstract class MouseHandlerMixin {
 
     @Inject(method = "onButton", at = @At("HEAD"), cancellable = true)
     private void render4u$onButton(long window, MouseButtonInfo button, int action, CallbackInfo ci) {
+        if (dev.render4u.render.drag.DragManager.INSTANCE.onPress(button.button(), action)) {
+            ci.cancel();
+            return;
+        }
         if (Render4U.getEventBus() != null) {
             Minecraft mc = Minecraft.getInstance();
             float mx = (float) MouseHandler.getScaledXPos(mc.getWindow(), xpos());

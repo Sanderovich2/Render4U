@@ -10,8 +10,10 @@ import dev.render4u.module.setting.ColorSetting;
 import dev.render4u.module.setting.ModeSetting;
 import dev.render4u.render.display.Draw;
 import dev.render4u.render.display.element.DrawRect;
+import dev.render4u.render.drag.DragManager;
 import dev.render4u.render.font.msdf.MsdfFonts;
 import dev.render4u.theme.Theme;
+import dev.render4u.util.color.ColorMath;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.multiplayer.PlayerInfo;
 
@@ -27,6 +29,9 @@ public final class HUDModule extends Module {
     public final BooleanSetting showFps = new BooleanSetting("FPS", true, "Показывать счетчик кадров");
     public final BooleanSetting showPing = new BooleanSetting("Пинг", true, "Показывать пинг до сервера");
     public final BooleanSetting showServer = new BooleanSetting("Сервер", true, "Показывать адрес сервера");
+
+    private float wmHoverAnim = 0.0f;
+    private long lastAnimTime = 0;
 
     public HUDModule() {
         super("HUD", "Отображает интерфейс клиента на экране", Category.RENDER);
@@ -55,9 +60,18 @@ public final class HUDModule extends Module {
             return;
         }
 
+        long now = System.currentTimeMillis();
+        float dt = lastAnimTime == 0 ? 0.016f : Math.min(0.08f, (now - lastAnimTime) / 1000.0f);
+        lastAnimTime = now;
+        float factor = 1.0f - (float) Math.exp(-14.0 * dt);
+
         GuiGraphicsExtractor g = event.graphics();
         int accent = getAccentColor();
 
+        renderWatermark(g, accent, factor);
+    }
+
+    private void renderWatermark(GuiGraphicsExtractor g, int accent, float factor) {
         String clientName = Constants.getName();
         String userName = mc.getUser() != null ? mc.getUser().getName() : "Player";
         String serverIp = mc.getCurrentServer() != null ? mc.getCurrentServer().ip : "Singleplayer";
@@ -73,42 +87,45 @@ public final class HUDModule extends Module {
         String fpsStr = mc.getFps() + " FPS";
 
         float textSize = 9.5f;
+        float logoSize = 14.0f;
+        float logoSpacing = 3.0f;
+        float pad = 6.0f;
+        float divW = 1.0f;
+        float divSpacing = 8.0f;
+        float pillH = 22.0f;
+        float sepW = divSpacing * 2.0f + divW;
+
         float titleW = MsdfFonts.SF_BOLD.width(clientName, textSize);
         float userW = MsdfFonts.SF_MEDIUM.width(userName, textSize);
         float serverW = showServer.isEnabled() ? MsdfFonts.SF_MEDIUM.width(serverIp, textSize) : 0.0f;
         float pingW = showPing.isEnabled() ? MsdfFonts.SF_MEDIUM.width(pingStr, textSize) : 0.0f;
         float fpsW = showFps.isEnabled() ? MsdfFonts.SF_SEMIBOLD.width(fpsStr, textSize) : 0.0f;
-
-        float logoSize = 14.0f;
         float logoW = MsdfFonts.LOGO.width("A", logoSize);
-        float logoSpacing = 3.0f;
-        float pad = 6.0f;
-        float divW = 1.0f;
-        float divSpacing = 8.0f;
 
-        float totalW = pad + logoW + logoSpacing + titleW + (divSpacing * 2.0f + divW) + userW;
-        if (showServer.isEnabled()) {
-            totalW += (divSpacing * 2.0f + divW) + serverW;
-        }
-        if (showPing.isEnabled()) {
-            totalW += (divSpacing * 2.0f + divW) + pingW;
-        }
-        if (showFps.isEnabled()) {
-            totalW += (divSpacing * 2.0f + divW) + fpsW;
-        }
+        float totalW = pad + logoW + logoSpacing + titleW + sepW + userW;
+        if (showServer.isEnabled()) totalW += sepW + serverW;
+        if (showPing.isEnabled()) totalW += sepW + pingW;
+        if (showFps.isEnabled()) totalW += sepW + fpsW;
         totalW += pad;
 
-        float pillX = 10.0f;
-        float pillY = 10.0f;
-        float pillH = 22.0f;
+        float pillX = 10.0f + DragManager.INSTANCE.offsetX("hud_watermark");
+        float pillY = 10.0f + DragManager.INSTANCE.offsetY("hud_watermark");
+
+        boolean hovered = DragManager.INSTANCE.isHovered("hud_watermark");
+        float target = hovered ? 1.0f : 0.0f;
+        wmHoverAnim += (target - wmHoverAnim) * factor;
+
+        int outlineCol = ColorMath.lerp(0x2E282E3D, ColorMath.multiplyAlpha(accent, 0.90f), wmHoverAnim);
 
         DrawRect.create()
                 .bounds(pillX, pillY, totalW, pillH)
                 .rounding(6.0f)
                 .bg(0xC80D0F15)
-                .blur(3)
+                .blur(2)
+                .glass(true)
                 .shadow(10.0f, 0.0f, 0.0f, 0x44000000)
-                .outline(1.0f, 0x2E282E3D)
+                .outline(1.0f, outlineCol)
+                .draggable("hud_watermark")
                 .render(g);
 
         float curX = pillX + pad;
@@ -119,30 +136,30 @@ public final class HUDModule extends Module {
         Draw.text(g, MsdfFonts.SF_BOLD, clientName, curX, pillY + 5.5f, textSize, accent);
         curX += titleW + divSpacing;
 
-        Draw.rect(g, curX, pillY + 5.0f, divW, pillH - 10.0f, 0.5f, 0x22FFFFFF);
-        curX += divW + divSpacing;
-
+        curX = drawDivider(g, curX, pillY, pillH, divW, divSpacing);
         Draw.text(g, MsdfFonts.SF_MEDIUM, userName, curX, pillY + 5.5f, textSize, 0xFFCBD5E1);
         curX += userW + divSpacing;
 
         if (showServer.isEnabled()) {
-            Draw.rect(g, curX, pillY + 5.0f, divW, pillH - 10.0f, 0.5f, 0x22FFFFFF);
-            curX += divW + divSpacing;
+            curX = drawDivider(g, curX, pillY, pillH, divW, divSpacing);
             Draw.text(g, MsdfFonts.SF_MEDIUM, serverIp, curX, pillY + 5.5f, textSize, 0xFF94A3B8);
             curX += serverW + divSpacing;
         }
 
         if (showPing.isEnabled()) {
-            Draw.rect(g, curX, pillY + 5.0f, divW, pillH - 10.0f, 0.5f, 0x22FFFFFF);
-            curX += divW + divSpacing;
+            curX = drawDivider(g, curX, pillY, pillH, divW, divSpacing);
             Draw.text(g, MsdfFonts.SF_MEDIUM, pingStr, curX, pillY + 5.5f, textSize, 0xFF94A3B8);
             curX += pingW + divSpacing;
         }
 
         if (showFps.isEnabled()) {
-            Draw.rect(g, curX, pillY + 5.0f, divW, pillH - 10.0f, 0.5f, 0x22FFFFFF);
-            curX += divW + divSpacing;
+            curX = drawDivider(g, curX, pillY, pillH, divW, divSpacing);
             Draw.text(g, MsdfFonts.SF_SEMIBOLD, fpsStr, curX, pillY + 5.5f, textSize, accent);
         }
+    }
+
+    private float drawDivider(GuiGraphicsExtractor g, float curX, float pillY, float pillH, float divW, float divSpacing) {
+        Draw.rect(g, curX, pillY + 5.0f, divW, pillH - 10.0f, 0.5f, 0x22FFFFFF);
+        return curX + divW + divSpacing;
     }
 }

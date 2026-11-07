@@ -19,6 +19,7 @@ public abstract class RectBuilder<B extends RectBuilder<B>> {
     protected int colorBottomRight = -1;
     protected int colorBottomLeft = -1;
     protected float alpha = 1.0F;
+    protected String dragId;
 
     protected RectBuilder() {
     }
@@ -26,6 +27,23 @@ public abstract class RectBuilder<B extends RectBuilder<B>> {
     @SuppressWarnings("unchecked")
     protected final B self() {
         return (B) this;
+    }
+
+    public B draggable(String dragId) {
+        this.dragId = dragId;
+        return self();
+    }
+
+    public String dragId() {
+        return dragId;
+    }
+
+    public float effectiveX() {
+        return x;
+    }
+
+    public float effectiveY() {
+        return y;
     }
 
     public B position(float x, float y) {
